@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS System Overview | 8051 RTOS Architecture and Components</title>
+
+    <meta name="description"
+        content="Technical overview of HRTOS, including its kernel, task management, scheduling, synchronization, communication, hardware abstraction, drivers and software extensions for 8051 microcontrollers.">
+
+    <meta name="keywords"
+        content="HRTOS system overview, 8051 RTOS architecture, 8051 kernel, MCS-51 operating system, embedded software components">
+
+    <meta name="author" content="HRTOS Project">
+    <meta name="theme-color" content="#101a2b">
+
+    <link rel="canonical" href="https://en.hrtos.com/product/overview.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HRTOS System Overview">
+    <meta property="og:description"
+        content="Understand the internal structure and software components of the HRTOS operating system.">
+    <meta property="og:url" content="https://en.hrtos.com/product/overview.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script src="../assets/js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo" aria-label="HRTOS Home">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="./index.html" class="active">Product</a>
+                <a href="../features/index.html">Features</a>
+                <a href="../architecture/index.html">Architecture</a>
+                <a href="../performance/index.html">Performance</a>
+                <a href="../hardware/index.html">Hardware</a>
+                <a href="../drivers/index.html">Drivers</a>
+                <a href="../examples/index.html">Examples</a>
+                <a href="../docs/index.html">Documentation</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="hero-content">
+
+                    <div class="eyebrow">SYSTEM OVERVIEW</div>
+
+                    <h1>
+                        Inside the
+                        <span class="text-gradient">HRTOS</span>
+                        System
+                    </h1>
+
+                    <p class="hero-description">
+                        HRTOS is organized as an integrated embedded
+                        software system for 8051 and MCS-51
+                        microcontrollers. Its structure combines
+                        kernel services, system interfaces, hardware
+                        support and reusable application components.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="../architecture/index.html" class="btn btn-primary">
+                            System Architecture
+                        </a>
+
+                        <a href="../docs/index.html" class="btn btn-secondary">
+                            Technical Documentation
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- System Structure -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">SYSTEM STRUCTURE</div>
+
+                    <h2 class="section-title">
+                        A Layered Embedded Software System
+                    </h2>
+
+                    <p class="section-description">
+                        HRTOS separates operating system services,
+                        hardware interaction and application logic.
+                        This organization helps developers build
+                        structured firmware while keeping system
+                        components independently manageable.
+                    </p>
+                </div>
+
+                <div class="content-grid">
+
+                    <article class="content-card">
+                        <div class="card-number">01</div>
+                        <h3>Application Layer</h3>
+
+                        <p>
+                            Application tasks implement product
+                            functions such as data acquisition,
+                            display control, communication,
+                            monitoring and device management.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">02</div>
+                        <h3>System Service Layer</h3>
+
+                        <p>
+                            System APIs provide task management,
+                            timing, synchronization, event handling
+                            and inter-task communication services.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">03</div>
+                        <h3>Kernel Layer</h3>
+
+                        <p>
+                            The kernel manages task execution,
+                            scheduling decisions, task contexts
+                            and the core operating system mechanisms.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">04</div>
+                        <h3>Hardware Support Layer</h3>
+
+                        <p>
+                            Hardware support provides the interfaces
+                            required to work with microcontroller
+                            peripherals and platform-specific resources.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">05</div>
+                        <h3>Driver Layer</h3>
+
+                        <p>
+                            Peripheral and sensor drivers provide
+                            reusable interfaces for external devices
+                            and common embedded hardware.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">06</div>
+                        <h3>Extension Layer</h3>
+
+                        <p>
+                            Optional software modules provide
+                            additional functions such as Modbus RTU,
+                            shell utilities and cooperative execution.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Kernel Services -->
+        <section class="section section-light">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">KERNEL SERVICES</div>
+
+                    <h2 class="section-title">
+                        Core Operating System Functions
+                    </h2>
+
+                    <p class="section-description">
+                        The kernel provides the fundamental mechanisms
+                        required to coordinate multiple tasks and
+                        manage execution on resource-constrained
+                        8051 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="content-grid">
+
+                    <article class="content-card">
+                        <h3>Task Control</h3>
+
+                        <p>
+                            Tasks are managed as independent execution
+                            units. Developers can organize application
+                            functions according to their responsibilities
+                            and execution requirements.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>Priority Scheduling</h3>
+
+                        <p>
+                            Priority-based scheduling coordinates
+                            task execution. Scheduling mechanisms
+                            support applications with different
+                            response and processing requirements.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>Time Management</h3>
+
+                        <p>
+                            Timer-based services support delays,
+                            timeouts, periodic operations and
+                            time-related task coordination.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>Interrupt Processing</h3>
+
+                        <p>
+                            Interrupt management supports
+                            interrupt-driven applications and
+                            coordination between interrupt events
+                            and task execution.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>Synchronization</h3>
+
+                        <p>
+                            Semaphores, mutexes and event mechanisms
+                            help coordinate tasks and protect
+                            shared resources.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>Message Communication</h3>
+
+                        <p>
+                            Message queues and mailboxes provide
+                            structured communication between
+                            independent application tasks.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="section-action">
+                    <a href="../features/index.html" class="btn btn-primary">
+                        Explore Kernel Features
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware and Drivers -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">HARDWARE INTEGRATION</div>
+
+                    <h2 class="section-title">
+                        From Microcontroller to Application
+                    </h2>
+
+                    <p class="section-description">
+                        Hardware support and reusable drivers connect
+                        the operating system environment with physical
+                        devices, sensors and communication peripherals.
+                    </p>
+                </div>
+
+                <div class="scope-grid">
+
+                    <article class="scope-item">
+                        <h3>Microcontroller Platform</h3>
+
+                        <p>
+                            HRTOS targets 8051 and MCS-51 compatible
+                            microcontrollers, with development
+                            and testing on selected STC devices.
+                        </p>
+                    </article>
+
+                    <article class="scope-item">
+                        <h3>Peripheral Drivers</h3>
+
+                        <p>
+                            Drivers support common hardware interfaces
+                            and peripheral functions, helping developers
+                            reuse established device access code.
+                        </p>
+                    </article>
+
+                    <article class="scope-item">
+                        <h3>Sensor Interfaces</h3>
+
+                        <p>
+                            Sensor-related software supports practical
+                            embedded applications involving measurement,
+                            detection and data collection.
+                        </p>
+                    </article>
+
+                    <article class="scope-item">
+                        <h3>Communication Interfaces</h3>
+
+                        <p>
+                            Communication components support the
+                            integration of external devices and
+                            embedded communication protocols.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="section-action">
+                    <a href="../drivers/index.html" class="btn btn-secondary">
+                        Browse Driver Library
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Extensions -->
+        <section class="section section-light">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">SOFTWARE EXTENSIONS</div>
+
+                    <h2 class="section-title">
+                        Additional Development Components
+                    </h2>
+
+                    <p class="section-description">
+                        Beyond the kernel, HRTOS includes additional
+                        modules that support common embedded software
+                        development requirements.
+                    </p>
+                </div>
+
+                <div class="content-grid">
+
+                    <article class="content-card">
+                        <div class="card-number">01</div>
+                        <h3>Modbus RTU</h3>
+
+                        <p>
+                            A Modbus RTU slave implementation supports
+                            register-oriented communication and
+                            integration with industrial devices.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">02</div>
+                        <h3>System Shell</h3>
+
+                        <p>
+                            Shell utilities provide command-based
+                            access to selected system information
+                            and debugging functions.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">03</div>
+                        <h3>Cooperative Execution</h3>
+
+                        <p>
+                            The cooperative module provides an
+                            alternative execution approach for
+                            applications with different resource
+                            and scheduling requirements.
+                        </p>
+                    </article>
+
+                    <article class="content-card">
+                        <div class="card-number">04</div>
+                        <h3>Application Examples</h3>
+
+                        <p>
+                            Example projects demonstrate the use
+                            of system APIs, drivers and extension
+                            modules in practical applications.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Workflow -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">DEVELOPMENT WORKFLOW</div>
+
+                    <h2 class="section-title">
+                        A Structured Development Process
+                    </h2>
+
+                    <p class="section-description">
+                        A typical HRTOS development project combines
+                        system configuration, application task design,
+                        hardware integration, compilation and
+                        on-device verification.
+                    </p>
+                </div>
+
+                <div class="philosophy-grid">
+
+                    <article class="philosophy-item">
+                        <h3>01. Configure</h3>
+
+                        <p>
+                            Select the target microcontroller,
+                            configure system resources and
+                            prepare the Keil C51 project.
+                        </p>
+                    </article>
+
+                    <article class="philosophy-item">
+                        <h3>02. Develop</h3>
+
+                        <p>
+                            Register application tasks and use
+                            system APIs to organize timing,
+                            synchronization and communication.
+                        </p>
+                    </article>
+
+                    <article class="philosophy-item">
+                        <h3>03. Integrate</h3>
+
+                        <p>
+                            Add hardware support, peripheral drivers
+                            and required extension modules to
+                            the application.
+                        </p>
+                    </article>
+
+                    <article class="philosophy-item">
+                        <h3>04. Verify</h3>
+
+                        <p>
+                            Compile the project, program the target
+                            device and evaluate application behavior
+                            through hardware testing.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="section-action">
+                    <a href="../docs/getting-started.html" class="btn btn-primary">
+                        Read Getting Started Guide
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Platform Requirements -->
+        <section class="section section-light">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">DEVELOPMENT ENVIRONMENT</div>
+
+                    <h2 class="section-title">
+                        Platform and Toolchain
+                    </h2>
+
+                    <p class="section-description">
+                        HRTOS maintains a focused development
+                        environment for traditional 8051 embedded
+                        systems.
+                    </p>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-item">
+                        <div class="stat-number">8051</div>
+                        <div class="stat-label">Target Architecture</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-number">C51</div>
+                        <div class="stat-label">Compiler Toolchain</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-number">STC</div>
+                        <div class="stat-label">Tested MCU Family</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-number">4.0</div>
+                        <div class="stat-label">Current Major Generation</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">TECHNICAL RESOURCES</div>
+
+                    <h2 class="section-title">
+                        Documentation and Development Resources
+                    </h2>
+
+                    <p class="section-description">
+                        Technical materials are available to help
+                        developers understand the system, integrate
+                        its components and build embedded applications.
+                    </p>
+                </div>
+
+                <div class="content-grid">
+
+                    <article class="content-card">
+                        <h3>System Documentation</h3>
+
+                        <p>
+                            Learn about system configuration,
+                            kernel mechanisms, resource management
+                            and development procedures.
+                        </p>
+
+                        <a href="../docs/index.html" class="text-link">
+                            View Documentation
+                        </a>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>API Reference</h3>
+
+                        <p>
+                            Review the programming interfaces
+                            available for application development
+                            and system integration.
+                        </p>
+
+                        <a href="../docs/api.html" class="text-link">
+                            Browse API Reference
+                        </a>
+                    </article>
+
+                    <article class="content-card">
+                        <h3>Example Projects</h3>
+
+                        <p>
+                            Examine practical code examples
+                            demonstrating common HRTOS application
+                            patterns and hardware integration.
+                        </p>
+
+                        <a href="../examples/index.html" class="text-link">
+                            View Examples
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <div class="eyebrow">EXPLORE HRTOS</div>
+
+                    <h2>
+                        Build Embedded Applications on 8051
+                    </h2>
+
+                    <p>
+                        Explore the architecture, review the
+                        documentation and start developing
+                        with the HRTOS software environment.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="../docs/getting-started.html" class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="./releases.html" class="btn btn-secondary">
+                            Release History
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-main">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                        A maintained operating system project
+                        for the 8051 and MCS-51 ecosystem.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="./index.html">Product Home</a>
+                    <a href="./overview.html">System Overview</a>
+                    <a href="./releases.html">Releases</a>
+                    <a href="../architecture/index.html">Architecture</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../docs/index.html">Documentation</a>
+                    <a href="../examples/index.html">Examples</a>
+                    <a href="../drivers/index.html">Drivers</a>
+                    <a href="../download/index.html">Download</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Project</h4>
+                    <a href="../about/index.html">About HRTOS</a>
+                    <a href="../about/history.html">Project History</a>
+                    <a href="../about/contact.html">Contact</a>
+                    <a href="https://hrtos.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Main Website
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    ? <span class="current-year">2026</span>
+                    HRTOS Project. All rights reserved.
+                </p>
+
+                <p>Engineering Real-Time on 8051.</p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

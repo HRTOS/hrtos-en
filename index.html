@@ -1,237 +1,1057 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07111f">
-  <title>HRTOS — Real-Time Operating System for 8051 Microcontrollers</title>
-  <meta name="description" content="HRTOS is a complete operating system for 8051 microcontrollers, featuring deterministic task scheduling, interrupt management, synchronization, communication, and an expanding driver ecosystem.">
-  <meta name="keywords" content="8051 RTOS, 8051 operating system, MCS-51, STC microcontroller, embedded real-time operating system, HRTOS">
-  <link rel="canonical" href="https://en.hrtos.com/">
-  <link rel="alternate" hreflang="en" href="https://en.hrtos.com/">
-  <link rel="alternate" hreflang="zh-CN" href="https://hrtos.com/">
-  <link rel="alternate" hreflang="x-default" href="https://en.hrtos.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="HRTOS — Engineering Real-Time on 8051">
-  <meta property="og:description" content="A complete operating system for 8051 microcontrollers. An 8051 operating-system project originating in 2017.">
-  <meta property="og:url" content="https://en.hrtos.com/">
-  <meta property="og:site_name" content="HRTOS">
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #07111f;
-      --bg-soft: #0b1829;
-      --panel: rgba(16, 32, 52, .78);
-      --panel-solid: #102039;
-      --line: rgba(157, 184, 215, .16);
-      --text: #edf4fc;
-      --muted: #a9bbcf;
-      --blue: #68b7ff;
-      --cyan: #5ee0d0;
-      --max: 1160px;
-      --radius: 20px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07111f">
+
+    <title>HRTOS — Real-Time Operating System for 8051 Microcontrollers</title>
+
+    <meta name="description"
+        content="HRTOS is a complete operating system for 8051 microcontrollers, featuring task scheduling, interrupt management, synchronization, communication, hardware support, drivers and practical application examples.">
+
+    <meta name="keywords"
+        content="8051 RTOS, 8051 operating system, MCS-51, STC microcontroller, embedded real-time operating system, HRTOS">
+
+    <link rel="canonical" href="https://en.hrtos.com/">
+    <link rel="alternate" hreflang="en" href="https://en.hrtos.com/">
+    <link rel="alternate" hreflang="zh-CN" href="https://hrtos.com/">
+    <link rel="alternate" hreflang="x-default" href="https://en.hrtos.com/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HRTOS — Engineering Real-Time on 8051">
+    <meta property="og:description"
+        content="A complete operating system for 8051 microcontrollers. An 8051 operating-system project originating in 2017.">
+    <meta property="og:url" content="https://en.hrtos.com/">
+    <meta property="og:site_name" content="HRTOS">
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #07111f;
+            --bg-soft: #0b1829;
+            --panel: rgba(16, 32, 52, .78);
+            --panel-solid: #102039;
+            --line: rgba(157, 184, 215, .16);
+            --text: #edf4fc;
+            --muted: #a9bbcf;
+            --blue: #68b7ff;
+            --cyan: #5ee0d0;
+            --max: 1160px;
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 78% 5%, rgba(35, 115, 174, .22), transparent 34rem),
+                radial-gradient(ellipse at 8% 32%, rgba(24, 92, 120, .13), transparent 32rem),
+                var(--bg);
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--cyan);
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 44px));
+            margin: 0 auto;
+        }
+
+        /* Header */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(7, 17, 31, .88);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            flex-shrink: 0;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(104, 183, 255, .55);
+            border-radius: 11px;
+            color: var(--cyan);
+            font-size: 13px;
+            letter-spacing: -.05em;
+            background: linear-gradient(145deg, rgba(104, 183, 255, .18), rgba(94, 224, 208, .06));
+            box-shadow: 0 0 28px rgba(72, 174, 220, .12);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .nav-links > a,
+        .nav-dropdown > summary {
+            transition: color .2s ease;
+        }
+
+        .nav-links > a:hover,
+        .nav-dropdown > summary:hover {
+            color: var(--cyan);
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown summary {
+            list-style: none;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .nav-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .nav-dropdown summary::after {
+            content: "+";
+            margin-left: 6px;
+            color: var(--cyan);
+        }
+
+        .nav-dropdown[open] summary::after {
+            content: "−";
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 18px);
+            left: -18px;
+            min-width: 210px;
+            padding: 9px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #0c1b2d;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--cyan);
+            background: rgba(104, 183, 255, .08);
+        }
+
+        .nav-cta,
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            border: 1px solid rgba(104, 183, 255, .45);
+            border-radius: 999px;
+            padding: 10px 17px;
+            color: #eaf6ff;
+            font-size: 13px;
+            font-weight: 700;
+            background: rgba(57, 139, 204, .13);
+            transition: .2s ease;
+        }
+
+        .nav-cta:hover,
+        .button:hover {
+            background: rgba(57, 139, 204, .25);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .button.primary {
+            color: #061522;
+            border-color: transparent;
+            background: linear-gradient(110deg, #75c4ff, #66e1d1);
+        }
+
+        .button.primary:hover {
+            color: #061522;
+            filter: brightness(1.06);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        /* Hero */
+
+        .hero {
+            padding: 104px 0 86px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            align-items: center;
+            gap: 58px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow:before {
+            content: "";
+            width: 26px;
+            height: 1px;
+            background: var(--cyan);
+        }
+
+        h1 {
+            margin: 22px 0 20px;
+            max-width: 760px;
+            font-size: clamp(43px, 6.4vw, 76px);
+            line-height: 1.04;
+            letter-spacing: -.055em;
+        }
+
+        h1 span {
+            color: var(--blue);
+        }
+
+        .hero-copy {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 31px;
+        }
+
+        .hero-note {
+            margin-top: 26px;
+            color: #8198b1;
+            font-size: 12px;
+            letter-spacing: .04em;
+        }
+
+        .chip {
+            display: inline-flex;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 11px;
+            color: #c7d8e9;
+            font-size: 11px;
+            margin: 0 6px 7px 0;
+            background: rgba(255, 255, 255, .025);
+        }
+
+        .visual {
+            min-height: 390px;
+            position: relative;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(22, 53, 80, .75), rgba(8, 21, 37, .78));
+            box-shadow: 0 30px 90px rgba(0, 0, 0, .25), inset 0 1px rgba(255, 255, 255, .05);
+            overflow: hidden;
+        }
+
+        .visual:before,
+        .visual:after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(104, 183, 255, .16);
+            border-radius: 50%;
+            width: 310px;
+            height: 310px;
+        }
+
+        .visual:after {
+            width: 230px;
+            height: 230px;
+            border-color: rgba(94, 224, 208, .2);
+        }
+
+        .chip-core {
+            z-index: 1;
+            width: 174px;
+            height: 174px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            border: 1px solid rgba(113, 204, 255, .65);
+            border-radius: 24px;
+            background: linear-gradient(145deg, #153c5a, #0b2035);
+            box-shadow: 0 0 70px rgba(71, 173, 222, .2), inset 0 0 32px rgba(93, 208, 224, .08);
+        }
+
+        .chip-core strong {
+            display: block;
+            font-size: 32px;
+            letter-spacing: .13em;
+        }
+
+        .chip-core small {
+            color: var(--cyan);
+            font-size: 9px;
+            letter-spacing: .22em;
+        }
+
+        .orbit {
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 18px var(--cyan);
+        }
+
+        .o1 { top: 22%; left: 24%; }
+        .o2 {
+            right: 20%;
+            top: 31%;
+            background: var(--blue);
+            box-shadow: 0 0 18px var(--blue);
+        }
+        .o3 { bottom: 21%; left: 27%; }
+        .o4 {
+            right: 27%;
+            bottom: 19%;
+            background: var(--blue);
+            box-shadow: 0 0 18px var(--blue);
+        }
+
+        .visual-label {
+            position: absolute;
+            color: #9eb5cb;
+            font: 10px ui-monospace, SFMono-Regular, Menlo, monospace;
+            letter-spacing: .12em;
+        }
+
+        .vl1 { top: 15%; left: 9%; }
+        .vl2 { right: 8%; top: 19%; }
+        .vl3 { bottom: 13%; left: 10%; }
+        .vl4 { right: 9%; bottom: 13%; }
+
+        /* General Sections */
+
+        section {
+            padding: 82px 0;
+            border-top: 1px solid rgba(157, 184, 215, .09);
+        }
+
+        .section-head {
+            max-width: 720px;
+            margin-bottom: 36px;
+        }
+
+        .kicker {
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 10px 0 12px;
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1.13;
+            letter-spacing: -.035em;
+        }
+
+        .section-head p,
+        .muted {
+            color: var(--muted);
+        }
+
+        /* Cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            padding: 25px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, rgba(17, 37, 59, .78), rgba(11, 25, 42, .75));
+            transition: border-color .2s ease, transform .2s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(104, 183, 255, .4);
+            transform: translateY(-3px);
+        }
+
+        .card-icon {
+            width: 39px;
+            height: 39px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            color: var(--cyan);
+            background: rgba(94, 224, 208, .09);
+            border: 1px solid rgba(94, 224, 208, .18);
+            font-size: 17px;
+        }
+
+        h3 {
+            margin: 17px 0 8px;
+            font-size: 17px;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .card-link:hover {
+            color: var(--cyan);
+        }
+
+        /* Product */
+
+        .split {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .code-panel {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #081522;
+            box-shadow: 0 25px 65px rgba(0, 0, 0, .2);
+        }
+
+        .code-top {
+            padding: 13px 17px;
+            border-bottom: 1px solid var(--line);
+            color: #8da7c0;
+            font: 11px ui-monospace, monospace;
+        }
+
+        pre {
+            margin: 0;
+            padding: 23px;
+            overflow: auto;
+            color: #c4d8e9;
+            font: 12px/1.9 ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        .c-blue { color: #75c4ff; }
+        .c-green { color: #71dfc5; }
+        .c-dim { color: #718ba4; }
+
+        /* Metrics */
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .metric {
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(16, 32, 52, .55);
+        }
+
+        .metric strong {
+            display: block;
+            color: var(--cyan);
+            font-size: clamp(24px, 3vw, 34px);
+            letter-spacing: -.04em;
+        }
+
+        .metric span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .fineprint {
+            margin-top: 18px;
+            color: #8298ad;
+            font-size: 11px;
+        }
+
+        /* Website Resource Directory */
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .resource-card {
+            position: relative;
+            display: block;
+            min-height: 190px;
+            padding: 25px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, rgba(17, 37, 59, .78), rgba(11, 25, 42, .75));
+            transition: .2s ease;
+        }
+
+        .resource-card:hover {
+            border-color: rgba(104, 183, 255, .5);
+            background: linear-gradient(145deg, rgba(24, 54, 82, .9), rgba(11, 29, 48, .9));
+            transform: translateY(-3px);
+        }
+
+        .resource-number {
+            color: var(--cyan);
+            font: 11px ui-monospace, monospace;
+            letter-spacing: .12em;
+        }
+
+        .resource-card h3 {
+            margin: 18px 0 9px;
+            font-size: 19px;
+        }
+
+        .resource-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .resource-action {
+            display: inline-block;
+            margin-top: 17px;
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Ecosystem */
+
+        .ecosystem {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 13px;
+        }
+
+        .eco-item {
+            padding: 21px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(16, 32, 52, .45);
+        }
+
+        .eco-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .eco-item span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* CTA */
+
+        .cta {
+            padding: 43px;
+            border: 1px solid rgba(104, 183, 255, .28);
+            border-radius: 25px;
+            background:
+                radial-gradient(ellipse at 90% 10%, rgba(68, 166, 210, .18), transparent 45%),
+                linear-gradient(120deg, #102b43, #0b1a2c);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .cta h2 {
+            margin-top: 0;
+            font-size: 31px;
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 38px 0 42px;
+            border-top: 1px solid var(--line);
+            color: #8197ad;
+            font-size: 12px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand {
+            color: #dceafa;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: .12em;
+        }
+
+        .footer-title {
+            margin-bottom: 13px;
+            color: #dceafa;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .footer-links a {
+            color: #8197ad;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-top: 35px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 1050px) {
+            .nav-links {
+                gap: 13px;
+                font-size: 12px;
+            }
+
+            .nav-cta {
+                padding: 9px 13px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid,
+            .split {
+                grid-template-columns: 1fr;
+            }
+
+            .visual {
+                min-height: 330px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .resource-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ecosystem {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links,
+            .desktop-cta {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+                position: relative;
+            }
+
+            .mobile-menu summary {
+                list-style: none;
+                cursor: pointer;
+                padding: 9px 14px;
+                border: 1px solid var(--line);
+                border-radius: 999px;
+                color: var(--text);
+                font-size: 13px;
+            }
+
+            .mobile-menu summary::-webkit-details-marker {
+                display: none;
+            }
+
+            .mobile-menu-panel {
+                position: absolute;
+                right: 0;
+                top: calc(100% + 12px);
+                width: min(300px, calc(100vw - 30px));
+                max-height: 75vh;
+                overflow-y: auto;
+                padding: 12px;
+                border: 1px solid var(--line);
+                border-radius: 15px;
+                background: #0c1b2d;
+                box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+            }
+
+            .mobile-menu-panel a {
+                display: block;
+                padding: 10px 12px;
+                border-radius: 8px;
+                color: var(--muted);
+                font-size: 13px;
+            }
+
+            .mobile-menu-panel a:hover {
+                color: var(--cyan);
+                background: rgba(104, 183, 255, .08);
+            }
+
+            .mobile-menu-label {
+                padding: 12px 12px 5px;
+                color: var(--cyan);
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: .15em;
+                text-transform: uppercase;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                width: min(var(--max), calc(100% - 30px));
+            }
+
+            .nav {
+                min-height: 66px;
+            }
+
+            .hero {
+                padding: 72px 0 60px;
+            }
+
+            .hero-copy {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 62px 0;
+            }
+
+            .cards,
+            .metrics,
+            .ecosystem,
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 27px;
+            }
+
+            .visual {
+                min-height: 290px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px 18px;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "HRTOS",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "8051 / MCS-51 microcontrollers",
+        "description": "A complete operating system for 8051 microcontrollers, focused on deterministic scheduling and embedded real-time system development.",
+        "url": "https://en.hrtos.com/",
+        "datePublished": "2017"
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background:
-        radial-gradient(ellipse at 78% 5%, rgba(35, 115, 174, .22), transparent 34rem),
-        radial-gradient(ellipse at 8% 32%, rgba(24, 92, 120, .13), transparent 32rem),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.65;
-    }
-    a { color: inherit; text-decoration: none; }
-    a:hover { color: var(--cyan); }
-    .container { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
-    .topbar {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(7, 17, 31, .82);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(18px);
-    }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .12em; }
-    .brand-mark {
-      width: 38px; height: 38px; display: grid; place-items: center;
-      border: 1px solid rgba(104,183,255,.55); border-radius: 11px;
-      color: var(--cyan); font-size: 13px; letter-spacing: -.05em;
-      background: linear-gradient(145deg, rgba(104,183,255,.18), rgba(94,224,208,.06));
-      box-shadow: 0 0 28px rgba(72, 174, 220, .12);
-    }
-    .nav-links { display: flex; align-items: center; gap: 25px; color: var(--muted); font-size: 13px; }
-    .nav-links a { transition: color .2s ease; }
-    .nav-cta, .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-      border: 1px solid rgba(104,183,255,.45); border-radius: 999px;
-      padding: 10px 17px; color: #eaf6ff; font-size: 13px; font-weight: 700;
-      background: rgba(57, 139, 204, .13); transition: .2s ease;
-    }
-    .nav-cta:hover, .button:hover { background: rgba(57,139,204,.25); color: white; transform: translateY(-1px); }
-    .button.primary { color: #061522; border-color: transparent; background: linear-gradient(110deg, #75c4ff, #66e1d1); }
-    .button.primary:hover { color: #061522; filter: brightness(1.06); }
-    .hero { padding: 104px 0 86px; position: relative; overflow: hidden; }
-    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 58px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--cyan); font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
-    .eyebrow:before { content: ""; width: 26px; height: 1px; background: var(--cyan); }
-    h1 { margin: 22px 0 20px; max-width: 760px; font-size: clamp(43px, 6.4vw, 76px); line-height: 1.04; letter-spacing: -.055em; }
-    h1 span { color: var(--blue); }
-    .hero-copy { max-width: 650px; color: var(--muted); font-size: 18px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 31px; }
-    .hero-note { margin-top: 26px; color: #8198b1; font-size: 12px; letter-spacing: .04em; }
-    .chip { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 6px 11px; color: #c7d8e9; font-size: 11px; margin: 0 6px 7px 0; background: rgba(255,255,255,.025); }
-    .visual {
-      min-height: 390px; position: relative; display: grid; place-items: center;
-      border: 1px solid var(--line); border-radius: 28px;
-      background: linear-gradient(145deg, rgba(22,53,80,.75), rgba(8,21,37,.78));
-      box-shadow: 0 30px 90px rgba(0,0,0,.25), inset 0 1px rgba(255,255,255,.05);
-      overflow: hidden;
-    }
-    .visual:before, .visual:after { content: ""; position: absolute; border: 1px solid rgba(104,183,255,.16); border-radius: 50%; width: 310px; height: 310px; }
-    .visual:after { width: 230px; height: 230px; border-color: rgba(94,224,208,.2); }
-    .chip-core {
-      z-index: 1; width: 174px; height: 174px; display: grid; place-items: center; text-align: center;
-      border: 1px solid rgba(113,204,255,.65); border-radius: 24px;
-      background: linear-gradient(145deg, #153c5a, #0b2035);
-      box-shadow: 0 0 70px rgba(71,173,222,.2), inset 0 0 32px rgba(93,208,224,.08);
-    }
-    .chip-core strong { display: block; font-size: 32px; letter-spacing: .13em; }
-    .chip-core small { color: var(--cyan); font-size: 9px; letter-spacing: .22em; }
-    .orbit { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan); }
-    .o1 { top: 22%; left: 24%; } .o2 { right: 20%; top: 31%; background: var(--blue); box-shadow: 0 0 18px var(--blue); }
-    .o3 { bottom: 21%; left: 27%; } .o4 { right: 27%; bottom: 19%; background: var(--blue); box-shadow: 0 0 18px var(--blue); }
-    .visual-label { position: absolute; color: #9eb5cb; font: 10px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
-    .vl1 { top: 15%; left: 9%; } .vl2 { right: 8%; top: 19%; } .vl3 { bottom: 13%; left: 10%; } .vl4 { right: 9%; bottom: 13%; }
-    section { padding: 82px 0; border-top: 1px solid rgba(157,184,215,.09); }
-    .section-head { max-width: 720px; margin-bottom: 36px; }
-    .kicker { color: var(--cyan); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
-    h2 { margin: 10px 0 12px; font-size: clamp(30px, 4vw, 44px); line-height: 1.13; letter-spacing: -.035em; }
-    .section-head p, .muted { color: var(--muted); }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .card {
-      padding: 25px; border: 1px solid var(--line); border-radius: var(--radius);
-      background: linear-gradient(145deg, rgba(17,37,59,.78), rgba(11,25,42,.75));
-    }
-    .card-icon { width: 39px; height: 39px; display: grid; place-items: center; border-radius: 12px; color: var(--cyan); background: rgba(94,224,208,.09); border: 1px solid rgba(94,224,208,.18); font-size: 17px; }
-    h3 { margin: 17px 0 8px; font-size: 17px; }
-    .card p { margin: 0; color: var(--muted); font-size: 13px; }
-    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 55px; align-items: center; }
-    .code-panel {
-      border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
-      background: #081522; box-shadow: 0 25px 65px rgba(0,0,0,.2);
-    }
-    .code-top { padding: 13px 17px; border-bottom: 1px solid var(--line); color: #8da7c0; font: 11px ui-monospace, monospace; }
-    pre { margin: 0; padding: 23px; overflow: auto; color: #c4d8e9; font: 12px/1.9 ui-monospace, SFMono-Regular, Menlo, monospace; }
-    .c-blue { color: #75c4ff; } .c-green { color: #71dfc5; } .c-dim { color: #718ba4; }
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
-    .metric { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: rgba(16,32,52,.55); }
-    .metric strong { display: block; color: var(--cyan); font-size: clamp(24px, 3vw, 34px); letter-spacing: -.04em; }
-    .metric span { color: var(--muted); font-size: 12px; }
-    .fineprint { margin-top: 18px; color: #8298ad; font-size: 11px; }
-    .ecosystem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
-    .eco-item { padding: 21px; border: 1px solid var(--line); border-radius: 16px; background: rgba(16,32,52,.45); }
-    .eco-item strong { display: block; margin-bottom: 5px; font-size: 14px; }
-    .eco-item span { color: var(--muted); font-size: 12px; }
-    .cta {
-      padding: 43px; border: 1px solid rgba(104,183,255,.28); border-radius: 25px;
-      background: radial-gradient(ellipse at 90% 10%, rgba(68,166,210,.18), transparent 45%), linear-gradient(120deg, #102b43, #0b1a2c);
-      display: flex; align-items: center; justify-content: space-between; gap: 25px;
-    }
-    .cta h2 { margin-top: 0; font-size: 31px; }
-    footer { padding: 30px 0 42px; border-top: 1px solid var(--line); color: #8197ad; font-size: 12px; }
-    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    @media (max-width: 900px) {
-      .hero-grid, .split { grid-template-columns: 1fr; }
-      .visual { min-height: 330px; }
-      .cards { grid-template-columns: repeat(2, 1fr); }
-      .ecosystem { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { gap: 13px; }
-    }
-    @media (max-width: 640px) {
-      .container { width: min(var(--max), calc(100% - 30px)); }
-      .nav { min-height: 66px; }
-      .nav-links { display: none; }
-      .hero { padding: 72px 0 60px; }
-      .hero-copy { font-size: 16px; }
-      section { padding: 62px 0; }
-      .cards, .metrics, .ecosystem { grid-template-columns: 1fr; }
-      .cta, .footer-row { align-items: flex-start; flex-direction: column; }
-      .cta { padding: 27px; }
-      .visual { min-height: 290px; }
-    }
-  </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "HRTOS",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "8051 / MCS-51 microcontrollers",
-    "description": "A complete operating system for 8051 microcontrollers, focused on deterministic scheduling and embedded real-time system development.",
-    "url": "https://en.hrtos.com/",
-    "datePublished": "2017"
-  }
-  </script>
+    </script>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a class="brand" href="#top" aria-label="HRTOS home">
-        <span class="brand-mark">HR</span><span>HRTOS</span>
-      </a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#product">Product</a>
-        <a href="#features">Features</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#performance">Performance</a>
-        <a href="#ecosystem">Ecosystem</a>
-        <a href="#about">About</a>
-      </nav>
-      <a class="nav-cta" href="https://github.com/HRTOS">GitHub <span aria-hidden="true">↗</span></a>
-    </div>
-  </header>
 
-  <main id="top">
-    <section class="hero" style="border-top:0">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Embedded systems · 8051 / MCS-51</div>
-          <h1>Engineering<br><span>Real-Time</span> on 8051.</h1>
-          <p class="hero-copy">A complete operating system for 8051 microcontrollers. HRTOS brings structured multitasking, interrupt management and practical embedded software components to a long-established 8-bit architecture.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#product">Explore HRTOS <span aria-hidden="true">→</span></a>
-            <a class="button" href="#architecture">Explore the Technology</a>
-          </div>
-          <div class="hero-note">PROJECT ORIGIN: 2017</div>
-          <div style="margin-top:22px">
-            <span class="chip">8051 Native</span><span class="chip">Deterministic Scheduling</span><span class="chip">Embedded Ecosystem</span>
-          </div>
-        </div>
-        <div class="visual" aria-label="Abstract HRTOS processor and real-time system illustration">
-          <span class="visual-label vl1">TASK CONTROL</span>
-          <span class="visual-label vl2">INTERRUPT FLOW</span>
-          <span class="visual-label vl3">RESOURCE MODEL</span>
-          <span class="visual-label vl4">8051 CORE</span>
-          <i class="orbit o1"></i><i class="orbit o2"></i><i class="orbit o3"></i><i class="orbit o4"></i>
-          <div class="chip-core"><div><strong>HRTOS</strong><small>REAL-TIME SYSTEM</small></div></div>
-        </div>
-      </div>
-    </section>
+    <!-- Header -->
 
-    <section id="product">
-      <div class="container split">
-        <div class="section-head">
-          <div class="kicker">The product</div>
-          <h2>A complete system.<br>Built for 8051.</h2>
-          <p>HRTOS is designed specifically for the 8051 / MCS-51 family. It provides an organized software foundation for applications that need multiple tasks, predictable coordination and efficient access to microcontroller resources.</p>
-          <p class="muted">Rather than treating the 8051 as a platform of isolated bare-metal routines, HRTOS provides a coherent system model for building and maintaining embedded applications.</p>
+    <header class="topbar">
+        <div class="container nav">
+
+            <a class="brand" href="./index.html" aria-label="HRTOS Home">
+                <span class="brand-mark">HR</span>
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+
+                <a href="./index.html">Home</a>
+
+                <details class="nav-dropdown">
+                    <summary>Product</summary>
+                    <div class="dropdown-menu">
+                        <a href="./product/index.html">Product Center</a>
+                        <a href="./product/overview.html">Product Overview</a>
+                        <a href="./product/releases.html">Release History</a>
+                    </div>
+                </details>
+
+                <details class="nav-dropdown">
+                    <summary>Technology</summary>
+                    <div class="dropdown-menu">
+                        <a href="./features/index.html">Core Features</a>
+                        <a href="./architecture/index.html">System Architecture</a>
+                        <a href="./performance/index.html">Performance</a>
+                    </div>
+                </details>
+
+                <details class="nav-dropdown">
+                    <summary>Resources</summary>
+                    <div class="dropdown-menu">
+                        <a href="./hardware/index.html">Hardware Support</a>
+                        <a href="./drivers/index.html">Driver Library</a>
+                        <a href="./examples/index.html">Application Examples</a>
+                        <a href="./docs/index.html">Documentation</a>
+                        <a href="./download/index.html">Downloads</a>
+                    </div>
+                </details>
+
+                <a href="./about/index.html">About</a>
+
+            </nav>
+
+            <a class="nav-cta desktop-cta" href="https://github.com/HRTOS">
+                GitHub
+            </a>
+
+            <details class="mobile-menu">
+                <summary>Menu</summary>
+                <div class="mobile-menu-panel">
+
+                    <a href="./index.html">Home</a>
+
+                    <div class="mobile-menu-label">Product</div>
+                    <a href="./product/index.html">Product Center</a>
+                    <a href="./product/overview.html">Product Overview</a>
+                    <a href="./product/releases.html">Release History</a>
+
+                    <div class="mobile-menu-label">Technology</div>
+                    <a href="./features/index.html">Core Features</a>
+                    <a href="./architecture/index.html">System Architecture</a>
+                    <a href="./performance/index.html">Performance</a>
+
+                    <div class="mobile-menu-label">Resources</div>
+                    <a href="./hardware/index.html">Hardware Support</a>
+                    <a href="./drivers/index.html">Driver Library</a>
+                    <a href="./examples/index.html">Application Examples</a>
+                    <a href="./docs/index.html">Documentation</a>
+                    <a href="./download/index.html">Downloads</a>
+
+                    <div class="mobile-menu-label">Project</div>
+                    <a href="./about/index.html">About HRTOS</a>
+                    <a href="./about/history.html">Project History</a>
+                    <a href="./about/contact.html">Contact</a>
+                    <a href="https://github.com/HRTOS">GitHub</a>
+                    <a href="https://hrtos.com/">Chinese Website</a>
+
+                </div>
+            </details>
+
         </div>
-        <div class="code-panel">
-          <div class="code-top">HRTOS · SYSTEM CAPABILITIES</div>
-          <pre><span class="c-dim">// A structured embedded application</span>
+    </header>
+
+
+    <main id="top">
+
+        <!-- Hero -->
+
+        <section class="hero" style="border-top:0">
+            <div class="container hero-grid">
+
+                <div>
+                    <div class="eyebrow">Embedded Systems · 8051 / MCS-51</div>
+
+                    <h1>
+                        Engineering<br>
+                        <span>Real-Time</span> on 8051.
+                    </h1>
+
+                    <p class="hero-copy">
+                        A complete operating system for 8051 microcontrollers.
+                        HRTOS brings structured multitasking, interrupt management
+                        and practical embedded software components to a
+                        long-established 8-bit architecture.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button primary" href="./product/index.html">
+                            Explore HRTOS
+                        </a>
+
+                        <a class="button" href="./docs/index.html">
+                            Technical Documentation
+                        </a>
+                    </div>
+
+                    <div class="hero-note">
+                        PROJECT ORIGIN: 2017
+                    </div>
+
+                    <div style="margin-top:22px">
+                        <span class="chip">8051 Native</span>
+                        <span class="chip">Deterministic Scheduling</span>
+                        <span class="chip">Embedded Ecosystem</span>
+                    </div>
+                </div>
+
+                <div class="visual" aria-label="HRTOS processor and real-time system illustration">
+
+                    <span class="visual-label vl1">TASK CONTROL</span>
+                    <span class="visual-label vl2">INTERRUPT FLOW</span>
+                    <span class="visual-label vl3">RESOURCE MODEL</span>
+                    <span class="visual-label vl4">8051 CORE</span>
+
+                    <i class="orbit o1"></i>
+                    <i class="orbit o2"></i>
+                    <i class="orbit o3"></i>
+                    <i class="orbit o4"></i>
+
+                    <div class="chip-core">
+                        <div>
+                            <strong>HRTOS</strong>
+                            <small>REAL-TIME SYSTEM</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Product Introduction -->
+
+        <section id="product">
+            <div class="container split">
+
+                <div class="section-head">
+                    <div class="kicker">The Product</div>
+
+                    <h2>
+                        A complete system.<br>
+                        Built for 8051.
+                    </h2>
+
+                    <p>
+                        HRTOS is designed specifically for the 8051 / MCS-51 family.
+                        It provides an organized software foundation for applications
+                        that need multiple tasks, predictable coordination and
+                        efficient access to microcontroller resources.
+                    </p>
+
+                    <p class="muted">
+                        Rather than treating the 8051 as a platform of isolated
+                        bare-metal routines, HRTOS provides a coherent system
+                        model for building and maintaining embedded applications.
+                    </p>
+
+                    <a class="button" href="./product/overview.html">
+                        Product Overview
+                    </a>
+                </div>
+
+                <div class="code-panel">
+                    <div class="code-top">HRTOS · SYSTEM CAPABILITIES</div>
+
+                    <pre><span class="c-dim">// A structured embedded application</span>
 
 <span class="c-blue">Task Management</span>
   ├─ Task creation and scheduling
@@ -247,40 +1067,143 @@
   ├─ Peripheral drivers
   ├─ Communication components
   └─ Reusable application examples</pre>
-        </div>
-      </div>
-    </section>
+                </div>
 
-    <section id="features">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Core capabilities</div>
-          <h2>System services for real embedded work.</h2>
-          <p>HRTOS combines core operating-system mechanisms with practical services for organizing 8051 applications.</p>
-        </div>
-        <div class="cards">
-          <article class="card"><div class="card-icon">◈</div><h3>Task Scheduling</h3><p>Priority-based task management and time-driven scheduling help structure concurrent application behavior.</p></article>
-          <article class="card"><div class="card-icon">↯</div><h3>Interrupt Management</h3><p>Dedicated interrupt handling mechanisms support responsive interaction with hardware events.</p></article>
-          <article class="card"><div class="card-icon">⇄</div><h3>Synchronization</h3><p>Semaphores, mutexes and events provide coordination mechanisms for tasks and shared resources.</p></article>
-          <article class="card"><div class="card-icon">▤</div><h3>Inter-task Communication</h3><p>Message queues and mailboxes help exchange data between independent parts of an application.</p></article>
-          <article class="card"><div class="card-icon">⌁</div><h3>Resource Management</h3><p>System resource services help applications manage limited memory and microcontroller resources.</p></article>
-          <article class="card"><div class="card-icon">⌘</div><h3>Practical Components</h3><p>Drivers, communication modules and application examples provide a foundation for real projects.</p></article>
-        </div>
-      </div>
-    </section>
+            </div>
+        </section>
 
-    <section id="architecture">
-      <div class="container split">
-        <div>
-          <div class="kicker">System architecture</div>
-          <h2>Designed around the realities of 8-bit computing.</h2>
-          <p class="muted">The 8051 is resource-constrained. Its memory spaces, register banks, interrupt behavior and compiler toolchain all matter. HRTOS is developed with these architectural constraints in mind.</p>
-          <p class="muted">The system architecture separates kernel services, hardware adaptation and application-level components, making projects easier to organize and maintain.</p>
-          <a class="button" href="#ecosystem">Explore the ecosystem <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="code-panel">
-          <div class="code-top">CONCEPTUAL SOFTWARE LAYERS</div>
-          <pre><span class="c-green">Application</span>
+
+        <!-- Core Features -->
+
+        <section id="features">
+            <div class="container">
+
+                <div class="section-head">
+                    <div class="kicker">Core Capabilities</div>
+
+                    <h2>System services for real embedded work.</h2>
+
+                    <p>
+                        HRTOS combines core operating-system mechanisms with
+                        practical services for organizing 8051 applications.
+                        Explore the individual capabilities and their implementation.
+                    </p>
+                </div>
+
+                <div class="cards">
+
+                    <article class="card">
+                        <div class="card-icon">◈</div>
+                        <h3>Task Scheduling</h3>
+                        <p>
+                            Priority-based task management and time-driven
+                            scheduling help structure concurrent application behavior.
+                        </p>
+                        <a class="card-link" href="./features/scheduler.html">
+                            Explore Scheduling
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">↯</div>
+                        <h3>Interrupt Management</h3>
+                        <p>
+                            Dedicated interrupt handling mechanisms support
+                            responsive interaction with hardware events.
+                        </p>
+                        <a class="card-link" href="./features/interrupt.html">
+                            Explore Interrupts
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">⇄</div>
+                        <h3>Synchronization</h3>
+                        <p>
+                            Semaphores, mutexes and events provide coordination
+                            mechanisms for tasks and shared resources.
+                        </p>
+                        <a class="card-link" href="./features/synchronization.html">
+                            Explore Synchronization
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">▤</div>
+                        <h3>Inter-task Communication</h3>
+                        <p>
+                            Message queues and mailboxes help exchange data
+                            between independent parts of an application.
+                        </p>
+                        <a class="card-link" href="./features/communication.html">
+                            Explore Communication
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">⌁</div>
+                        <h3>Resource Management</h3>
+                        <p>
+                            System resource services help applications manage
+                            limited memory and microcontroller resources.
+                        </p>
+                        <a class="card-link" href="./architecture/resource-management.html">
+                            Explore Resources
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">⌘</div>
+                        <h3>Practical Components</h3>
+                        <p>
+                            Drivers, communication modules and application
+                            examples provide a foundation for real projects.
+                        </p>
+                        <a class="card-link" href="./drivers/index.html">
+                            Explore Drivers
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Architecture -->
+
+        <section id="architecture">
+            <div class="container split">
+
+                <div>
+                    <div class="kicker">System Architecture</div>
+
+                    <h2>
+                        Designed around the realities of 8-bit computing.
+                    </h2>
+
+                    <p class="muted">
+                        The 8051 is resource-constrained. Its memory spaces,
+                        register banks, interrupt behavior and compiler toolchain
+                        all matter. HRTOS is developed with these architectural
+                        constraints in mind.
+                    </p>
+
+                    <p class="muted">
+                        The system architecture separates kernel services,
+                        hardware adaptation and application-level components,
+                        making projects easier to organize and maintain.
+                    </p>
+
+                    <a class="button" href="./architecture/index.html">
+                        Explore Architecture
+                    </a>
+                </div>
+
+                <div class="code-panel">
+                    <div class="code-top">CONCEPTUAL SOFTWARE LAYERS</div>
+
+                    <pre><span class="c-green">Application</span>
   User tasks · Examples · Shell
           ▲
 <span class="c-blue">System Services</span>
@@ -293,67 +1216,451 @@
   HAL · MCU-specific drivers
           ▲
 <span class="c-dim">8051 / MCS-51 Microcontroller</span></pre>
-        </div>
-      </div>
-    </section>
+                </div>
 
-    <section id="performance">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Measured performance</div>
-          <h2>Engineering claims backed by test data.</h2>
-          <p>Performance should be understood in the context of a specific MCU, clock frequency, compiler configuration and test method. HRTOS publishes measured results rather than implying one universal figure for every 8051 device.</p>
-        </div>
-        <div class="metrics">
-          <div class="metric"><strong>12.167 µs</strong><span>Measured ISR execution time</span></div>
-          <div class="metric"><strong>394.33 µs</strong><span>Normal task switch · scheduling-flag path</span></div>
-          <div class="metric"><strong>143.5 µs</strong><span>Fast task switch · scheduling-flag path</span></div>
-        </div>
-        <p class="fineprint">Reference test platform: STC12C5A60S2, 1T mode, 11.0592 MHz. Values are platform- and test-condition-specific; consult the detailed Performance documentation for measurement definitions and additional results.</p>
-      </div>
-    </section>
+            </div>
+        </section>
 
-    <section id="ecosystem">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Embedded ecosystem</div>
-          <h2>From kernel mechanisms to application examples.</h2>
-          <p>A useful operating system is more than its scheduler. HRTOS is building a practical collection of drivers, communication components and reusable examples around the 8051 platform.</p>
-        </div>
-        <div class="ecosystem">
-          <div class="eco-item"><strong>Sensor Drivers</strong><span>Temperature, gas, light and other sensing modules.</span></div>
-          <div class="eco-item"><strong>Communication</strong><span>UART-based modules and Modbus RTU components.</span></div>
-          <div class="eco-item"><strong>Display</strong><span>Display interfaces and human-readable output.</span></div>
-          <div class="eco-item"><strong>Application Examples</strong><span>Complete demonstrations connecting drivers and tasks.</span></div>
-        </div>
-      </div>
-    </section>
 
-    <section id="about">
-      <div class="container">
-        <div class="cta">
-          <div>
-            <div class="kicker">Explore HRTOS</div>
-            <h2>Build structured embedded applications on 8051.</h2>
-            <p class="muted" style="margin:0">Discover the system, review the technical approach and explore the growing collection of practical resources.</p>
-          </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <a class="button primary" href="https://github.com/HRTOS">GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button" href="https://hrtos.com/">中文网站 <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        <!-- Performance -->
 
-  <footer>
-    <div class="container footer-row">
-      <div><strong style="color:#dceafa;letter-spacing:.12em">HRTOS</strong><br>Engineering Real-Time on 8051.</div>
-      <div class="footer-links">
-        <a href="#product">Product</a><a href="#features">Features</a><a href="#performance">Performance</a><a href="https://github.com/HRTOS">GitHub</a><a href="https://hrtos.com/">中文网站</a>
-      </div>
-      <div>HRTOS Project · Established 2017</div>
-    </div>
-  </footer>
+        <section id="performance">
+            <div class="container">
+
+                <div class="section-head">
+                    <div class="kicker">Measured Performance</div>
+
+                    <h2>Engineering claims backed by test data.</h2>
+
+                    <p>
+                        Performance should be understood in the context of a
+                        specific MCU, clock frequency, compiler configuration
+                        and test method. HRTOS publishes measured results rather
+                        than implying one universal figure for every 8051 device.
+                    </p>
+                </div>
+
+                <div class="metrics">
+
+                    <div class="metric">
+                        <strong>12.167 µs</strong>
+                        <span>Measured ISR execution time</span>
+                    </div>
+
+                    <div class="metric">
+                        <strong>394.33 µs</strong>
+                        <span>Normal task switch · Scheduling-flag path</span>
+                    </div>
+
+                    <div class="metric">
+                        <strong>143.5 µs</strong>
+                        <span>Fast task switch · Scheduling-flag path</span>
+                    </div>
+
+                </div>
+
+                <p class="fineprint">
+                    Reference test platform: STC12C5A60S2, 1T mode, 11.0592 MHz.
+                    Values are platform- and test-condition-specific.
+                    Consult the detailed Performance documentation for
+                    measurement definitions and additional results.
+                </p>
+
+                <div style="margin-top:24px">
+                    <a class="button" href="./performance/index.html">
+                        Performance Center
+                    </a>
+                    <a class="button" href="./performance/benchmarks.html">
+                        View Benchmarks
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware Support -->
+
+        <section id="hardware">
+            <div class="container">
+
+                <div class="section-head">
+                    <div class="kicker">Hardware Support</div>
+
+                    <h2>Developed for the 8051 platform.</h2>
+
+                    <p>
+                        HRTOS focuses on the 8051 / MCS-51 architecture and
+                        selected microcontroller platforms. Explore hardware
+                        information, platform considerations and test environments.
+                    </p>
+                </div>
+
+                <div class="cards">
+
+                    <article class="card">
+                        <div class="card-icon">01</div>
+                        <h3>STC12 Series</h3>
+                        <p>
+                            Reference hardware for system functionality,
+                            timing measurements and performance evaluation.
+                        </p>
+                        <a class="card-link" href="./hardware/stc12.html">
+                            View STC12 Information
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">02</div>
+                        <h3>STC8 Series</h3>
+                        <p>
+                            Hardware resources and testing considerations
+                            for newer STC 8051 microcontrollers.
+                        </p>
+                        <a class="card-link" href="./hardware/stc8.html">
+                            View STC8 Information
+                        </a>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icon">03</div>
+                        <h3>Hardware Overview</h3>
+                        <p>
+                            Review supported hardware information and
+                            platform-related development resources.
+                        </p>
+                        <a class="card-link" href="./hardware/index.html">
+                            Explore Hardware
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Ecosystem -->
+
+        <section id="ecosystem">
+            <div class="container">
+
+                <div class="section-head">
+                    <div class="kicker">Embedded Ecosystem</div>
+
+                    <h2>From kernel mechanisms to application examples.</h2>
+
+                    <p>
+                        A useful operating system is more than its scheduler.
+                        HRTOS is building a practical collection of drivers,
+                        communication components and reusable examples around
+                        the 8051 platform.
+                    </p>
+                </div>
+
+                <div class="ecosystem">
+
+                    <div class="eco-item">
+                        <strong>Sensor Drivers</strong>
+                        <span>Temperature, gas, light and other sensing modules.</span>
+                    </div>
+
+                    <div class="eco-item">
+                        <strong>Communication</strong>
+                        <span>UART-based modules and Modbus RTU components.</span>
+                    </div>
+
+                    <div class="eco-item">
+                        <strong>Display</strong>
+                        <span>Display interfaces and human-readable output.</span>
+                    </div>
+
+                    <div class="eco-item">
+                        <strong>Application Examples</strong>
+                        <span>Practical demonstrations connecting drivers and tasks.</span>
+                    </div>
+
+                </div>
+
+                <div style="margin-top:25px;display:flex;gap:12px;flex-wrap:wrap">
+                    <a class="button" href="./drivers/index.html">
+                        Driver Library
+                    </a>
+
+                    <a class="button" href="./examples/index.html">
+                        Application Examples
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Website Directory -->
+
+        <section id="explore">
+            <div class="container">
+
+                <div class="section-head">
+                    <div class="kicker">Explore the Website</div>
+
+                    <h2>Everything you need to explore HRTOS.</h2>
+
+                    <p>
+                        Navigate the HRTOS website to learn about the product,
+                        understand its technical design, review hardware support
+                        and access practical development resources.
+                    </p>
+                </div>
+
+                <div class="resource-grid">
+
+                    <a class="resource-card" href="./product/index.html">
+                        <div class="resource-number">01 / PRODUCT</div>
+                        <h3>Product Center</h3>
+                        <p>
+                            Discover HRTOS, its system capabilities,
+                            product information and release history.
+                        </p>
+                        <span class="resource-action">Explore Product</span>
+                    </a>
+
+                    <a class="resource-card" href="./features/index.html">
+                        <div class="resource-number">02 / FEATURES</div>
+                        <h3>Core Features</h3>
+                        <p>
+                            Explore task scheduling, interrupt management,
+                            synchronization and communication services.
+                        </p>
+                        <span class="resource-action">Explore Features</span>
+                    </a>
+
+                    <a class="resource-card" href="./architecture/index.html">
+                        <div class="resource-number">03 / ARCHITECTURE</div>
+                        <h3>System Architecture</h3>
+                        <p>
+                            Understand the kernel, memory model, task
+                            management and system resource organization.
+                        </p>
+                        <span class="resource-action">Explore Architecture</span>
+                    </a>
+
+                    <a class="resource-card" href="./performance/index.html">
+                        <div class="resource-number">04 / PERFORMANCE</div>
+                        <h3>Performance Center</h3>
+                        <p>
+                            Review benchmarks, context switching,
+                            interrupt latency and timing accuracy.
+                        </p>
+                        <span class="resource-action">View Performance</span>
+                    </a>
+
+                    <a class="resource-card" href="./hardware/index.html">
+                        <div class="resource-number">05 / HARDWARE</div>
+                        <h3>Hardware Support</h3>
+                        <p>
+                            Learn about supported 8051 hardware platforms
+                            and test environments.
+                        </p>
+                        <span class="resource-action">Explore Hardware</span>
+                    </a>
+
+                    <a class="resource-card" href="./drivers/index.html">
+                        <div class="resource-number">06 / DRIVERS</div>
+                        <h3>Driver Library</h3>
+                        <p>
+                            Explore reusable sensor drivers, communication
+                            components and display support.
+                        </p>
+                        <span class="resource-action">Explore Drivers</span>
+                    </a>
+
+                    <a class="resource-card" href="./examples/index.html">
+                        <div class="resource-number">07 / EXAMPLES</div>
+                        <h3>Application Examples</h3>
+                        <p>
+                            Study practical examples involving infrared,
+                            sensors, displays and Modbus.
+                        </p>
+                        <span class="resource-action">View Examples</span>
+                    </a>
+
+                    <a class="resource-card" href="./docs/index.html">
+                        <div class="resource-number">08 / DOCUMENTATION</div>
+                        <h3>Technical Documentation</h3>
+                        <p>
+                            Access getting-started guides, installation
+                            instructions, API references and FAQs.
+                        </p>
+                        <span class="resource-action">Read Documentation</span>
+                    </a>
+
+                    <a class="resource-card" href="./download/index.html">
+                        <div class="resource-number">09 / DOWNLOAD</div>
+                        <h3>Downloads</h3>
+                        <p>
+                            Find HRTOS packages and available project
+                            resources for development.
+                        </p>
+                        <span class="resource-action">View Downloads</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- About -->
+
+        <section id="about">
+            <div class="container">
+
+                <div class="cta">
+
+                    <div>
+                        <div class="kicker">The HRTOS Project</div>
+
+                        <h2>Engineering Real-Time on 8051.</h2>
+
+                        <p class="muted" style="margin:0">
+                            Originating in 2017, HRTOS is an ongoing
+                            8051 operating-system project focused on
+                            system development, practical engineering
+                            resources and long-term maintenance.
+                        </p>
+                    </div>
+
+                    <div style="display:flex;gap:12px;flex-wrap:wrap">
+                        <a class="button primary" href="./about/index.html">
+                            About HRTOS
+                        </a>
+
+                        <a class="button" href="./about/history.html">
+                            Project History
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Final Call to Action -->
+
+        <section style="border-top:0;padding-top:10px">
+            <div class="container">
+                <div class="section-head">
+                    <div class="kicker">Get Started</div>
+
+                    <h2>Explore. Understand. Build.</h2>
+
+                    <p>
+                        Start with the documentation, review the system
+                        architecture and explore practical examples for
+                        your next 8051 project.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button primary" href="./docs/getting-started.html">
+                            Getting Started
+                        </a>
+
+                        <a class="button" href="./download/index.html">
+                            Downloads
+                        </a>
+
+                        <a class="button" href="https://github.com/HRTOS">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+                    <div class="footer-brand">HRTOS</div>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                    </p>
+
+                    <p>
+                        A complete operating system for
+                        8051 / MCS-51 microcontrollers.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="footer-title">Product</div>
+
+                    <div class="footer-links">
+                        <a href="./product/index.html">Product Center</a>
+                        <a href="./product/overview.html">Product Overview</a>
+                        <a href="./product/releases.html">Release History</a>
+                        <a href="./features/index.html">Core Features</a>
+                        <a href="./architecture/index.html">Architecture</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="footer-title">Resources</div>
+
+                    <div class="footer-links">
+                        <a href="./performance/index.html">Performance</a>
+                        <a href="./hardware/index.html">Hardware</a>
+                        <a href="./drivers/index.html">Drivers</a>
+                        <a href="./examples/index.html">Examples</a>
+                        <a href="./docs/index.html">Documentation</a>
+                        <a href="./download/index.html">Downloads</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="footer-title">Project</div>
+
+                    <div class="footer-links">
+                        <a href="./about/index.html">About HRTOS</a>
+                        <a href="./about/history.html">Project History</a>
+                        <a href="./about/contact.html">Contact</a>
+                        <a href="https://github.com/HRTOS">GitHub</a>
+                        <a href="https://hrtos.com/">Chinese Website</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <div>
+                    HRTOS Project · Established 2017
+                </div>
+
+                <div>
+                    8051 / MCS-51 Embedded Operating System
+                </div>
+
+                <div>
+                    <a href="./about/contact.html">Contact</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
 </body>
 </html>
