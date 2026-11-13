@@ -9,18 +9,18 @@
     <title>Download HRTOS | 8051 Real-Time Operating System</title>
 
     <meta name="description"
-        content="Download HRTOS for 8051 and MCS-51 microcontrollers. Find the latest release, development requirements, documentation and example resources.">
+        content="Download HRTOS 4.0.0 LTS for 8051 and MCS-51 microcontrollers. Access official releases, development requirements, technical documentation, drivers and application examples.">
 
     <meta name="keywords"
-        content="HRTOS download, 8051 RTOS download, MCS-51 operating system, HRTOS 4.0, Keil C51">
+        content="HRTOS download, 8051 RTOS download, 8051 operating system, MCS-51 RTOS, HRTOS 4.0, Keil C51">
 
     <meta name="author" content="HRTOS Project">
 
     <link rel="canonical" href="https://en.hrtos.com/download/">
 
-    <meta property="og:title" content="Download HRTOS">
+    <meta property="og:title" content="Download HRTOS | 8051 Real-Time Operating System">
     <meta property="og:description"
-        content="Get HRTOS releases, documentation and development resources for 8051 microcontrollers.">
+        content="Download HRTOS releases and access official development resources for 8051 and MCS-51 microcontrollers.">
     <meta property="og:url" content="https://en.hrtos.com/download/">
     <meta property="og:type" content="website">
 
@@ -29,553 +29,6 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
 
-    <style>
-        /* ==============================
-           Download Hero
-        ============================== */
-
-        .download-hero {
-            padding: 100px 20px 75px;
-            text-align: center;
-            background:
-                radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.18), transparent 42%),
-                linear-gradient(180deg, #081426 0%, #0b1729 100%);
-        }
-
-        .download-hero .eyebrow {
-            color: #60a5fa;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 18px;
-        }
-
-        .download-hero h1 {
-            color: #ffffff;
-            font-size: clamp(36px, 5vw, 54px);
-            line-height: 1.15;
-            margin-bottom: 22px;
-        }
-
-        .download-hero p {
-            color: #a9bad0;
-            max-width: 720px;
-            margin: 0 auto;
-            font-size: 17px;
-            line-height: 1.8;
-        }
-
-        /* ==============================
-           Main Download
-        ============================== */
-
-        .download-section {
-            padding: 75px 0;
-        }
-
-        .download-card {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 42px;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            border-radius: 18px;
-            background: linear-gradient(145deg, #111f34, #0c192b);
-            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.2);
-        }
-
-        .download-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-
-        .download-card h2 {
-            color: #ffffff;
-            font-size: 30px;
-            margin: 0 0 10px;
-        }
-
-        .download-card-header p {
-            color: #94a8c0;
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        .version-badge {
-            display: inline-block;
-            padding: 8px 14px;
-            border-radius: 30px;
-            background: rgba(34, 197, 94, 0.12);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #4ade80;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
-
-        .download-info {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            margin: 30px 0;
-        }
-
-        .download-info-item {
-            min-width: 0;
-            padding: 18px;
-            background: rgba(30, 48, 72, 0.65);
-            border-radius: 10px;
-            border: 1px solid rgba(148, 163, 184, 0.12);
-        }
-
-        .download-info-item span {
-            display: block;
-            color: #8298b2;
-            font-size: 12px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .download-info-item strong {
-            color: #e5edf7;
-            font-size: 15px;
-            font-weight: 600;
-            overflow-wrap: anywhere;
-        }
-
-        /* ==============================
-           Download Buttons
-        ============================== */
-
-        .download-actions {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .download-actions a {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 48px;
-            padding: 0 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            text-align: center;
-            transition: all 0.25s ease;
-        }
-
-        .download-primary {
-            color: #ffffff;
-            background: #2563eb;
-            border: 1px solid #2563eb;
-        }
-
-        .download-primary:hover {
-            background: #1d4ed8;
-            border-color: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .download-secondary {
-            color: #dbeafe;
-            border: 1px solid rgba(96, 165, 250, 0.45);
-            background: rgba(37, 99, 235, 0.08);
-        }
-
-        .download-secondary:hover {
-            background: rgba(37, 99, 235, 0.2);
-        }
-
-        .download-note {
-            margin-top: 25px;
-            padding: 16px 18px;
-            border-left: 3px solid #3b82f6;
-            background: rgba(37, 99, 235, 0.08);
-            color: #a9bad0;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        /* ==============================
-           Resources
-        ============================== */
-
-        .resource-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
-            margin-top: 38px;
-        }
-
-        .resource-card {
-            min-width: 0;
-            padding: 28px;
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            border-radius: 14px;
-            background: rgba(15, 29, 49, 0.8);
-            transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.55);
-        }
-
-        .resource-card .resource-label {
-            color: #60a5fa;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-        }
-
-        .resource-card h3 {
-            color: #ffffff;
-            font-size: 19px;
-            margin-bottom: 12px;
-        }
-
-        .resource-card p {
-            color: #94a8c0;
-            font-size: 14px;
-            line-height: 1.8;
-            min-height: 76px;
-            margin-bottom: 20px;
-        }
-
-        .resource-card a {
-            color: #60a5fa;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .resource-card a:hover {
-            color: #93c5fd;
-        }
-
-        /* ==============================
-           Requirements
-        ============================== */
-
-        .requirements {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            margin-top: 35px;
-        }
-
-        .requirement-item {
-            min-width: 0;
-            padding: 22px;
-            border-radius: 12px;
-            background: rgba(15, 29, 49, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.14);
-        }
-
-        .requirement-item h3 {
-            color: #e5edf7;
-            font-size: 16px;
-            margin-bottom: 9px;
-        }
-
-        .requirement-item p {
-            color: #94a8c0;
-            font-size: 14px;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        /* ==============================
-           CTA
-        ============================== */
-
-        .download-cta {
-            padding: 65px 30px;
-            text-align: center;
-            border-radius: 18px;
-            background:
-                radial-gradient(circle at center, rgba(37, 99, 235, 0.2), transparent 65%),
-                #101e32;
-            border: 1px solid rgba(96, 165, 250, 0.18);
-        }
-
-        .download-cta h2 {
-            color: #ffffff;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .download-cta p {
-            color: #9fb1c7;
-            max-width: 620px;
-            margin: 0 auto 25px;
-            line-height: 1.8;
-        }
-
-        /* ==============================
-           Navigation
-        ============================== */
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #60a5fa;
-        }
-
-        /* ==============================
-           Tablet
-        ============================== */
-
-        @media (max-width: 1024px) {
-
-            .header-inner {
-                gap: 18px;
-            }
-
-            .nav-links {
-                gap: 16px;
-            }
-
-            .nav-links a {
-                font-size: 12px;
-            }
-
-            .resource-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-        }
-
-        /* ==============================
-           Mobile
-        ============================== */
-
-        @media (max-width: 768px) {
-
-            html,
-            body {
-                max-width: 100%;
-                overflow-x: hidden;
-            }
-
-            .download-hero {
-                padding: 65px 20px 45px;
-            }
-
-            .download-hero .eyebrow {
-                font-size: 11px;
-                letter-spacing: 1.5px;
-                margin-bottom: 14px;
-            }
-
-            .download-hero h1 {
-                font-size: clamp(32px, 8vw, 40px);
-                line-height: 1.2;
-                margin-bottom: 16px;
-            }
-
-            .download-hero p {
-                font-size: 14px;
-                line-height: 1.8;
-            }
-
-            .download-section {
-                padding: 45px 0;
-            }
-
-            .download-card {
-                padding: 25px 18px;
-                border-radius: 14px;
-            }
-
-            .download-card-header {
-                flex-direction: column;
-                gap: 14px;
-                margin-bottom: 22px;
-            }
-
-            .download-card h2 {
-                font-size: 25px;
-            }
-
-            .download-card-header p {
-                font-size: 13px;
-            }
-
-            .version-badge {
-                font-size: 10px;
-                padding: 7px 11px;
-            }
-
-            .download-info {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
-                margin: 22px 0;
-            }
-
-            .download-info-item {
-                padding: 14px 11px;
-                border-radius: 8px;
-            }
-
-            .download-info-item span {
-                font-size: 10px;
-                letter-spacing: 0.5px;
-                margin-bottom: 7px;
-            }
-
-            .download-info-item strong {
-                font-size: 12px;
-                line-height: 1.5;
-            }
-
-            .download-actions {
-                flex-direction: column;
-                gap: 12px;
-                margin-top: 22px;
-            }
-
-            .download-actions a {
-                width: 100%;
-                min-height: 48px;
-                padding: 12px 15px;
-                box-sizing: border-box;
-                font-size: 13px;
-            }
-
-            .download-note {
-                margin-top: 20px;
-                padding: 13px 14px;
-                font-size: 12px;
-            }
-
-            .resource-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                margin-top: 25px;
-            }
-
-            .resource-card {
-                padding: 23px 20px;
-            }
-
-            .resource-card h3 {
-                font-size: 18px;
-            }
-
-            .resource-card p {
-                min-height: 0;
-                font-size: 13px;
-                margin-bottom: 15px;
-            }
-
-            .requirements {
-                grid-template-columns: 1fr;
-                gap: 13px;
-                margin-top: 25px;
-            }
-
-            .requirement-item {
-                padding: 19px;
-            }
-
-            .requirement-item p {
-                font-size: 13px;
-            }
-
-            .download-cta {
-                padding: 40px 20px;
-                border-radius: 14px;
-            }
-
-            .download-cta h2 {
-                font-size: 23px;
-                line-height: 1.35;
-            }
-
-            .download-cta p {
-                font-size: 13px;
-            }
-
-            /* Navigation is handled by the shared mobile menu */
-            .header-inner {
-                gap: 12px;
-            }
-
-        }
-
-        /* ==============================
-           Small Mobile
-        ============================== */
-
-        @media (max-width: 420px) {
-
-            .download-section .container {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-            .download-card {
-                padding: 22px 15px;
-            }
-
-            .download-info {
-                gap: 8px;
-            }
-
-            .download-info-item {
-                padding: 12px 9px;
-            }
-
-            .download-info-item strong {
-                font-size: 11px;
-            }
-
-            .download-hero {
-                padding-top: 55px;
-            }
-
-            .download-cta {
-                padding: 35px 16px;
-            }
-
-        }
-
-    </style>
 </head>
 
 <body>
@@ -584,253 +37,785 @@
     <header class="site-header">
         <div class="container header-inner">
 
-            <a class="brand" href="../index.html" aria-label="HRTOS Home">
-                <img src="../assets/images/logo.svg"
-                    alt="HRTOS Logo"
-                    class="brand-logo">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
             </a>
 
-            <nav class="nav-links">
+            <nav class="main-nav">
                 <a href="../index.html">Home</a>
-                <a href="../product/index.html">Product</a>
-                <a href="../features/index.html">Features</a>
-                <a href="../architecture/index.html">Architecture</a>
-                <a href="../performance/index.html">Performance</a>
-                <a href="../docs/index.html">Documentation</a>
-                <a href="./index.html" class="active">Download</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="./" class="active">Download</a>
             </nav>
-
-            <a href="https://github.com/HRTOS"
-                class="header-cta"
-                target="_blank"
-                rel="noopener">
-                GitHub
-            </a>
 
         </div>
     </header>
 
+
     <main>
 
         <!-- Hero -->
-        <section class="download-hero">
-            <div class="container">
-                <div class="eyebrow">HRTOS SOFTWARE RESOURCES</div>
-
-                <h1>Download HRTOS</h1>
-
-                <p>
-                    Access HRTOS releases, development resources and technical
-                    documentation for 8051 and MCS-51 microcontrollers.
-                    Build your embedded applications on a complete real-time
-                    operating system.
-                </p>
-            </div>
-        </section>
-
-        <!-- Main Download -->
-        <section class="download-section">
+        <section class="page-hero">
             <div class="container">
 
-                <div class="download-card">
+                <div class="hero-content">
 
-                    <div class="download-card-header">
-                        <div>
-                            <h2>HRTOS 4.0</h2>
-                            <p>
-                                The current generation of the HRTOS operating
-                                system for the 8051 platform.
-                            </p>
-                        </div>
+                    <span class="section-tag">
+                        OFFICIAL SOFTWARE RELEASES
+                    </span>
 
-                        <span class="version-badge">CURRENT GENERATION</span>
-                    </div>
+                    <h1>
+                        Download HRTOS
+                    </h1>
 
-                    <div class="download-info">
-
-                        <div class="download-info-item">
-                            <span>Platform</span>
-                            <strong>8051 / MCS-51</strong>
-                        </div>
-
-                        <div class="download-info-item">
-                            <span>Development Environment</span>
-                            <strong>Keil C51</strong>
-                        </div>
-
-                        <div class="download-info-item">
-                            <span>Target Hardware</span>
-                            <strong>STC and compatible MCUs</strong>
-                        </div>
-
-                        <div class="download-info-item">
-                            <span>Release</span>
-                            <strong>HRTOS 4.0.0</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="download-actions">
-
-                        <a href="https://hrtos.com/download/HRTOS%20V4.0.0%20LTS.7z"
-                            class="download-primary"
-                            download>
-                            Download HRTOS 4.0.0 LTS
-                        </a>
-
-                        <a href="../product/releases.html"
-                            class="download-secondary">
-                            View Release History
-                        </a>
-
-                    </div>
-
-                    <div class="download-note">
-                        The download link points to the official HRTOS
-                        release package. Please refer to the release page for
-                        the latest version and package details.
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Resources -->
-        <section class="download-section">
-            <div class="container">
-
-                <div class="section-header">
-                    <div class="section-eyebrow">DEVELOPMENT RESOURCES</div>
-                    <h2>Everything You Need to Get Started</h2>
-                    <p>
-                        Explore the documentation and resources available
-                        for developing applications with HRTOS.
-                    </p>
-                </div>
-
-                <div class="resource-grid">
-
-                    <div class="resource-card">
-                        <div class="resource-label">DOCUMENTATION</div>
-                        <h3>Technical Documentation</h3>
-                        <p>
-                            Learn about system architecture, configuration,
-                            APIs, task management and kernel functionality.
-                        </p>
-                        <a href="../docs/index.html">
-                            Explore Documentation
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <div class="resource-label">EXAMPLES</div>
-                        <h3>Application Examples</h3>
-                        <p>
-                            Explore practical examples covering sensors,
-                            displays, infrared communication and Modbus RTU.
-                        </p>
-                        <a href="../examples/index.html">
-                            Browse Examples
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <div class="resource-label">DRIVERS</div>
-                        <h3>Driver Library</h3>
-                        <p>
-                            Access peripheral drivers and hardware interface
-                            resources for common 8051 development projects.
-                        </p>
-                        <a href="../drivers/index.html">
-                            Explore Drivers
-                        </a>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Requirements -->
-        <section class="download-section">
-            <div class="container">
-
-                <div class="section-header">
-                    <div class="section-eyebrow">DEVELOPMENT ENVIRONMENT</div>
-                    <h2>System Requirements</h2>
-                    <p>
-                        Review the recommended development environment and
-                        hardware resources before building HRTOS projects.
-                    </p>
-                </div>
-
-                <div class="requirements">
-
-                    <div class="requirement-item">
-                        <h3>Compiler</h3>
-                        <p>
-                            Keil C51 development environment for 8051
-                            and MCS-51 microcontrollers.
-                        </p>
-                    </div>
-
-                    <div class="requirement-item">
-                        <h3>Microcontroller</h3>
-                        <p>
-                            An 8051-compatible MCU. STC microcontrollers
-                            are among the supported development targets.
-                        </p>
-                    </div>
-
-                    <div class="requirement-item">
-                        <h3>Memory Resources</h3>
-                        <p>
-                            The full HRTOS configuration requires at least
-                            1 KB of XDATA and 8 KB of CODE memory.
-                        </p>
-                    </div>
-
-                    <div class="requirement-item">
-                        <h3>Development Hardware</h3>
-                        <p>
-                            A compatible development board, programmer
-                            and debugging tools are recommended.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="download-section">
-            <div class="container">
-
-                <div class="download-cta">
-                    <h2>Start Building with HRTOS</h2>
-
-                    <p>
-                        Read the getting started guide, review the system
-                        architecture and explore practical application
-                        examples to begin your development.
+                    <p class="hero-description">
+                        Access official HRTOS releases and
+                        development resources for 8051
+                        and MCS-51 microcontrollers.
                     </p>
 
-                    <div class="download-actions"
-                        style="justify-content:center;">
+                    <p>
+                        Download the HRTOS operating system,
+                        explore technical documentation
+                        and access the resources required
+                        to develop structured real-time
+                        embedded applications.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="#latest-release"
+                            class="btn btn-primary">
+                            Download HRTOS
+                        </a>
 
                         <a href="../docs/getting-started.html"
-                            class="download-primary">
+                            class="btn btn-secondary">
                             Get Started
                         </a>
 
-                        <a href="../product/overview.html"
-                            class="download-secondary">
-                            Explore HRTOS
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Latest Release -->
+        <section class="section" id="latest-release">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        OFFICIAL RELEASE
+                    </span>
+
+                    <h2>HRTOS 4.0.0 LTS</h2>
+
+                    <p>
+                        The current HRTOS release provides
+                        a complete operating system environment
+                        for 8051 and MCS-51 embedded development.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>4.0</span>
+                        </div>
+
+                        <h3>HRTOS 4.0.0 LTS</h3>
+
+                        <p>
+                            HRTOS 4.0 is designed for the
+                            8051 microcontroller platform,
+                            providing task scheduling,
+                            timing services, synchronization,
+                            communication and system resource
+                            management.
+                        </p>
+
+                        <div class="capability-grid">
+
+                            <div class="capability-item">
+                                <h3>Platform</h3>
+                                <p>8051 / MCS-51</p>
+                            </div>
+
+                            <div class="capability-item">
+                                <h3>Compiler</h3>
+                                <p>Keil C51</p>
+                            </div>
+
+                            <div class="capability-item">
+                                <h3>Hardware</h3>
+                                <p>STC and compatible MCUs</p>
+                            </div>
+
+                            <div class="capability-item">
+                                <h3>Version</h3>
+                                <p>HRTOS 4.0.0 LTS</p>
+                            </div>
+
+                        </div>
+
+                        <div class="hero-actions">
+
+                            <a href="https://hrtos.com/download/HRTOS%20V4.0.0%20LTS.7z"
+                                class="btn btn-primary"
+                                download>
+                                Download HRTOS 4.0.0 LTS
+                            </a>
+
+                            <a href="../product/releases.html"
+                                class="btn btn-secondary">
+                                Release History
+                            </a>
+
+                        </div>
+
+                        <p>
+                            The download link provides the official
+                            HRTOS 4.0.0 LTS release package.
+                            Refer to the release history for
+                            additional version information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Package Information -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELEASE INFORMATION
+                    </span>
+
+                    <h2>HRTOS Development Package</h2>
+
+                    <p>
+                        The HRTOS development resources cover
+                        the kernel interfaces, supporting modules
+                        and practical components required
+                        for embedded application development.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Operating System Kernel</h3>
+
+                        <p>
+                            Core operating system functionality
+                            including task management,
+                            scheduling, timing and
+                            interrupt management.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>System Services</h3>
+
+                        <p>
+                            Synchronization and communication
+                            services including semaphores,
+                            mutexes, events, mailboxes
+                            and message queues.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Development Resources</h3>
+
+                        <p>
+                            Supporting drivers, application
+                            examples and development resources
+                            for building complete 8051
+                            embedded applications.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DEVELOPMENT RESOURCES
+                    </span>
+
+                    <h2>Everything You Need to Develop with HRTOS</h2>
+
+                    <p>
+                        Explore the official technical resources
+                        to understand the system, configure
+                        your development environment
+                        and build practical applications.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Documentation -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Technical Documentation</h3>
+
+                        <p>
+                            Read system documentation covering
+                            kernel architecture, configuration,
+                            API interfaces and operating
+                            system functionality.
+                        </p>
+
+                        <ul>
+                            <li>Getting Started</li>
+                            <li>Installation Guide</li>
+                            <li>Kernel API Reference</li>
+                            <li>Frequently Asked Questions</li>
+                        </ul>
+
+                        <a href="../docs/"
+                            class="text-link">
+                            Explore Documentation
+                        </a>
+
+                    </article>
+
+
+                    <!-- Examples -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Application Examples</h3>
+
+                        <p>
+                            Explore practical embedded
+                            applications demonstrating
+                            how HRTOS services can be used
+                            in real development projects.
+                        </p>
+
+                        <ul>
+                            <li>Infrared Communication</li>
+                            <li>DHT11 Temperature and Humidity</li>
+                            <li>OLED Display</li>
+                            <li>Modbus RTU</li>
+                        </ul>
+
+                        <a href="../examples/"
+                            class="text-link">
+                            Browse Application Examples
+                        </a>
+
+                    </article>
+
+
+                    <!-- Drivers -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Hardware Driver Library</h3>
+
+                        <p>
+                            Explore hardware interface
+                            resources and peripheral drivers
+                            for common 8051 development
+                            applications.
+                        </p>
+
+                        <ul>
+                            <li>Sensor Drivers</li>
+                            <li>Communication Interfaces</li>
+                            <li>Display Drivers</li>
+                            <li>Peripheral Integration</li>
+                        </ul>
+
+                        <a href="../drivers/"
+                            class="text-link">
+                            Explore Driver Library
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- System Requirements -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DEVELOPMENT ENVIRONMENT
+                    </span>
+
+                    <h2>System Requirements</h2>
+
+                    <p>
+                        Review the recommended software
+                        environment and hardware resources
+                        before starting an HRTOS project.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Compiler and Toolchain</h3>
+
+                        <p>
+                            HRTOS is designed for the Keil C51
+                            development environment and
+                            8051-compatible toolchains.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Microcontroller Platform</h3>
+
+                        <p>
+                            An 8051 or MCS-51 compatible
+                            microcontroller is required.
+                            STC microcontrollers are among
+                            the supported development targets.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>CODE Memory</h3>
+
+                        <p>
+                            The full HRTOS configuration
+                            requires at least 8 KB
+                            of CODE memory.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>XDATA Memory</h3>
+
+                        <p>
+                            The full HRTOS configuration
+                            requires at least 1 KB
+                            of external data memory.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Development Board</h3>
+
+                        <p>
+                            An 8051-compatible development
+                            board is recommended for
+                            hardware testing and application
+                            development.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Programming and Debugging</h3>
+
+                        <p>
+                            A compatible programmer,
+                            debugging tools and serial
+                            communication interface
+                            are recommended.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Workflow -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        GETTING STARTED
+                    </span>
+
+                    <h2>Start Your First HRTOS Project</h2>
+
+                    <p>
+                        Follow these steps to prepare
+                        your development environment
+                        and begin building applications.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Step 01 - Download HRTOS</h3>
+
+                        <p>
+                            Obtain the official HRTOS
+                            4.0.0 LTS development package
+                            from the download section.
+                        </p>
+
+                        <a href="https://hrtos.com/download/HRTOS%20V4.0.0%20LTS.7z"
+                            class="text-link">
+                            Download HRTOS 4.0.0 LTS
                         </a>
 
                     </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Step 02 - Prepare the Environment</h3>
+
+                        <p>
+                            Install and configure the Keil C51
+                            development environment and
+                            prepare a compatible 8051
+                            development platform.
+                        </p>
+
+                        <a href="../docs/installation.html"
+                            class="text-link">
+                            Read Installation Guide
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Step 03 - Configure HRTOS</h3>
+
+                        <p>
+                            Configure system parameters,
+                            integrate the required libraries
+                            and prepare the application
+                            project structure.
+                        </p>
+
+                        <a href="../docs/getting-started.html"
+                            class="text-link">
+                            Read Getting Started
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Step 04 - Build Applications</h3>
+
+                        <p>
+                            Use HRTOS kernel services,
+                            peripheral drivers and
+                            application examples to
+                            develop your own embedded system.
+                        </p>
+
+                        <a href="../examples/"
+                            class="text-link">
+                            Explore Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Release History -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        VERSION INFORMATION
+                    </span>
+
+                    <h2>HRTOS Release History</h2>
+
+                    <p>
+                        Follow the development and
+                        maintenance history of HRTOS
+                        through its official release records.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>HRTOS 4.0.0 LTS</h3>
+
+                        <p>
+                            The current HRTOS 4.x generation,
+                            providing the operating system
+                            kernel and supporting services
+                            for 8051 and MCS-51 development.
+                        </p>
+
+                        <a href="../product/releases.html"
+                            class="text-link">
+                            View Release Details
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Previous Versions</h3>
+
+                        <p>
+                            Explore historical HRTOS releases
+                            and review the evolution of
+                            the operating system.
+                        </p>
+
+                        <a href="../product/releases.html"
+                            class="text-link">
+                            Browse Release History
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Explore More HRTOS Resources</h2>
+
+                    <p>
+                        Learn more about the HRTOS operating
+                        system, its architecture and
+                        supported development platforms.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Product Overview</h3>
+
+                        <p>
+                            Discover the HRTOS operating
+                            system and its major capabilities
+                            for 8051 embedded development.
+                        </p>
+
+                        <a href="../product/"
+                            class="text-link">
+                            Explore Product
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Architecture</h3>
+
+                        <p>
+                            Understand the kernel structure,
+                            scheduling model and internal
+                            organization of HRTOS.
+                        </p>
+
+                        <a href="../architecture/"
+                            class="text-link">
+                            Explore Architecture
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Performance</h3>
+
+                        <p>
+                            Review timing measurements,
+                            context switching and
+                            interrupt response characteristics.
+                        </p>
+
+                        <a href="../performance/"
+                            class="text-link">
+                            Explore Performance
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Supported Hardware</h3>
+
+                        <p>
+                            Explore 8051 microcontroller
+                            platforms and hardware
+                            development resources.
+                        </p>
+
+                        <a href="../hardware/"
+                            class="text-link">
+                            Explore Hardware
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Start Building with HRTOS</h2>
+
+                    <p>
+                        Download HRTOS 4.0.0 LTS,
+                        explore the technical documentation
+                        and begin developing real-time
+                        embedded applications for
+                        8051 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="https://hrtos.com/download/HRTOS%20V4.0.0%20LTS.7z"
+                            class="btn btn-primary"
+                            download>
+                            Download HRTOS
+                        </a>
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-secondary">
+                            Get Started
+                        </a>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -838,66 +823,75 @@
 
     </main>
 
+
     <!-- Footer -->
     <footer class="site-footer">
+
         <div class="container">
 
-            <div class="footer-main">
+            <div class="footer-content">
 
                 <div class="footer-brand">
-                    <a href="../index.html" class="brand">
+
+                    <a href="../index.html" class="logo">
                         <img src="../assets/images/logo.svg"
-                            alt="HRTOS Logo"
-                            class="brand-logo">
+                            alt="HRTOS Logo">
                         <span>HRTOS</span>
                     </a>
 
                     <p>
-                        Engineering Real-Time on 8051.
-                        A complete operating system for the MCS-51 platform.
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
                     </p>
+
                 </div>
 
-                <div class="footer-column">
-                    <h4>Product</h4>
-                    <a href="../product/overview.html">Overview</a>
-                    <a href="../product/releases.html">Releases</a>
-                    <a href="./index.html">Download</a>
-                </div>
 
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <a href="../docs/index.html">Documentation</a>
-                    <a href="../drivers/index.html">Drivers</a>
-                    <a href="../examples/index.html">Examples</a>
-                </div>
+                <div class="footer-links">
 
-                <div class="footer-column">
-                    <h4>About</h4>
-                    <a href="../about/index.html">About HRTOS</a>
-                    <a href="../about/history.html">Project History</a>
-                    <a href="../about/contact.html">Contact</a>
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="./">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
                 </div>
 
             </div>
 
+
             <div class="footer-bottom">
+
                 <p>
-                    &copy; 2017¨C2026 HRTOS Project. All rights reserved.
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
                 </p>
 
-                <div>
-                    <a href="https://hrtos.com/" target="_blank" rel="noopener">
-                        Chinese Website
-                    </a>
-                    <a href="https://github.com/HRTOS" target="_blank" rel="noopener">
-                        GitHub
-                    </a>
-                </div>
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
             </div>
 
         </div>
+
     </footer>
+
 
     <script src="../assets/js/main.js"></script>
 
