@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS Examples | Practical 8051 Embedded Applications</title>
+
+    <meta name="description"
+        content="Explore practical HRTOS application examples for 8051 microcontrollers, including infrared remote control, DHT11 temperature and humidity sensing, OLED displays and Modbus RTU communication.">
+
+    <meta name="keywords"
+        content="8051 RTOS examples, HRTOS examples, 8051 embedded applications, infrared remote control, DHT11, OLED, Modbus RTU">
+
+    <link rel="canonical" href="https://en.hrtos.com/examples/">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="./" class="active">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        PRACTICAL APPLICATIONS
+                    </span>
+
+                    <h1>
+                        HRTOS Application Examples
+                    </h1>
+
+                    <p class="hero-description">
+                        Explore practical embedded applications
+                        built with HRTOS on 8051 microcontrollers.
+                    </p>
+
+                    <p>
+                        These examples demonstrate how HRTOS
+                        task scheduling, interrupt handling,
+                        hardware drivers and communication services
+                        can be combined to build structured
+                        embedded applications.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../drivers/"
+                            class="btn btn-secondary">
+                            Explore Drivers
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        EXAMPLE COLLECTION
+                    </span>
+
+                    <h2>Explore Practical Applications</h2>
+
+                    <p>
+                        Discover how HRTOS can be used with
+                        common embedded hardware and communication
+                        interfaces in real-world application scenarios.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Infrared -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Infrared Remote Control</h3>
+
+                        <p>
+                            An infrared remote control application
+                            demonstrating event-driven processing
+                            and interrupt-based signal reception.
+                        </p>
+
+                        <ul>
+                            <li>Infrared signal reception</li>
+                            <li>NEC protocol decoding</li>
+                            <li>Interrupt-driven processing</li>
+                            <li>Task-based event handling</li>
+                        </ul>
+
+                        <a href="./infrared.html"
+                            class="text-link">
+                            Explore Example
+                        </a>
+
+                    </article>
+
+
+                    <!-- DHT11 -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>DHT11 Temperature and Humidity</h3>
+
+                        <p>
+                            A sensor application demonstrating
+                            periodic data acquisition and
+                            task-based sensor management.
+                        </p>
+
+                        <ul>
+                            <li>DHT11 sensor interface</li>
+                            <li>Temperature measurement</li>
+                            <li>Humidity measurement</li>
+                            <li>Periodic task execution</li>
+                        </ul>
+
+                        <a href="./dht11.html"
+                            class="text-link">
+                            Explore Example
+                        </a>
+
+                    </article>
+
+
+                    <!-- OLED -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>OLED Display Application</h3>
+
+                        <p>
+                            A display application demonstrating
+                            hardware driver integration and
+                            real-time information presentation.
+                        </p>
+
+                        <ul>
+                            <li>OLED display interface</li>
+                            <li>Display driver integration</li>
+                            <li>Task-based screen updates</li>
+                            <li>System information display</li>
+                        </ul>
+
+                        <a href="./oled.html"
+                            class="text-link">
+                            Explore Example
+                        </a>
+
+                    </article>
+
+
+                    <!-- Modbus -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Modbus RTU Communication</h3>
+
+                        <p>
+                            An industrial communication example
+                            demonstrating serial communication
+                            and Modbus RTU slave functionality.
+                        </p>
+
+                        <ul>
+                            <li>Modbus RTU slave</li>
+                            <li>Serial communication</li>
+                            <li>Register operations</li>
+                            <li>Industrial device integration</li>
+                        </ul>
+
+                        <a href="./modbus.html"
+                            class="text-link">
+                            Explore Example
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Scenarios -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION SCENARIOS
+                    </span>
+
+                    <h2>From Hardware to Complete Applications</h2>
+
+                    <p>
+                        HRTOS provides a structured software
+                        environment for integrating hardware,
+                        drivers and application-level tasks.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Data Acquisition</h3>
+
+                        <p>
+                            Integrate temperature, humidity
+                            and other sensor devices into
+                            periodic data acquisition tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Human-Machine Interfaces</h3>
+
+                        <p>
+                            Combine display drivers, input
+                            devices and application tasks
+                            to build embedded user interfaces.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Interrupt-Driven Applications</h3>
+
+                        <p>
+                            Process external hardware events
+                            through interrupt handling and
+                            task-level event processing.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Industrial Communication</h3>
+
+                        <p>
+                            Build serial communication
+                            applications with Modbus RTU
+                            and structured task management.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Multi-Task Applications</h3>
+
+                        <p>
+                            Divide application functionality
+                            into independent tasks with
+                            defined priorities and execution.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Hardware Integration</h3>
+
+                        <p>
+                            Combine peripheral drivers and
+                            kernel services to create
+                            maintainable embedded systems.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Workflow -->
+        <section class="section">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        DEVELOPMENT APPROACH
+                    </span>
+
+                    <h2>Build Applications with Structured Tasks</h2>
+
+                    <p>
+                        Traditional 8051 applications often rely
+                        on a main loop to handle multiple hardware
+                        operations and application functions.
+                    </p>
+
+                    <p>
+                        With HRTOS, application functionality
+                        can be divided into independent tasks.
+                        Each task can perform specific operations,
+                        such as sensor acquisition, display updates,
+                        communication processing and event handling.
+                    </p>
+
+                    <p>
+                        Kernel services provide scheduling,
+                        synchronization and inter-task communication,
+                        helping developers organize complex
+                        embedded application logic.
+                    </p>
+
+                    <a href="../architecture/"
+                        class="btn btn-primary">
+                        Explore HRTOS Architecture
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware Resources -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DEVELOPMENT RESOURCES
+                    </span>
+
+                    <h2>Hardware and Driver Resources</h2>
+
+                    <p>
+                        Explore the hardware platforms and
+                        peripheral drivers used to build
+                        HRTOS-based embedded applications.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Supported Hardware</h3>
+
+                        <p>
+                            Learn about the 8051 development
+                            platforms used for HRTOS integration
+                            and application development.
+                        </p>
+
+                        <a href="../hardware/"
+                            class="text-link">
+                            Explore Hardware
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Peripheral Drivers</h3>
+
+                        <p>
+                            Explore available drivers for
+                            sensors, communication interfaces
+                            and display devices.
+                        </p>
+
+                        <a href="../drivers/"
+                            class="text-link">
+                            Explore Drivers
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Documentation</h3>
+
+                        <p>
+                            Read technical documentation
+                            covering kernel APIs, system
+                            configuration and development.
+                        </p>
+
+                        <a href="../docs/"
+                            class="text-link">
+                            Read Documentation
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Performance</h3>
+
+                        <p>
+                            Review scheduling performance,
+                            interrupt latency and system
+                            stress testing results.
+                        </p>
+
+                        <a href="../performance/"
+                            class="text-link">
+                            View Benchmarks
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Start Developing with HRTOS</h2>
+
+                    <p>
+                        Explore the examples, read the documentation
+                        and build your own embedded applications
+                        with HRTOS.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

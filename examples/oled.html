@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OLED Display Example | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore OLED display integration with HRTOS on 8051 microcontrollers, featuring display initialization, data presentation, task-based refresh and embedded application design.">
+
+    <meta name="keywords"
+        content="8051 OLED, OLED display example, HRTOS example, 8051 RTOS, OLED display driver, embedded display application">
+
+    <link rel="canonical" href="https://en.hrtos.com/examples/oled.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="./" class="active">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        EMBEDDED APPLICATION EXAMPLE
+                    </span>
+
+                    <h1>
+                        OLED Display Integration
+                    </h1>
+
+                    <p class="hero-description">
+                        Build structured embedded display applications
+                        with task-based display management
+                        on 8051 microcontrollers.
+                    </p>
+
+                    <p>
+                        This example demonstrates how HRTOS
+                        can coordinate display initialization,
+                        data updates, rendering operations
+                        and other application functions
+                        through independent software tasks.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/"
+                            class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            Back to Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION OVERVIEW
+                    </span>
+
+                    <h2>Display Information with OLED</h2>
+
+                    <p>
+                        OLED displays provide compact visual
+                        interfaces for embedded applications.
+                        They can present sensor measurements,
+                        system information and communication
+                        status through a simple display interface.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Display Management</h3>
+
+                        <p>
+                            Organize display initialization,
+                            rendering and update operations
+                            into clearly defined software functions.
+                        </p>
+
+                        <ul>
+                            <li>Display initialization</li>
+                            <li>Text and graphic rendering</li>
+                            <li>Display buffer management</li>
+                            <li>Hardware communication</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Task-Based Updates</h3>
+
+                        <p>
+                            Use HRTOS application tasks
+                            to manage display refresh operations
+                            independently from other system functions.
+                        </p>
+
+                        <ul>
+                            <li>Independent display tasks</li>
+                            <li>Periodic screen updates</li>
+                            <li>Task-based execution</li>
+                            <li>Application synchronization</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Application Integration</h3>
+
+                        <p>
+                            Integrate display output with
+                            sensor acquisition, communication
+                            and embedded application logic.
+                        </p>
+
+                        <ul>
+                            <li>Sensor data presentation</li>
+                            <li>System status monitoring</li>
+                            <li>Communication information</li>
+                            <li>User interface development</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Structure -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SOFTWARE ARCHITECTURE
+                    </span>
+
+                    <h2>OLED Application Structure</h2>
+
+                    <p>
+                        Separate application data, task execution,
+                        display management and hardware communication
+                        to create a modular and maintainable system.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Application Data</h3>
+
+                        <p>
+                            Sensor measurements, system status,
+                            user information and other application
+                            data required by the display.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Application Tasks</h3>
+
+                        <p>
+                            Data processing, display updates
+                            and user interaction organized
+                            into independent application tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Display Management</h3>
+
+                        <p>
+                            Display buffer management,
+                            text rendering, graphic rendering
+                            and screen update operations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Hardware Driver</h3>
+
+                        <p>
+                            Display initialization,
+                            communication interface management
+                            and data transmission to the OLED module.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        HARDWARE COMPONENTS
+                    </span>
+
+                    <h2>Hardware Requirements</h2>
+
+                    <p>
+                        An OLED display application can be built
+                        using a compatible 8051 development board
+                        and a small number of peripheral components.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>8051 Microcontroller</h3>
+
+                        <p>
+                            An 8051 or MCS-51 compatible
+                            microcontroller running HRTOS
+                            to coordinate application tasks
+                            and display operations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>OLED Display Module</h3>
+
+                        <p>
+                            A small OLED display module
+                            for presenting application data,
+                            system information and user interfaces.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Communication Interface</h3>
+
+                        <p>
+                            An I2C or SPI interface,
+                            depending on the OLED module
+                            and display controller configuration.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Power Supply</h3>
+
+                        <p>
+                            A suitable power supply
+                            configured according to the
+                            electrical requirements of
+                            the microcontroller and display module.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Implementation -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        IMPLEMENTATION
+                    </span>
+
+                    <h2>Key Implementation Steps</h2>
+
+                    <p>
+                        A practical workflow for integrating
+                        an OLED display into an HRTOS-based
+                        8051 embedded application.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Initialize the Display</h3>
+
+                        <p>
+                            Configure the display hardware
+                            and execute the initialization
+                            sequence required by the
+                            display controller.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Prepare Display Data</h3>
+
+                        <p>
+                            Organize text, graphics
+                            and application values
+                            before transferring them
+                            to the display.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Create Display Tasks</h3>
+
+                        <p>
+                            Use HRTOS tasks to separate
+                            display update operations
+                            from other application activities.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Integrate Application Data</h3>
+
+                        <p>
+                            Connect display functions
+                            with sensor acquisition,
+                            communication modules
+                            and system status information.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Display Applications -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION SCENARIOS
+                    </span>
+
+                    <h2>What Can You Display?</h2>
+
+                    <p>
+                        OLED interfaces can serve as compact
+                        monitoring and interaction interfaces
+                        for a wide range of 8051 embedded systems.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Monitoring</h3>
+
+                        <p>
+                            Display temperature, humidity
+                            and other measurement values
+                            collected by application tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Information</h3>
+
+                        <p>
+                            Present operating modes,
+                            device status and other
+                            diagnostic information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Communication Status</h3>
+
+                        <p>
+                            Show communication state,
+                            received data and relevant
+                            Modbus application information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>User Interface</h3>
+
+                        <p>
+                            Combine display output
+                            with buttons or other input
+                            devices to build a simple
+                            embedded user interface.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HRTOS Integration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        HRTOS INTEGRATION
+                    </span>
+
+                    <h2>Coordinating Display Operations with HRTOS</h2>
+
+                    <p>
+                        A simple OLED application can be
+                        implemented using a traditional
+                        main-loop structure.
+                    </p>
+
+                    <p>
+                        As application functionality grows,
+                        additional operations such as sensor
+                        acquisition, communication processing,
+                        user interaction and display refresh
+                        may need to be coordinated.
+                    </p>
+
+                    <p>
+                        HRTOS provides task scheduling
+                        and synchronization mechanisms
+                        that help organize these operations
+                        into independent application tasks.
+                    </p>
+
+                    <p>
+                        For example, a sensor task can
+                        periodically acquire measurement data,
+                        while a display task updates the screen
+                        and a communication task handles
+                        external data transmission.
+                    </p>
+
+                    <p>
+                        This approach separates hardware
+                        operations from application logic
+                        and makes the overall system
+                        easier to extend and maintain.
+                    </p>
+
+                    <a href="../features/"
+                        class="btn btn-primary">
+                        Explore HRTOS Features
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Extensions -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        POSSIBLE EXTENSIONS
+                    </span>
+
+                    <h2>Extend the OLED Application</h2>
+
+                    <p>
+                        An OLED display can become part
+                        of a more comprehensive embedded
+                        application by integrating additional
+                        hardware and software components.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Data Display</h3>
+
+                        <p>
+                            Integrate temperature,
+                            humidity and other sensor
+                            measurements into the display interface.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Menu Navigation</h3>
+
+                        <p>
+                            Add physical buttons
+                            to implement menu navigation,
+                            parameter configuration
+                            and basic user interaction.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Diagnostics</h3>
+
+                        <p>
+                            Display operating status,
+                            communication information
+                            and application diagnostic data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Industrial Monitoring</h3>
+
+                        <p>
+                            Combine OLED display functions
+                            with sensor modules and
+                            Modbus communication
+                            for embedded monitoring systems.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Continue Exploring HRTOS</h2>
+
+                    <p>
+                        Explore additional display drivers,
+                        hardware platforms and practical
+                        application examples for 8051 development.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Display Drivers</h3>
+
+                        <p>
+                            Explore display interfaces
+                            and hardware driver resources
+                            for embedded applications.
+                        </p>
+
+                        <a href="../drivers/display.html"
+                            class="text-link">
+                            Explore Display Drivers
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>DHT11 Sensor Example</h3>
+
+                        <p>
+                            Learn how temperature
+                            and humidity acquisition
+                            can be integrated into
+                            an HRTOS application.
+                        </p>
+
+                        <a href="./dht11.html"
+                            class="text-link">
+                            Explore DHT11 Example
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Drivers</h3>
+
+                        <p>
+                            Explore sensor interfaces
+                            and hardware driver resources
+                            for 8051 applications.
+                        </p>
+
+                        <a href="../drivers/sensors.html"
+                            class="text-link">
+                            Explore Sensor Drivers
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Architecture</h3>
+
+                        <p>
+                            Understand HRTOS kernel
+                            architecture, task scheduling
+                            and system services.
+                        </p>
+
+                        <a href="../architecture/"
+                            class="text-link">
+                            Explore Architecture
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Your Own 8051 Display Application</h2>
+
+                    <p>
+                        Explore HRTOS documentation
+                        and develop structured,
+                        task-oriented display applications
+                        on 8051 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

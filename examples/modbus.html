@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modbus RTU Example | HRTOS Industrial Communication for 8051</title>
+
+    <meta name="description"
+        content="Explore Modbus RTU slave communication with HRTOS on 8051 microcontrollers. Learn about serial communication, register management, protocol processing and industrial embedded applications.">
+
+    <meta name="keywords"
+        content="8051 Modbus RTU, HRTOS Modbus, Modbus RTU slave, 8051 industrial communication, Modbus registers, embedded RTOS">
+
+    <link rel="canonical" href="https://en.hrtos.com/examples/modbus.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="./" class="active">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        INDUSTRIAL COMMUNICATION EXAMPLE
+                    </span>
+
+                    <h1>
+                        Modbus RTU Communication
+                    </h1>
+
+                    <p class="hero-description">
+                        Industrial serial communication
+                        and Modbus RTU slave functionality
+                        on 8051 microcontrollers.
+                    </p>
+
+                    <p>
+                        This example demonstrates how HRTOS
+                        integrates Modbus RTU slave communication
+                        with real-time task management,
+                        register operations and embedded
+                        application processing.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/"
+                            class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            Back to Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION OVERVIEW
+                    </span>
+
+                    <h2>Modbus RTU with HRTOS</h2>
+
+                    <p>
+                        Modbus RTU is a widely used
+                        industrial communication protocol
+                        for exchanging data between
+                        controllers, sensors and automation
+                        equipment.
+                    </p>
+
+                    <p>
+                        HRTOS provides an integrated
+                        Modbus RTU slave implementation
+                        that can be used as part of
+                        8051-based embedded applications.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Serial -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Serial Communication</h3>
+
+                        <p>
+                            Communicate with external
+                            Modbus masters through
+                            a serial interface.
+                        </p>
+
+                        <ul>
+                            <li>UART communication</li>
+                            <li>RTU frame reception</li>
+                            <li>Serial data transmission</li>
+                            <li>Frame processing</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Protocol -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Modbus RTU Slave</h3>
+
+                        <p>
+                            Process Modbus RTU requests
+                            and provide register-based
+                            access to embedded application data.
+                        </p>
+
+                        <ul>
+                            <li>Slave address handling</li>
+                            <li>Function code processing</li>
+                            <li>CRC validation</li>
+                            <li>Protocol response generation</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Registers -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Register Management</h3>
+
+                        <p>
+                            Expose application variables
+                            through Modbus register
+                            interfaces for external access.
+                        </p>
+
+                        <ul>
+                            <li>Coil operations</li>
+                            <li>Holding registers</li>
+                            <li>Input registers</li>
+                            <li>Application data mapping</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Protocol Functions -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        PROTOCOL FUNCTIONS
+                    </span>
+
+                    <h2>Supported Modbus Function Codes</h2>
+
+                    <p>
+                        The HRTOS Modbus RTU slave
+                        implementation supports common
+                        function codes for reading
+                        and writing application data.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>FC01 - Read Coils</h3>
+
+                        <p>
+                            Read the status of multiple
+                            coils from the Modbus slave
+                            device.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>FC03 - Read Holding Registers</h3>
+
+                        <p>
+                            Read one or more holding
+                            registers containing
+                            application data.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>FC05 - Write Single Coil</h3>
+
+                        <p>
+                            Modify the state of an
+                            individual coil through
+                            a Modbus write request.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>FC06 - Write Single Register</h3>
+
+                        <p>
+                            Write a single holding
+                            register to update
+                            application data.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>05</span>
+                        </div>
+
+                        <h3>FC10 - Write Multiple Registers</h3>
+
+                        <p>
+                            Write multiple holding
+                            registers within a single
+                            Modbus request.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Communication Architecture -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        COMMUNICATION ARCHITECTURE
+                    </span>
+
+                    <h2>Modbus RTU Processing Workflow</h2>
+
+                    <p>
+                        A typical Modbus RTU application
+                        receives serial frames, validates
+                        requests, processes function codes
+                        and returns corresponding responses.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>1. Serial Data Reception</h3>
+
+                        <p>
+                            Receive incoming bytes from
+                            the UART interface and assemble
+                            the Modbus RTU request frame.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>2. Frame Validation</h3>
+
+                        <p>
+                            Check the received frame,
+                            including slave address,
+                            frame length and CRC integrity.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>3. Request Processing</h3>
+
+                        <p>
+                            Identify the requested function
+                            code and execute the corresponding
+                            register read or write operation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>4. Response Generation</h3>
+
+                        <p>
+                            Construct the appropriate
+                            Modbus RTU response frame
+                            and transmit it through
+                            the serial interface.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Register Management -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DATA INTERFACE
+                    </span>
+
+                    <h2>Register-Based Application Integration</h2>
+
+                    <p>
+                        Modbus registers provide a
+                        standardized interface between
+                        external industrial equipment
+                        and embedded application logic.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Coils</h3>
+
+                        <p>
+                            Represent discrete output
+                            states that can be read
+                            or modified by a Modbus master.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Discrete Inputs</h3>
+
+                        <p>
+                            Represent discrete input
+                            states provided by the
+                            embedded application.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Holding Registers</h3>
+
+                        <p>
+                            Provide access to readable
+                            and writable 16-bit
+                            application data.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Input Registers</h3>
+
+                        <p>
+                            Provide access to measurement
+                            and status data exposed
+                            by the embedded device.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HRTOS Integration -->
+        <section class="section">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        HRTOS INTEGRATION
+                    </span>
+
+                    <h2>Industrial Communication with Real-Time Tasks</h2>
+
+                    <p>
+                        In an industrial embedded system,
+                        serial communication is often
+                        only one part of the overall
+                        application.
+                    </p>
+
+                    <p>
+                        The microcontroller may also
+                        need to acquire sensor data,
+                        update outputs, manage system
+                        status and execute application
+                        control logic.
+                    </p>
+
+                    <p>
+                        HRTOS allows these functions
+                        to be organized into independent
+                        tasks with defined priorities
+                        and scheduling behavior.
+                    </p>
+
+                    <p>
+                        Modbus communication can be
+                        integrated with application
+                        tasks to exchange data between
+                        the embedded system and an
+                        external Modbus master.
+                    </p>
+
+                    <p>
+                        This structure helps separate
+                        communication processing
+                        from application logic and
+                        makes the complete system
+                        easier to maintain and extend.
+                    </p>
+
+                    <a href="../architecture/"
+                        class="btn btn-primary">
+                        Explore System Architecture
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Scenarios -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        INDUSTRIAL APPLICATIONS
+                    </span>
+
+                    <h2>Practical Application Scenarios</h2>
+
+                    <p>
+                        Modbus RTU provides a practical
+                        communication interface for
+                        integrating 8051-based embedded
+                        devices into industrial systems.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Monitoring</h3>
+
+                        <p>
+                            Expose temperature, humidity
+                            and other measurement values
+                            through Modbus registers.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Remote Device Control</h3>
+
+                        <p>
+                            Allow external controllers
+                            to read device status and
+                            modify supported control
+                            registers.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Industrial Data Acquisition</h3>
+
+                        <p>
+                            Transfer embedded device
+                            measurements to supervisory
+                            systems and monitoring
+                            equipment.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Distributed Embedded Systems</h3>
+
+                        <p>
+                            Integrate multiple embedded
+                            devices through serial
+                            Modbus RTU communication.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Automation Controllers</h3>
+
+                        <p>
+                            Build compact control
+                            devices with standardized
+                            external communication
+                            interfaces.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Diagnostics</h3>
+
+                        <p>
+                            Make selected application
+                            status and diagnostic
+                            information available
+                            to external systems.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Considerations -->
+        <section class="section">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        DEVELOPMENT CONSIDERATIONS
+                    </span>
+
+                    <h2>Designing Reliable Modbus Applications</h2>
+
+                    <p>
+                        Reliable Modbus RTU communication
+                        requires attention to serial
+                        timing, frame integrity and
+                        application data consistency.
+                    </p>
+
+                    <p>
+                        Developers should configure
+                        UART parameters correctly,
+                        handle communication timeouts
+                        and validate received frames
+                        before processing requests.
+                    </p>
+
+                    <p>
+                        Shared register data should
+                        also be managed carefully
+                        when multiple application
+                        tasks access or update the
+                        same resources.
+                    </p>
+
+                    <p>
+                        HRTOS synchronization and
+                        task management facilities
+                        can help organize these
+                        operations within a structured
+                        embedded software architecture.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Continue Exploring HRTOS</h2>
+
+                    <p>
+                        Explore related communication
+                        drivers, hardware platforms
+                        and system documentation.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Communication Drivers</h3>
+
+                        <p>
+                            Explore serial communication
+                            and other peripheral
+                            integration resources.
+                        </p>
+
+                        <a href="../drivers/communication.html"
+                            class="text-link">
+                            Explore Communication
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>8051 Hardware Platforms</h3>
+
+                        <p>
+                            Learn about supported
+                            microcontroller platforms
+                            for HRTOS applications.
+                        </p>
+
+                        <a href="../hardware/"
+                            class="text-link">
+                            Explore Hardware
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Features</h3>
+
+                        <p>
+                            Discover task scheduling,
+                            synchronization and
+                            communication services.
+                        </p>
+
+                        <a href="../features/"
+                            class="text-link">
+                            Explore Features
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Other Application Examples</h3>
+
+                        <p>
+                            Explore sensor, display
+                            and infrared application
+                            examples built around HRTOS.
+                        </p>
+
+                        <a href="./"
+                            class="text-link">
+                            View All Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Industrial Applications with HRTOS</h2>
+
+                    <p>
+                        Explore HRTOS documentation
+                        and develop structured
+                        industrial communication
+                        applications on 8051
+                        microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

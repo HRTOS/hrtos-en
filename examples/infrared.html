@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Infrared Remote Control Example | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore an infrared remote control application using HRTOS on 8051 microcontrollers, featuring NEC protocol decoding, interrupt-driven signal reception and task-based event processing.">
+
+    <meta name="keywords"
+        content="8051 infrared remote control, NEC protocol, infrared receiver, HRTOS example, 8051 RTOS, interrupt handling">
+
+    <link rel="canonical" href="https://en.hrtos.com/examples/infrared.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="./" class="active">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        EMBEDDED APPLICATION EXAMPLE
+                    </span>
+
+                    <h1>
+                        Infrared Remote Control
+                    </h1>
+
+                    <p class="hero-description">
+                        Interrupt-driven infrared reception
+                        and task-based event processing
+                        on 8051 microcontrollers.
+                    </p>
+
+                    <p>
+                        This example demonstrates how HRTOS
+                        can organize infrared signal reception,
+                        protocol decoding and application-level
+                        event handling into structured tasks.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/"
+                            class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            Back to Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION OVERVIEW
+                    </span>
+
+                    <h2>Infrared Signal Processing with HRTOS</h2>
+
+                    <p>
+                        Infrared remote control is a common
+                        embedded application that requires
+                        accurate signal timing, reliable data
+                        decoding and responsive event processing.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Signal Reception</h3>
+
+                        <p>
+                            Receive infrared signals through
+                            an infrared receiver module and
+                            detect changes in the input signal.
+                        </p>
+
+                        <ul>
+                            <li>Infrared receiver interface</li>
+                            <li>Signal edge detection</li>
+                            <li>Timing measurement</li>
+                            <li>Interrupt-based reception</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>NEC Protocol Decoding</h3>
+
+                        <p>
+                            Decode received infrared data
+                            according to the timing and frame
+                            structure of the NEC protocol.
+                        </p>
+
+                        <ul>
+                            <li>Leader code detection</li>
+                            <li>Address decoding</li>
+                            <li>Command decoding</li>
+                            <li>Frame validation</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Task-Based Processing</h3>
+
+                        <p>
+                            Separate signal acquisition
+                            from application logic through
+                            independent HRTOS tasks.
+                        </p>
+
+                        <ul>
+                            <li>Task scheduling</li>
+                            <li>Event notification</li>
+                            <li>Data processing</li>
+                            <li>Application response</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        HARDWARE COMPONENTS
+                    </span>
+
+                    <h2>Hardware Requirements</h2>
+
+                    <p>
+                        A basic infrared remote control
+                        application can be constructed using
+                        a small number of common embedded
+                        hardware components.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>8051 Microcontroller</h3>
+
+                        <p>
+                            An 8051 or MCS-51 compatible
+                            microcontroller running the
+                            HRTOS real-time operating system.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Infrared Receiver</h3>
+
+                        <p>
+                            A demodulating infrared receiver
+                            module, such as a 38 kHz receiver,
+                            for detecting remote control signals.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Infrared Remote</h3>
+
+                        <p>
+                            A compatible infrared remote
+                            control transmitting NEC-format
+                            command frames.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Optional Display</h3>
+
+                        <p>
+                            An LCD or OLED display can be
+                            integrated to present decoded
+                            addresses and command values.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- System Architecture -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SOFTWARE ARCHITECTURE
+                    </span>
+
+                    <h2>Application Processing Architecture</h2>
+
+                    <p>
+                        The application can separate
+                        low-level signal acquisition,
+                        protocol decoding and user-level
+                        processing into different software stages.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Hardware Interrupt</h3>
+
+                        <p>
+                            Detect infrared receiver signal
+                            transitions and capture timing
+                            information using the appropriate
+                            hardware interrupt or timer mechanism.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Signal Acquisition</h3>
+
+                        <p>
+                            Record signal timing information
+                            and make received data available
+                            for further processing.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Protocol Processing Task</h3>
+
+                        <p>
+                            Analyze the received timing sequence,
+                            decode NEC data frames and validate
+                            the resulting command information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Application Task</h3>
+
+                        <p>
+                            Process decoded commands and
+                            perform corresponding application
+                            operations, such as controlling
+                            outputs or updating a display.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- NEC Protocol -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        COMMUNICATION PROTOCOL
+                    </span>
+
+                    <h2>NEC Infrared Protocol</h2>
+
+                    <p>
+                        The NEC infrared protocol is widely
+                        used in consumer remote control
+                        applications. Its frame structure
+                        provides address and command information.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Leader Code</h3>
+
+                        <p>
+                            A leading pulse and space identify
+                            the beginning of a standard NEC
+                            transmission frame.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Address Field</h3>
+
+                        <p>
+                            The address field identifies
+                            the target device or remote
+                            control address.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Command Field</h3>
+
+                        <p>
+                            The command field carries
+                            the operation code associated
+                            with the pressed remote button.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Data Validation</h3>
+
+                        <p>
+                            Address and command complements
+                            can be checked to help validate
+                            received standard NEC frames.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HRTOS Integration -->
+        <section class="section">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        HRTOS INTEGRATION
+                    </span>
+
+                    <h2>Why Use an RTOS for Infrared Applications?</h2>
+
+                    <p>
+                        A simple infrared remote control
+                        implementation can be developed
+                        using a traditional super-loop
+                        architecture.
+                    </p>
+
+                    <p>
+                        However, when infrared reception
+                        becomes part of a larger embedded
+                        application, additional functions
+                        such as display updates, sensor
+                        acquisition and communication
+                        processing may need to operate
+                        concurrently.
+                    </p>
+
+                    <p>
+                        HRTOS allows these functions
+                        to be organized into independent
+                        tasks while coordinating their
+                        execution through scheduling,
+                        synchronization and communication
+                        mechanisms.
+                    </p>
+
+                    <p>
+                        This approach helps improve
+                        application structure, modularity
+                        and maintainability as system
+                        functionality grows.
+                    </p>
+
+                    <a href="../features/"
+                        class="btn btn-primary">
+                        Explore HRTOS Features
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Extensions -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        POSSIBLE EXTENSIONS
+                    </span>
+
+                    <h2>Extend the Application</h2>
+
+                    <p>
+                        The infrared reception example
+                        can serve as a starting point
+                        for more advanced embedded
+                        control applications.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>LED Control</h3>
+
+                        <p>
+                            Use decoded infrared commands
+                            to control LEDs and other
+                            digital output devices.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Display Integration</h3>
+
+                        <p>
+                            Display received command
+                            information and application
+                            status on an OLED screen.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Multi-Function Control</h3>
+
+                        <p>
+                            Assign different remote
+                            control buttons to multiple
+                            application functions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Integration</h3>
+
+                        <p>
+                            Combine infrared control
+                            with sensor monitoring,
+                            serial communication and
+                            other embedded services.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Continue Exploring HRTOS</h2>
+
+                    <p>
+                        Explore related hardware platforms,
+                        driver resources and technical
+                        documentation.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Hardware Platforms</h3>
+
+                        <p>
+                            Explore supported 8051
+                            microcontroller platforms.
+                        </p>
+
+                        <a href="../hardware/"
+                            class="text-link">
+                            Explore Hardware
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Peripheral Drivers</h3>
+
+                        <p>
+                            Discover available sensor,
+                            communication and display drivers.
+                        </p>
+
+                        <a href="../drivers/"
+                            class="text-link">
+                            Explore Drivers
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Architecture</h3>
+
+                        <p>
+                            Understand task scheduling,
+                            interrupt handling and kernel
+                            system services.
+                        </p>
+
+                        <a href="../architecture/"
+                            class="text-link">
+                            Explore Architecture
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Other Examples</h3>
+
+                        <p>
+                            Explore additional HRTOS
+                            embedded application examples.
+                        </p>
+
+                        <a href="./"
+                            class="text-link">
+                            View All Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Your Own 8051 Applications</h2>
+
+                    <p>
+                        Start with HRTOS documentation
+                        and explore how real-time
+                        task management can simplify
+                        embedded application development.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

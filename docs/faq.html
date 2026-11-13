@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS FAQ | Frequently Asked Questions</title>
+
+    <meta name="description"
+        content="Frequently asked questions about HRTOS, including 8051 compatibility, development tools, task scheduling, interrupt handling, memory requirements, and system configuration.">
+
+    <meta name="keywords"
+        content="HRTOS FAQ, 8051 RTOS FAQ, MCS-51 RTOS, 8051 operating system questions, Keil C51, real-time operating system">
+
+    <link rel="canonical" href="https://en.hrtos.com/docs/faq.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="./">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="hero-content">
+
+                    <span class="section-tag">Documentation / FAQ</span>
+
+                    <h1>Frequently Asked Questions</h1>
+
+                    <p class="hero-description">
+                        Find answers to common questions about HRTOS, its supported
+                        platforms, real-time capabilities, system architecture,
+                        development environment, and practical usage.
+                    </p>
+
+                    <p>
+                        This page provides general guidance for developers working
+                        with HRTOS on 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./getting-started.html" class="btn btn-primary">
+                            Getting Started
+                        </a>
+                        <a href="./api.html" class="btn btn-secondary">
+                            API Reference
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- General Questions -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">General</span>
+                    <h2>About HRTOS</h2>
+                    <p>
+                        Basic information about the operating system and its
+                        intended application environment.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>What is HRTOS?</h3>
+
+                        <p>
+                            HRTOS is a real-time operating system designed for
+                            8051 and MCS-51 microcontrollers. It provides task
+                            scheduling, interrupt management, synchronization,
+                            inter-task communication, and other system services.
+                        </p>
+
+                        <p>
+                            It is intended to help developers build structured
+                            embedded applications on resource-constrained
+                            8-bit microcontrollers.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>What does HRTOS stand for?</h3>
+
+                        <p>
+                            HRTOS stands for Hard Real-Time Operating System.
+                            The name reflects the project's focus on
+                            deterministic scheduling and predictable
+                            real-time behavior.
+                        </p>
+
+                        <p>
+                            Actual timing guarantees depend on the hardware,
+                            system configuration, application workload, and
+                            the design of individual tasks and interrupt
+                            handlers.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Which processors does HRTOS support?</h3>
+
+                        <p>
+                            HRTOS is designed for the 8051 and MCS-51
+                            microcontroller architecture.
+                        </p>
+
+                        <p>
+                            It is intended for compatible 8051-family devices,
+                            including supported STC microcontrollers.
+                            Actual compatibility depends on memory resources,
+                            compiler support, and device-specific requirements.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Is HRTOS limited to one microcontroller model?</h3>
+
+                        <p>
+                            No. HRTOS targets the broader 8051/MCS-51
+                            architecture rather than a single chip model.
+                        </p>
+
+                        <p>
+                            However, not every 8051-compatible device has
+                            identical memory capacity, peripherals, or
+                            hardware behavior. Developers should verify
+                            the requirements of their target device.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Environment -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Development</span>
+                    <h2>Development Environment</h2>
+                    <p>
+                        Questions about compilers, hardware requirements,
+                        and project integration.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+                        <h3>Which compiler is used by HRTOS?</h3>
+
+                        <p>
+                            HRTOS V4.0.0 is designed for the Keil C51
+                            development environment.
+                        </p>
+
+                        <p>
+                            The compiler configuration, memory model,
+                            linker settings, and target-device settings
+                            should be configured according to the project
+                            requirements.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>What are the minimum memory requirements?</h3>
+
+                        <p>
+                            The full HRTOS configuration requires at least:
+                        </p>
+
+                        <ul>
+                            <li>CODE memory: 8 KB or more</li>
+                            <li>XDATA memory: 1 KB or more</li>
+                        </ul>
+
+                        <p>
+                            These are baseline requirements for the full
+                            system configuration. Actual memory consumption
+                            depends on enabled modules, task configuration,
+                            application data, and stack allocation.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Can HRTOS run on a classic 8051 with limited RAM?</h3>
+
+                        <p>
+                            The full HRTOS configuration has specific XDATA
+                            requirements. Devices with very limited external
+                            data memory may not be suitable for the complete
+                            configuration.
+                        </p>
+
+                        <p>
+                            A cooperative scheduling option is available
+                            for applications that need a more constrained
+                            system configuration. Developers should select
+                            the appropriate configuration for their hardware.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Can I use HRTOS with an STC microcontroller?</h3>
+
+                        <p>
+                            HRTOS is designed for the 8051/MCS-51 ecosystem
+                            and supports compatible STC devices that meet
+                            its technical requirements.
+                        </p>
+
+                        <p>
+                            Before starting a project, check the device's
+                            CODE memory, XDATA capacity, timer resources,
+                            interrupt architecture, and compiler compatibility.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>How do I integrate HRTOS into an existing project?</h3>
+
+                        <p>
+                            Start by reviewing the installation instructions
+                            and the system configuration. Then integrate the
+                            required HRTOS libraries and interface files into
+                            the Keil C51 project.
+                        </p>
+
+                        <p>
+                            After configuring the system, initialize HRTOS,
+                            register application tasks, and verify the
+                            scheduling behavior before adding more complex
+                            application functions.
+                        </p>
+
+                        <p>
+                            See the
+                            <a href="./installation.html">Installation Guide</a>
+                            and
+                            <a href="./getting-started.html">Getting Started Guide</a>
+                            for more information.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Scheduling and Tasks -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Task Management</span>
+                    <h2>Scheduling and Tasks</h2>
+                    <p>
+                        Common questions about task execution, priorities,
+                        and scheduling behavior.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS support preemptive scheduling?</h3>
+
+                        <p>
+                            Yes. HRTOS provides preemptive task scheduling.
+                            Tasks are managed according to their configured
+                            scheduling priorities and system scheduling rules.
+                        </p>
+
+                        <p>
+                            This allows higher-priority tasks to respond
+                            without waiting for lower-priority tasks to
+                            voluntarily yield the processor.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>How many tasks can HRTOS manage?</h3>
+
+                        <p>
+                            The standard HRTOS V4.0.0 configuration supports
+                            up to 16 normal tasks. It also provides a separate
+                            fast-task mechanism with support for up to
+                            2 fast tasks.
+                        </p>
+
+                        <p>
+                            The actual number of tasks available in an
+                            application depends on the system configuration
+                            and memory resources.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>What is the difference between normal tasks and fast tasks?</h3>
+
+                        <p>
+                            Normal tasks use the standard task execution
+                            and scheduling mechanism. Fast tasks use a
+                            dedicated execution mechanism designed for
+                            shorter task-switching paths.
+                        </p>
+
+                        <p>
+                            Fast tasks are useful for selected time-sensitive
+                            operations. They should be used according to
+                            the system's configuration and execution rules.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>How should I choose task priorities?</h3>
+
+                        <p>
+                            Assign priorities according to the application's
+                            response-time requirements.
+                        </p>
+
+                        <ul>
+                            <li>Give higher priority to time-critical operations.</li>
+                            <li>Keep background processing at lower priorities.</li>
+                            <li>Avoid unnecessary priority differences.</li>
+                            <li>Consider shared resources and blocking behavior.</li>
+                        </ul>
+
+                        <p>
+                            Priority assignment should be evaluated together
+                            with task execution time, interrupt activity,
+                            and application timing requirements.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Can a task wait for an event or a message?</h3>
+
+                        <p>
+                            Yes. HRTOS provides synchronization and
+                            inter-task communication mechanisms, including
+                            events, semaphores, mutexes, mailboxes,
+                            and message queues.
+                        </p>
+
+                        <p>
+                            These mechanisms allow tasks to coordinate
+                            execution without relying entirely on continuous
+                            polling.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Interrupts -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Interrupt Management</span>
+                    <h2>Interrupts and Real-Time Behavior</h2>
+                    <p>
+                        Important considerations when working with
+                        interrupt-driven applications.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS support interrupt management?</h3>
+
+                        <p>
+                            Yes. HRTOS provides interrupt-related mechanisms
+                            for embedded applications that require
+                            predictable interrupt handling and task
+                            coordination.
+                        </p>
+
+                        <p>
+                            The interrupt model is designed around the
+                            characteristics of the 8051 architecture.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Can I perform task scheduling inside an ISR?</h3>
+
+                        <p>
+                            Interrupt service routines should be kept short
+                            and should follow the HRTOS interrupt usage rules.
+                        </p>
+
+                        <p>
+                            In particular, nested interrupt handlers should
+                            not directly call scheduling or task-wakeup APIs.
+                            Use the documented interrupt-safe mechanisms
+                            to coordinate with application tasks.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS support nested interrupts?</h3>
+
+                        <p>
+                            HRTOS takes the interrupt priority and nesting
+                            characteristics of the 8051 architecture into
+                            account.
+                        </p>
+
+                        <p>
+                            Nested interrupt behavior depends on the
+                            target device's interrupt capabilities and
+                            the configured interrupt model. Follow the
+                            system documentation when implementing
+                            nested interrupt handling.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS guarantee hard real-time behavior?</h3>
+
+                        <p>
+                            HRTOS is designed for deterministic real-time
+                            operation on 8051 microcontrollers. Its scheduling
+                            and interrupt mechanisms are intended to support
+                            applications with predictable timing requirements.
+                        </p>
+
+                        <p>
+                            A hard real-time guarantee must be established
+                            for the complete application, including worst-case
+                            execution time, interrupt latency, blocking time,
+                            hardware behavior, and scheduling configuration.
+                            Developers should measure and validate these
+                            conditions on the actual target system.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Components and Communication -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">System Components</span>
+                    <h2>Communication and Components</h2>
+                    <p>
+                        Questions about built-in system services and
+                        application-level functionality.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS provide inter-task communication?</h3>
+
+                        <p>
+                            Yes. HRTOS provides communication mechanisms
+                            such as mailboxes and message queues, allowing
+                            tasks to exchange data and coordinate operations.
+                        </p>
+
+                        <p>
+                            The appropriate mechanism depends on the
+                            application's data flow and synchronization
+                            requirements.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS support mutexes and semaphores?</h3>
+
+                        <p>
+                            Yes. HRTOS provides synchronization mechanisms
+                            including semaphores and mutexes.
+                        </p>
+
+                        <p>
+                            Mutex support includes priority inheritance
+                            to help address priority inversion when
+                            tasks share resources.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS include a Shell?</h3>
+
+                        <p>
+                            HRTOS provides a Shell extension for system
+                            interaction and debugging. It includes
+                            commands for inspecting system information
+                            and task-related status.
+                        </p>
+
+                        <p>
+                            Available commands depend on the enabled
+                            Shell configuration.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Does HRTOS support Modbus RTU?</h3>
+
+                        <p>
+                            HRTOS provides a Modbus RTU slave extension
+                            for embedded communication applications.
+                        </p>
+
+                        <p>
+                            Supported function codes include FC01, FC03,
+                            FC05, FC06, and FC10.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Can I add my own drivers and application modules?</h3>
+
+                        <p>
+                            Yes. Developers can integrate hardware drivers
+                            and application modules according to their
+                            project requirements.
+                        </p>
+
+                        <p>
+                            The HRTOS website also provides hardware
+                            information, driver resources, and application
+                            examples to help developers build complete
+                            embedded systems.
+                        </p>
+
+                        <p>
+                            Visit the
+                            <a href="../drivers/">Drivers</a>
+                            and
+                            <a href="../examples/">Examples</a>
+                            sections for additional resources.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Troubleshooting -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Troubleshooting</span>
+                    <h2>Common Development Issues</h2>
+                    <p>
+                        A few practical checks that can help identify
+                        common integration and runtime problems.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>HRTOS does not start correctly</h3>
+
+                        <p>
+                            Check the system initialization sequence,
+                            project configuration, library integration,
+                            and linker settings.
+                        </p>
+
+                        <p>
+                            Also verify that the selected device provides
+                            sufficient CODE and XDATA memory.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Tasks do not execute as expected</h3>
+
+                        <p>
+                            Review task registration, task priorities,
+                            scheduling configuration, and task state.
+                        </p>
+
+                        <p>
+                            Check whether tasks are waiting for events,
+                            messages, or other synchronization conditions.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Unexpected timing behavior</h3>
+
+                        <p>
+                            Verify the oscillator frequency, timer
+                            configuration, interrupt load, and
+                            application execution time.
+                        </p>
+
+                        <p>
+                            Measure timing on the actual target hardware
+                            instead of relying only on theoretical estimates.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Memory-related problems</h3>
+
+                        <p>
+                            Review the memory model, XDATA allocation,
+                            stack usage, task configuration, and
+                            enabled system modules.
+                        </p>
+
+                        <p>
+                            Make sure that application data and system
+                            resources do not exceed the available
+                            memory capacity.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- More Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Further Reading</span>
+                    <h2>Explore More Documentation</h2>
+                    <p>
+                        Continue with the relevant technical documentation
+                        for more detailed information.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <h3>Getting Started</h3>
+                        <p>
+                            Learn the basic workflow for creating
+                            an HRTOS application.
+                        </p>
+                        <a href="./getting-started.html" class="btn btn-secondary">
+                            Read Guide
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <h3>Installation Guide</h3>
+                        <p>
+                            Review the development environment and
+                            project integration process.
+                        </p>
+                        <a href="./installation.html" class="btn btn-secondary">
+                            View Installation
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <h3>API Reference</h3>
+                        <p>
+                            Explore the major HRTOS system interfaces
+                            and functional categories.
+                        </p>
+                        <a href="./api.html" class="btn btn-secondary">
+                            Explore APIs
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <span class="section-tag">Build with HRTOS</span>
+
+                    <h2>Have More Questions?</h2>
+
+                    <p>
+                        Explore the HRTOS documentation, hardware resources,
+                        and application examples to learn more about
+                        developing real-time systems on 8051 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./" class="btn btn-primary">
+                            Documentation Center
+                        </a>
+                        <a href="../examples/" class="btn btn-secondary">
+                            Browse Examples
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system for 8051 and
+                        MCS-51 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="./">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2017-2026 HRTOS. All rights reserved.</p>
+                <p>Engineering Real-Time on 8051.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

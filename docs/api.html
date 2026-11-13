@@ -1,0 +1,1103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS API Reference | 8051 RTOS Kernel APIs</title>
+
+    <meta name="description"
+        content="Explore the HRTOS API reference for 8051 and MCS-51 microcontrollers, covering task management, scheduling, timing, synchronization, inter-task communication, interrupt management and system configuration.">
+
+    <meta name="keywords"
+        content="HRTOS API, 8051 RTOS API, 8051 kernel API, task management, real-time scheduling, 8051 operating system, MCS-51">
+
+    <link rel="canonical" href="https://en.hrtos.com/docs/api.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="./" class="active">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        KERNEL API REFERENCE
+                    </span>
+
+                    <h1>
+                        HRTOS API Reference
+                    </h1>
+
+                    <p class="hero-description">
+                        Kernel interfaces and system services
+                        for developing real-time applications
+                        on 8051 microcontrollers.
+                    </p>
+
+                    <p>
+                        Explore the HRTOS application programming
+                        interfaces, covering task management,
+                        scheduling, timing, synchronization,
+                        inter-task communication and
+                        interrupt-related services.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./getting-started.html"
+                            class="btn btn-primary">
+                            Getting Started
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            Documentation Home
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- API Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        API OVERVIEW
+                    </span>
+
+                    <h2>HRTOS Kernel Interfaces</h2>
+
+                    <p>
+                        HRTOS provides a collection of kernel
+                        interfaces for organizing application
+                        execution, managing system resources
+                        and coordinating multiple tasks.
+                        These interfaces form the foundation
+                        of structured embedded application development.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Task Management</h3>
+
+                        <p>
+                            Create and organize application
+                            tasks, manage execution
+                            and coordinate task lifecycles.
+                        </p>
+
+                        <ul>
+                            <li>Task registration</li>
+                            <li>Task organization</li>
+                            <li>Task execution control</li>
+                            <li>Task priorities</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Time Management</h3>
+
+                        <p>
+                            Provide timing-related services
+                            for periodic execution,
+                            delay operations and
+                            time-dependent application logic.
+                        </p>
+
+                        <ul>
+                            <li>System time management</li>
+                            <li>Delay services</li>
+                            <li>Timed waiting</li>
+                            <li>Periodic execution</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Synchronization</h3>
+
+                        <p>
+                            Coordinate task execution
+                            and shared resource access
+                            through kernel synchronization services.
+                        </p>
+
+                        <ul>
+                            <li>Semaphores</li>
+                            <li>Mutexes</li>
+                            <li>Events</li>
+                            <li>Unified wait mechanisms</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Task Management -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        TASK MANAGEMENT APIS
+                    </span>
+
+                    <h2>Task Registration and Execution</h2>
+
+                    <p>
+                        Task management interfaces allow
+                        application functions to be organized
+                        into independent execution units.
+                        HRTOS coordinates these tasks
+                        through its scheduling mechanisms.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Task Registration</h3>
+
+                        <p>
+                            Register application task functions
+                            with the operating system and
+                            configure the corresponding
+                            task execution parameters.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Task Identification</h3>
+
+                        <p>
+                            Organize registered tasks
+                            using task identifiers
+                            for system management
+                            and application coordination.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Task Priority</h3>
+
+                        <p>
+                            Configure task execution priorities
+                            according to application
+                            scheduling requirements.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Fast Task Management</h3>
+
+                        <p>
+                            Support dedicated fast task
+                            execution mechanisms for
+                            applications with demanding
+                            response-time requirements.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Scheduling -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SCHEDULING SERVICES
+                    </span>
+
+                    <h2>Task Scheduling and Execution Control</h2>
+
+                    <p>
+                        HRTOS scheduling interfaces coordinate
+                        task execution according to system
+                        scheduling policies and application
+                        execution requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Priority-Based Scheduling</h3>
+
+                        <p>
+                            Organize task execution
+                            according to configured
+                            scheduling priorities.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Task Switching</h3>
+
+                        <p>
+                            Coordinate execution context
+                            transitions when scheduling
+                            conditions require a task switch.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Execution Coordination</h3>
+
+                        <p>
+                            Manage task execution
+                            and coordinate application
+                            activities through kernel services.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Time Management -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        TIME MANAGEMENT APIS
+                    </span>
+
+                    <h2>Timing and Delay Services</h2>
+
+                    <p>
+                        Time-related interfaces provide
+                        application tasks with mechanisms
+                        for waiting, periodic execution
+                        and time-dependent operations.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Delay Operations</h3>
+
+                        <p>
+                            Allow application tasks
+                            to suspend execution
+                            for configured time intervals.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Millisecond Timing</h3>
+
+                        <p>
+                            Provide millisecond-oriented
+                            timing services for applications
+                            that require time-based execution.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Periodic Task Execution</h3>
+
+                        <p>
+                            Organize recurring application
+                            operations using timing
+                            and scheduling services.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Timed Waiting</h3>
+
+                        <p>
+                            Coordinate task waiting
+                            operations with time limits
+                            and other kernel synchronization
+                            mechanisms.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Synchronization -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SYNCHRONIZATION APIS
+                    </span>
+
+                    <h2>Task Synchronization Mechanisms</h2>
+
+                    <p>
+                        HRTOS provides synchronization
+                        services for coordinating task execution,
+                        controlling shared resource access
+                        and managing application events.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Semaphores</h3>
+
+                        <p>
+                            Coordinate task execution
+                            and manage synchronization
+                            conditions between independent
+                            application tasks.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Mutexes</h3>
+
+                        <p>
+                            Protect shared resources
+                            and coordinate exclusive access
+                            between tasks, including
+                            priority inheritance support.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Events</h3>
+
+                        <p>
+                            Provide event-based
+                            synchronization for coordinating
+                            application activities
+                            and task execution.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- IPC -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        INTER-TASK COMMUNICATION APIS
+                    </span>
+
+                    <h2>Inter-Task Communication</h2>
+
+                    <p>
+                        Communication interfaces allow
+                        application tasks to exchange
+                        information and coordinate
+                        data processing operations.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Message Queues</h3>
+
+                        <p>
+                            Exchange messages between
+                            application tasks through
+                            queue-based communication
+                            mechanisms.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Mailboxes</h3>
+
+                        <p>
+                            Provide mailbox-based
+                            communication for transferring
+                            information between
+                            independent tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Message Management</h3>
+
+                        <p>
+                            Organize application messages
+                            and coordinate message-related
+                            task operations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Unified Wait Mechanism</h3>
+
+                        <p>
+                            Coordinate task waiting
+                            with supported synchronization
+                            and communication objects
+                            through unified waiting services.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Interrupt Management -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        INTERRUPT MANAGEMENT APIS
+                    </span>
+
+                    <h2>Interrupt-Related Services</h2>
+
+                    <p>
+                        Interrupt-related interfaces
+                        support application integration
+                        with hardware interrupt processing
+                        and the HRTOS execution model.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Interrupt Integration</h3>
+
+                        <p>
+                            Coordinate interrupt handling
+                            with application tasks
+                            and system execution.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Interrupt Priorities</h3>
+
+                        <p>
+                            Organize interrupt execution
+                            according to the hardware
+                            interrupt priority configuration
+                            and system requirements.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Interrupt and Task Coordination</h3>
+
+                        <p>
+                            Coordinate hardware event
+                            processing with task-level
+                            application operations.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        Interrupt context restrictions
+                        must be observed when using
+                        kernel services. Scheduling-related
+                        and task-wakeup operations should
+                        not be called from nested interrupt
+                        contexts where they are not permitted.
+                    </p>
+
+                    <a href="../architecture/interrupt-model.html"
+                        class="text-link">
+                        Explore Interrupt Model
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- System Configuration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SYSTEM CONFIGURATION
+                    </span>
+
+                    <h2>Kernel Configuration Interfaces</h2>
+
+                    <p>
+                        HRTOS configuration options
+                        allow developers to adapt
+                        kernel resources and system
+                        behavior to the requirements
+                        of their target 8051 platform.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Task Configuration</h3>
+
+                        <p>
+                            Configure the available
+                            task resources and
+                            application task limits.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Scheduling Configuration</h3>
+
+                        <p>
+                            Configure scheduling-related
+                            parameters and task priority
+                            arrangements.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Timing Configuration</h3>
+
+                        <p>
+                            Configure system timing
+                            parameters according to
+                            the target hardware clock
+                            and application requirements.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Resource Configuration</h3>
+
+                        <p>
+                            Configure available
+                            kernel resources, including
+                            synchronization and
+                            communication objects.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- API Usage Principles -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DEVELOPMENT GUIDELINES
+                    </span>
+
+                    <h2>Working with HRTOS APIs</h2>
+
+                    <p>
+                        Follow appropriate development
+                        practices when integrating kernel
+                        interfaces into embedded applications.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Understand Execution Context</h3>
+
+                        <p>
+                            Identify whether an interface
+                            is intended for task context
+                            or interrupt context before
+                            using it in application code.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Manage Shared Resources</h3>
+
+                        <p>
+                            Use appropriate synchronization
+                            mechanisms when multiple tasks
+                            access shared application data
+                            or hardware resources.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Configure Resources Carefully</h3>
+
+                        <p>
+                            Ensure that task limits,
+                            communication objects
+                            and other kernel resources
+                            are configured according
+                            to actual application needs.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Consider Timing Requirements</h3>
+
+                        <p>
+                            Design task execution,
+                            waiting operations and
+                            interrupt processing
+                            according to the timing
+                            requirements of the application.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Continue Exploring HRTOS</h2>
+
+                    <p>
+                        Explore additional documentation
+                        covering system architecture,
+                        kernel functionality and
+                        practical application development.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Getting Started</h3>
+
+                        <p>
+                            Learn the fundamentals
+                            of HRTOS and build
+                            your first application.
+                        </p>
+
+                        <a href="./getting-started.html"
+                            class="text-link">
+                            Read Getting Started
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Installation Guide</h3>
+
+                        <p>
+                            Configure Keil C51
+                            and prepare the HRTOS
+                            development environment.
+                        </p>
+
+                        <a href="./installation.html"
+                            class="text-link">
+                            Read Installation Guide
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Kernel Architecture</h3>
+
+                        <p>
+                            Understand kernel components,
+                            scheduling mechanisms
+                            and system organization.
+                        </p>
+
+                        <a href="../architecture/"
+                            class="text-link">
+                            Explore Architecture
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Application Examples</h3>
+
+                        <p>
+                            Explore practical embedded
+                            applications based on HRTOS
+                            task management and system services.
+                        </p>
+
+                        <a href="../examples/"
+                            class="text-link">
+                            Explore Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Applications with HRTOS APIs</h2>
+
+                    <p>
+                        Explore the kernel interfaces,
+                        understand the system services
+                        and start developing structured
+                        real-time applications for 8051
+                        microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

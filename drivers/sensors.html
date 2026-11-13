@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>8051 Sensor Drivers | HRTOS Device Driver Resources</title>
+    <meta name="description"
+        content="Explore sensor driver development for HRTOS-based 8051 embedded systems, including sensor interfaces, data acquisition, sampling tasks, and application integration.">
+    <meta name="keywords"
+        content="8051 sensor drivers, HRTOS sensor, 8051 data acquisition, sensor interface, Keil C51, embedded sensor applications">
+
+    <link rel="canonical" href="https://en.hrtos.com/drivers/sensors.html">
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="./" class="active">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="hero-content">
+
+                    <span class="section-tag">Sensor Drivers</span>
+
+                    <h1>8051 Sensor Interfaces</h1>
+
+                    <p class="hero-description">
+                        Sensor connectivity and data acquisition
+                        for HRTOS-based embedded applications.
+                    </p>
+
+                    <p>
+                        Sensors allow embedded systems to collect information
+                        from the physical environment. This section introduces
+                        sensor interface development and the integration of
+                        data acquisition tasks into HRTOS-based 8051 systems.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./index.html" class="btn btn-primary">
+                            All Driver Resources
+                        </a>
+                        <a href="../examples/" class="btn btn-secondary">
+                            Application Examples
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Overview</span>
+                    <h2>Sensor Integration on 8051</h2>
+                    <p>
+                        Connect external sensors to the microcontroller
+                        and organize data acquisition through the
+                        HRTOS task model.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Physical Data Acquisition</h3>
+                        <p>
+                            Collect temperature, humidity, pressure,
+                            distance, and other physical measurements
+                            through appropriate sensor interfaces.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Interface Communication</h3>
+                        <p>
+                            Exchange data with sensors through
+                            hardware communication interfaces
+                            supported by the target microcontroller.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Scheduled Sampling</h3>
+                        <p>
+                            Use HRTOS tasks to organize periodic
+                            sampling, data processing, and
+                            application-level updates.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sensor Categories -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Sensor Categories</span>
+                    <h2>Common Sensor Applications</h2>
+                    <p>
+                        Sensor interfaces can be organized according
+                        to the type of physical data being collected.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Environmental Sensors</h3>
+                        <p>
+                            Measure environmental conditions for
+                            monitoring, control, and data logging.
+                        </p>
+                        <ul>
+                            <li>Temperature measurement</li>
+                            <li>Relative humidity measurement</li>
+                            <li>Atmospheric pressure</li>
+                            <li>Environmental monitoring</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Distance and Motion Sensors</h3>
+                        <p>
+                            Detect object distance, movement,
+                            and changes in the surrounding environment.
+                        </p>
+                        <ul>
+                            <li>Distance measurement</li>
+                            <li>Infrared detection</li>
+                            <li>Motion detection</li>
+                            <li>Proximity sensing</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Analog Sensors</h3>
+                        <p>
+                            Acquire analog signals and convert
+                            measurement values into digital data
+                            for application processing.
+                        </p>
+                        <ul>
+                            <li>Analog voltage measurement</li>
+                            <li>Light intensity sensing</li>
+                            <li>Signal conditioning</li>
+                            <li>ADC-based data acquisition</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">04</div>
+                        <h3>Digital Sensors</h3>
+                        <p>
+                            Communicate with digital sensor devices
+                            using their specified signaling
+                            and data exchange protocols.
+                        </p>
+                        <ul>
+                            <li>Digital data interfaces</li>
+                            <li>Single-wire communication</li>
+                            <li>Serial sensor interfaces</li>
+                            <li>Measurement data decoding</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">05</div>
+                        <h3>Inertial Sensors</h3>
+                        <p>
+                            Obtain motion-related measurements
+                            for orientation, movement analysis,
+                            and embedded control applications.
+                        </p>
+                        <ul>
+                            <li>Acceleration measurement</li>
+                            <li>Angular velocity measurement</li>
+                            <li>Motion data acquisition</li>
+                            <li>Multi-axis sensor interfaces</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">06</div>
+                        <h3>Specialized Sensors</h3>
+                        <p>
+                            Integrate application-specific sensors
+                            for industrial monitoring and
+                            dedicated embedded devices.
+                        </p>
+                        <ul>
+                            <li>Gas detection</li>
+                            <li>Liquid level detection</li>
+                            <li>Current and voltage measurement</li>
+                            <li>Custom measurement interfaces</li>
+                        </ul>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interface Types -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Interfaces</span>
+                    <h2>Sensor Communication Interfaces</h2>
+                    <p>
+                        Different sensors use different electrical
+                        and communication interfaces. Driver design
+                        must account for the requirements of each device.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>GPIO</h3>
+                        <p>
+                            General-purpose input and output pins
+                            can be used for simple digital sensor
+                            signaling and control.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>I?C</h3>
+                        <p>
+                            A two-wire serial bus commonly used
+                            by sensors and other low-speed
+                            peripheral devices.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>SPI</h3>
+                        <p>
+                            A synchronous serial interface suitable
+                            for peripherals requiring a clocked
+                            data transfer mechanism.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">04</div>
+                        <h3>UART</h3>
+                        <p>
+                            An asynchronous serial interface
+                            used by sensors and measurement
+                            modules with serial output.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">05</div>
+                        <h3>ADC</h3>
+                        <p>
+                            Analog-to-digital conversion allows
+                            the microcontroller to acquire
+                            analog sensor signals.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">06</div>
+                        <h3>Custom Protocols</h3>
+                        <p>
+                            Some sensors use dedicated timing,
+                            signaling, or data formats that
+                            require device-specific driver logic.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RTOS Integration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">RTOS Integration</span>
+                    <h2>Sensor Data Acquisition with HRTOS</h2>
+                    <p>
+                        HRTOS provides task scheduling and
+                        synchronization services that help
+                        organize sensor-related application logic.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Sampling Tasks</h3>
+                        <p>
+                            Create dedicated tasks for periodic
+                            sensor acquisition and measurement
+                            updates.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Data Processing</h3>
+                        <p>
+                            Separate data acquisition from
+                            filtering, conversion, calculation,
+                            and application processing.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Event-Driven Updates</h3>
+                        <p>
+                            Use task synchronization and
+                            communication mechanisms to notify
+                            other application components when
+                            new sensor data is available.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Design Considerations -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Engineering</span>
+                    <h2>Sensor Driver Design Considerations</h2>
+                    <p>
+                        Reliable sensor integration requires
+                        attention to hardware characteristics,
+                        timing requirements, and resource constraints.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="capability-grid">
+
+                        <div class="capability-item">
+                            <h3>Timing Requirements</h3>
+                            <p>
+                                Respect sensor conversion times,
+                                sampling intervals, and protocol timing.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Data Validation</h3>
+                            <p>
+                                Check communication results and
+                                validate acquired measurement data.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Resource Usage</h3>
+                            <p>
+                                Consider RAM, code space, buffers,
+                                and stack requirements.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Task Coordination</h3>
+                            <p>
+                                Coordinate shared data and hardware
+                                access between application tasks.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        On resource-constrained 8051 systems,
+                        driver implementation should balance
+                        functionality, timing behavior, and
+                        memory consumption.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Development Workflow -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Development Workflow</span>
+                    <h2>From Sensor to Application</h2>
+                    <p>
+                        A structured workflow helps integrate
+                        sensors into HRTOS-based embedded systems.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Select the Sensor</h3>
+                        <p>
+                            Identify the measurement requirements,
+                            electrical characteristics, and
+                            communication interface of the device.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Implement the Driver</h3>
+                        <p>
+                            Develop low-level communication,
+                            device initialization, data acquisition,
+                            and error-handling routines.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Integrate with HRTOS</h3>
+                        <p>
+                            Organize sampling and processing
+                            operations into tasks and coordinate
+                            data exchange with other components.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Related Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related Resources</h2>
+                    <p>
+                        Explore other driver categories and
+                        practical HRTOS development resources.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Communication Drivers</h3>
+                        <p>
+                            Explore communication interfaces
+                            and data exchange components for
+                            embedded systems.
+                        </p>
+                        <a href="./communication.html" class="text-link">
+                            Explore Communication Drivers
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Display Drivers</h3>
+                        <p>
+                            Learn about display interfaces
+                            for presenting measurement data
+                            and system information.
+                        </p>
+                        <a href="./display.html" class="text-link">
+                            Explore Display Drivers
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Hardware Platforms</h3>
+                        <p>
+                            Review the 8051 hardware platforms
+                            used for HRTOS development and testing.
+                        </p>
+                        <a href="../hardware/" class="text-link">
+                            Explore Hardware
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+                    <span class="section-tag">Get Started</span>
+
+                    <h2>Build Sensor-Based 8051 Applications</h2>
+
+                    <p>
+                        Combine sensor interfaces with HRTOS task
+                        scheduling and synchronization services
+                        to build structured embedded applications.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="../download/" class="btn btn-primary">
+                            Download HRTOS
+                        </a>
+                        <a href="../docs/getting-started.html" class="btn btn-secondary">
+                            Getting Started
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../download/">Download</a>
+                        <a href="../features/">Features</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../architecture/">Architecture</a>
+                        <a href="../performance/">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                        <a href="./index.html">Drivers</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    Copyright ? 2017-2026 HRTOS. All rights reserved.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,832 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS Documentation | 8051 RTOS Technical Documentation</title>
+
+    <meta name="description"
+        content="Explore the official HRTOS documentation for 8051 and MCS-51 microcontrollers, including getting started guides, installation instructions, API references, kernel architecture and frequently asked questions.">
+
+    <meta name="keywords"
+        content="HRTOS documentation, 8051 RTOS documentation, 8051 operating system, MCS-51 RTOS, HRTOS API, 8051 embedded development">
+
+    <link rel="canonical" href="https://en.hrtos.com/docs/">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="./" class="active">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        OFFICIAL TECHNICAL DOCUMENTATION
+                    </span>
+
+                    <h1>
+                        HRTOS Documentation
+                    </h1>
+
+                    <p class="hero-description">
+                        Technical references, development guides
+                        and system documentation for 8051
+                        and MCS-51 microcontrollers.
+                    </p>
+
+                    <p>
+                        Explore the HRTOS documentation
+                        to understand system configuration,
+                        kernel services, task management,
+                        synchronization mechanisms
+                        and application development.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="./api.html"
+                            class="btn btn-secondary">
+                            Explore API Reference
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Documentation Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DOCUMENTATION OVERVIEW
+                    </span>
+
+                    <h2>Everything You Need to Develop with HRTOS</h2>
+
+                    <p>
+                        The HRTOS documentation provides
+                        practical development instructions
+                        and technical references covering
+                        the complete process from initial setup
+                        to application development.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Getting Started -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Getting Started</h3>
+
+                        <p>
+                            Learn the fundamentals of HRTOS
+                            and build your first 8051 application
+                            using the operating system.
+                        </p>
+
+                        <ul>
+                            <li>Introduction to HRTOS</li>
+                            <li>Development environment</li>
+                            <li>Basic project structure</li>
+                            <li>First application</li>
+                        </ul>
+
+                        <a href="./getting-started.html"
+                            class="text-link">
+                            Read Getting Started
+                        </a>
+
+                    </article>
+
+
+                    <!-- Installation -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Installation Guide</h3>
+
+                        <p>
+                            Understand the required tools,
+                            software packages and configuration
+                            steps for setting up an HRTOS project.
+                        </p>
+
+                        <ul>
+                            <li>Development requirements</li>
+                            <li>Keil C51 configuration</li>
+                            <li>Library integration</li>
+                            <li>Project configuration</li>
+                        </ul>
+
+                        <a href="./installation.html"
+                            class="text-link">
+                            Read Installation Guide
+                        </a>
+
+                    </article>
+
+
+                    <!-- API -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>API Reference</h3>
+
+                        <p>
+                            Explore HRTOS kernel interfaces
+                            and system services for building
+                            structured embedded applications.
+                        </p>
+
+                        <ul>
+                            <li>Task management</li>
+                            <li>Time and delay services</li>
+                            <li>Synchronization APIs</li>
+                            <li>Communication interfaces</li>
+                        </ul>
+
+                        <a href="./api.html"
+                            class="text-link">
+                            Explore API Reference
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Learning Path -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        DEVELOPMENT WORKFLOW
+                    </span>
+
+                    <h2>Start Developing with HRTOS</h2>
+
+                    <p>
+                        Follow a practical development path
+                        to configure the environment,
+                        understand the system and build
+                        your own embedded applications.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Step 01 - Understand HRTOS</h3>
+
+                        <p>
+                            Learn about the HRTOS operating system,
+                            its design concepts, supported
+                            microcontrollers and major capabilities.
+                        </p>
+
+                        <a href="./getting-started.html"
+                            class="text-link">
+                            Introduction and Getting Started
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Step 02 - Configure the Environment</h3>
+
+                        <p>
+                            Prepare the Keil C51 development
+                            environment, configure project settings
+                            and integrate the required HRTOS files
+                            and libraries.
+                        </p>
+
+                        <a href="./installation.html"
+                            class="text-link">
+                            Installation Instructions
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Step 03 - Learn Kernel APIs</h3>
+
+                        <p>
+                            Understand task creation,
+                            scheduling, timing services,
+                            synchronization and communication
+                            interfaces provided by HRTOS.
+                        </p>
+
+                        <a href="./api.html"
+                            class="text-link">
+                            Browse API Reference
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Step 04 - Build Applications</h3>
+
+                        <p>
+                            Apply HRTOS services to practical
+                            embedded projects involving sensors,
+                            displays, communication modules
+                            and peripheral drivers.
+                        </p>
+
+                        <a href="../examples/"
+                            class="text-link">
+                            Explore Application Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Technical Coverage -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        TECHNICAL COVERAGE
+                    </span>
+
+                    <h2>Explore HRTOS System Documentation</h2>
+
+                    <p>
+                        The documentation covers the major
+                        components of the operating system,
+                        from kernel fundamentals to
+                        application-level system services.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Kernel and Scheduling</h3>
+
+                        <p>
+                            Understand task management,
+                            priority-based scheduling,
+                            context switching and
+                            real-time execution mechanisms.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Time Management</h3>
+
+                        <p>
+                            Explore system timing,
+                            periodic task execution,
+                            delay services and
+                            time-related kernel interfaces.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Synchronization</h3>
+
+                        <p>
+                            Learn about semaphores,
+                            mutexes, events and other
+                            synchronization mechanisms
+                            for coordinating application tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Inter-Task Communication</h3>
+
+                        <p>
+                            Explore message queues,
+                            mailboxes and communication
+                            mechanisms for exchanging
+                            information between tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Interrupt Management</h3>
+
+                        <p>
+                            Understand interrupt handling,
+                            interrupt priorities and
+                            the relationship between
+                            interrupt services and task scheduling.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Configuration</h3>
+
+                        <p>
+                            Learn how to configure
+                            system parameters, task limits,
+                            memory resources and
+                            available kernel modules.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- API Documentation -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        API DOCUMENTATION
+                    </span>
+
+                    <h2>HRTOS Kernel API Reference</h2>
+
+                    <p>
+                        Access the API documentation
+                        to understand how application
+                        software interacts with HRTOS
+                        kernel services.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Task and Scheduling APIs</h3>
+
+                        <p>
+                            Interfaces for task registration,
+                            task management, scheduling
+                            and execution control.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Timing and Wait APIs</h3>
+
+                        <p>
+                            Interfaces for delay operations,
+                            timed waiting and
+                            time-related application services.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Synchronization and IPC APIs</h3>
+
+                        <p>
+                            Interfaces for semaphores,
+                            mutexes, events, message queues
+                            and inter-task communication.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <a href="./api.html"
+                        class="btn btn-primary">
+                        View Complete API Reference
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- FAQ -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        FREQUENTLY ASKED QUESTIONS
+                    </span>
+
+                    <h2>Need Help with HRTOS?</h2>
+
+                    <p>
+                        Find answers to common questions
+                        about development environments,
+                        system configuration and
+                        application development.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Which development environment does HRTOS use?</h3>
+
+                        <p>
+                            HRTOS is designed for 8051
+                            and MCS-51 microcontrollers
+                            and supports the Keil C51
+                            development toolchain.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>How do I start an HRTOS project?</h3>
+
+                        <p>
+                            Begin with the Getting Started
+                            guide and follow the installation
+                            instructions to configure
+                            your development environment.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Where can I find kernel API information?</h3>
+
+                        <p>
+                            The API Reference provides
+                            descriptions of HRTOS kernel
+                            interfaces and system services.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Where can I find application examples?</h3>
+
+                        <p>
+                            Visit the Examples section
+                            to explore practical applications
+                            involving sensors, displays
+                            and communication modules.
+                        </p>
+
+                    </div>
+
+
+                    <a href="./faq.html"
+                        class="btn btn-primary">
+                        View All Frequently Asked Questions
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Explore More HRTOS Resources</h2>
+
+                    <p>
+                        Continue exploring system features,
+                        hardware platforms and practical
+                        development resources.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>System Features</h3>
+
+                        <p>
+                            Explore task scheduling,
+                            interrupt management,
+                            synchronization and
+                            other HRTOS capabilities.
+                        </p>
+
+                        <a href="../features/"
+                            class="text-link">
+                            Explore Features
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Architecture</h3>
+
+                        <p>
+                            Understand the internal
+                            organization of HRTOS
+                            and its kernel architecture.
+                        </p>
+
+                        <a href="../architecture/"
+                            class="text-link">
+                            Explore Architecture
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Application Examples</h3>
+
+                        <p>
+                            Learn how to develop
+                            practical embedded applications
+                            using HRTOS services.
+                        </p>
+
+                        <a href="../examples/"
+                            class="text-link">
+                            Explore Examples
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>HRTOS Downloads</h3>
+
+                        <p>
+                            Access HRTOS releases
+                            and the resources required
+                            for application development.
+                        </p>
+
+                        <a href="../download/"
+                            class="text-link">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Start Building with HRTOS</h2>
+
+                    <p>
+                        Explore the documentation,
+                        configure your development environment
+                        and start building structured
+                        real-time applications for 8051
+                        microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DHT11 Sensor Example | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore a DHT11 temperature and humidity monitoring application using HRTOS on 8051 microcontrollers, featuring sensor communication, periodic data acquisition and real-time task scheduling.">
+
+    <meta name="keywords"
+        content="8051 DHT11, DHT11 temperature humidity sensor, HRTOS example, 8051 RTOS, sensor data acquisition, embedded sensor application">
+
+    <link rel="canonical" href="https://en.hrtos.com/examples/dht11.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="./" class="active">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        EMBEDDED APPLICATION EXAMPLE
+                    </span>
+
+                    <h1>
+                        DHT11 Temperature and Humidity Monitoring
+                    </h1>
+
+                    <p class="hero-description">
+                        Periodic sensor data acquisition
+                        and task-based environmental monitoring
+                        on 8051 microcontrollers.
+                    </p>
+
+                    <p>
+                        This example demonstrates how HRTOS
+                        can organize sensor communication,
+                        temperature and humidity acquisition
+                        and application-level data processing
+                        into independent tasks.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/"
+                            class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            Back to Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION OVERVIEW
+                    </span>
+
+                    <h2>Environmental Monitoring with DHT11</h2>
+
+                    <p>
+                        The DHT11 is a digital temperature
+                        and humidity sensor commonly used
+                        in embedded monitoring applications.
+                        It provides environmental data through
+                        a single-wire digital communication
+                        interface.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Temperature -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Temperature Measurement</h3>
+
+                        <p>
+                            Acquire temperature information
+                            from the DHT11 sensor and make
+                            the measurement available to
+                            application tasks.
+                        </p>
+
+                        <ul>
+                            <li>Digital temperature data</li>
+                            <li>Sensor communication</li>
+                            <li>Data validation</li>
+                            <li>Periodic measurement</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Humidity -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Humidity Measurement</h3>
+
+                        <p>
+                            Read relative humidity information
+                            and provide environmental data
+                            for monitoring and control functions.
+                        </p>
+
+                        <ul>
+                            <li>Relative humidity data</li>
+                            <li>Digital data acquisition</li>
+                            <li>Measurement processing</li>
+                            <li>Application data sharing</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Scheduling -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Periodic Task Scheduling</h3>
+
+                        <p>
+                            Use HRTOS task scheduling
+                            to perform sensor acquisition
+                            and other application functions
+                            independently.
+                        </p>
+
+                        <ul>
+                            <li>Periodic task execution</li>
+                            <li>Time-based scheduling</li>
+                            <li>Task synchronization</li>
+                            <li>Non-blocking application design</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        HARDWARE COMPONENTS
+                    </span>
+
+                    <h2>Hardware Requirements</h2>
+
+                    <p>
+                        A basic environmental monitoring
+                        application can be implemented
+                        using an 8051 development board
+                        and a small number of peripheral
+                        components.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>8051 Microcontroller</h3>
+
+                        <p>
+                            An 8051 or MCS-51 compatible
+                            microcontroller running HRTOS
+                            to coordinate sensor acquisition
+                            and application processing.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>DHT11 Sensor</h3>
+
+                        <p>
+                            A digital temperature and
+                            relative humidity sensor
+                            communicating through a
+                            single-wire data interface.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Pull-Up Resistor</h3>
+
+                        <p>
+                            An external pull-up resistor
+                            may be required by the sensor
+                            data-line interface according
+                            to the module configuration.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Optional Display</h3>
+
+                        <p>
+                            An LCD or OLED display can
+                            present temperature, humidity
+                            and sensor status information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Communication -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SENSOR COMMUNICATION
+                    </span>
+
+                    <h2>DHT11 Single-Wire Interface</h2>
+
+                    <p>
+                        The DHT11 uses a proprietary
+                        single-wire digital communication
+                        protocol. The microcontroller
+                        initiates a measurement request
+                        and receives a data frame from
+                        the sensor.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Start Signal</h3>
+
+                        <p>
+                            The microcontroller pulls
+                            the data line low for the
+                            required start interval to
+                            initiate sensor communication.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Sensor Response</h3>
+
+                        <p>
+                            The sensor responds to the
+                            request and prepares the
+                            digital data transmission.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Data Reception</h3>
+
+                        <p>
+                            The microcontroller measures
+                            signal timing and receives
+                            the temperature and humidity
+                            data bits.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Checksum Validation</h3>
+
+                        <p>
+                            Validate the received data
+                            using the checksum provided
+                            by the sensor before making
+                            the measurement available.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Software Architecture -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SOFTWARE ARCHITECTURE
+                    </span>
+
+                    <h2>Task-Based Sensor Application</h2>
+
+                    <p>
+                        HRTOS allows sensor communication
+                        and application processing to be
+                        organized into independent software
+                        components.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Acquisition Task</h3>
+
+                        <p>
+                            Initiate DHT11 communication,
+                            receive the sensor data frame
+                            and perform basic data validation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Data Processing Task</h3>
+
+                        <p>
+                            Process the acquired temperature
+                            and humidity values and make
+                            measurement information available
+                            to other application components.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Display Task</h3>
+
+                        <p>
+                            Update the user interface
+                            with the latest environmental
+                            measurements and system status.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Application Control Task</h3>
+
+                        <p>
+                            Evaluate sensor measurements
+                            and execute application-specific
+                            operations, such as threshold
+                            monitoring or alarm control.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HRTOS Integration -->
+        <section class="section">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        HRTOS INTEGRATION
+                    </span>
+
+                    <h2>Coordinating Sensor Operations with HRTOS</h2>
+
+                    <p>
+                        A simple DHT11 monitoring program
+                        can be implemented using a traditional
+                        main-loop structure.
+                    </p>
+
+                    <p>
+                        As application functionality grows,
+                        additional operations such as
+                        display refresh, serial communication,
+                        data logging and threshold monitoring
+                        may need to be handled concurrently.
+                    </p>
+
+                    <p>
+                        HRTOS provides task scheduling
+                        and synchronization mechanisms
+                        that help separate these operations
+                        into independent application tasks.
+                    </p>
+
+                    <p>
+                        For example, a sensor acquisition
+                        task can periodically collect
+                        environmental data, while another
+                        task updates the display and a
+                        communication task handles
+                        external data transmission.
+                    </p>
+
+                    <p>
+                        This architecture makes the
+                        application easier to extend
+                        and maintain as additional
+                        functionality is introduced.
+                    </p>
+
+                    <a href="../features/"
+                        class="btn btn-primary">
+                        Explore HRTOS Features
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Extensions -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        POSSIBLE EXTENSIONS
+                    </span>
+
+                    <h2>Extend the Monitoring System</h2>
+
+                    <p>
+                        The DHT11 example can serve as
+                        a foundation for more comprehensive
+                        embedded monitoring applications.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>OLED Data Display</h3>
+
+                        <p>
+                            Display real-time temperature
+                            and humidity measurements
+                            using an OLED module.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Threshold Monitoring</h3>
+
+                        <p>
+                            Monitor environmental
+                            measurements and trigger
+                            application events when
+                            configured thresholds are reached.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Serial Data Transmission</h3>
+
+                        <p>
+                            Transmit sensor measurements
+                            to external devices through
+                            a serial communication interface.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Data Logging</h3>
+
+                        <p>
+                            Extend the application with
+                            storage functions for recording
+                            historical environmental data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED RESOURCES
+                    </span>
+
+                    <h2>Continue Exploring HRTOS</h2>
+
+                    <p>
+                        Explore additional examples,
+                        hardware platforms and driver
+                        resources for 8051 development.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Drivers</h3>
+
+                        <p>
+                            Explore sensor interfaces
+                            and hardware driver resources
+                            for embedded applications.
+                        </p>
+
+                        <a href="../drivers/sensors.html"
+                            class="text-link">
+                            Explore Sensor Drivers
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>OLED Display Example</h3>
+
+                        <p>
+                            Learn how to integrate
+                            display hardware with
+                            HRTOS application tasks.
+                        </p>
+
+                        <a href="./oled.html"
+                            class="text-link">
+                            Explore OLED Example
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Hardware Platforms</h3>
+
+                        <p>
+                            Explore 8051 microcontroller
+                            platforms for HRTOS development.
+                        </p>
+
+                        <a href="../hardware/"
+                            class="text-link">
+                            Explore Hardware
+                        </a>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>System Architecture</h3>
+
+                        <p>
+                            Understand the kernel
+                            architecture, task scheduling
+                            and system services.
+                        </p>
+
+                        <a href="../architecture/"
+                            class="text-link">
+                            Explore Architecture
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Embedded Monitoring Applications</h2>
+
+                    <p>
+                        Explore HRTOS documentation
+                        and start developing structured
+                        sensor applications on 8051
+                        microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Get Started
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

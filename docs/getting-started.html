@@ -1,0 +1,1060 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Getting Started with HRTOS | 8051 RTOS Development Guide</title>
+
+    <meta name="description"
+        content="Get started with HRTOS on 8051 microcontrollers. Learn how to prepare the Keil C51 environment, configure the system, integrate HRTOS, create tasks, and run your first real-time application.">
+
+    <meta name="keywords"
+        content="HRTOS getting started, 8051 RTOS tutorial, Keil C51, MCS-51 operating system, 8051 real-time operating system, HRTOS development guide">
+
+    <link rel="canonical" href="https://en.hrtos.com/docs/getting-started.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="./">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="hero-content">
+
+                    <span class="section-tag">Documentation / Getting Started</span>
+
+                    <h1>Getting Started with HRTOS</h1>
+
+                    <p class="hero-description">
+                        Start building real-time embedded applications
+                        with HRTOS on 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                    <p>
+                        This guide introduces the essential development
+                        workflow, from preparing your toolchain and
+                        configuring the system to creating tasks and
+                        running your first application.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./installation.html" class="btn btn-primary">
+                            Installation Guide
+                        </a>
+                        <a href="../download/" class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Introduction</span>
+                    <h2>Your First HRTOS Project</h2>
+                    <p>
+                        Understand the basic workflow before integrating
+                        HRTOS into an embedded application.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS provides a structured runtime environment
+                        for applications built on 8051-family
+                        microcontrollers. Instead of implementing all
+                        application behavior inside a single main loop,
+                        developers can organize their programs into
+                        independent tasks.
+                    </p>
+
+                    <p>
+                        Each task can perform a specific function, such
+                        as sensor acquisition, communication, display
+                        updates, or background processing. HRTOS manages
+                        task execution and provides synchronization
+                        mechanisms for coordinating these activities.
+                    </p>
+
+                    <p>
+                        A typical development process includes the
+                        following stages:
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+                        <h3>Prepare</h3>
+                        <p>
+                            Select a compatible 8051 microcontroller
+                            and prepare the Keil C51 development
+                            environment.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+                        <h3>Configure</h3>
+                        <p>
+                            Review system configuration options,
+                            memory requirements, and enabled modules.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+                        <h3>Integrate</h3>
+                        <p>
+                            Add the required HRTOS libraries and
+                            interface files to your application project.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+                        <h3>Develop</h3>
+                        <p>
+                            Initialize the system, register tasks,
+                            and implement application functions.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Requirements -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Prerequisites</span>
+                    <h2>What You Need</h2>
+                    <p>
+                        Prepare the hardware and software resources
+                        required for an HRTOS development project.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>8051 Microcontroller</h3>
+
+                        <p>
+                            Choose an 8051 or MCS-51 compatible
+                            microcontroller that meets the system's
+                            memory and peripheral requirements.
+                        </p>
+
+                        <ul>
+                            <li>Compatible 8051/MCS-51 architecture</li>
+                            <li>Sufficient CODE memory</li>
+                            <li>Sufficient XDATA memory</li>
+                            <li>Suitable timer and interrupt resources</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Keil C51</h3>
+
+                        <p>
+                            HRTOS V4.0.0 is designed for the Keil C51
+                            development environment.
+                        </p>
+
+                        <ul>
+                            <li>Keil C51 compiler</li>
+                            <li>8051 target configuration</li>
+                            <li>Project and linker configuration</li>
+                            <li>Device-specific header files</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>HRTOS Package</h3>
+
+                        <p>
+                            Prepare the HRTOS distribution and the
+                            files required by your selected system
+                            configuration.
+                        </p>
+
+                        <ul>
+                            <li>HRTOS library files</li>
+                            <li>Public interface headers</li>
+                            <li>Configuration files</li>
+                            <li>Documentation and examples</li>
+                        </ul>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Development Hardware</h3>
+
+                        <p>
+                            A development board or target circuit
+                            is recommended for testing the system
+                            on real hardware.
+                        </p>
+
+                        <ul>
+                            <li>8051 development board</li>
+                            <li>Power supply and programming interface</li>
+                            <li>Serial communication interface</li>
+                            <li>Optional debugging equipment</li>
+                        </ul>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware Requirements -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Hardware Requirements</span>
+                    <h2>Check System Resources</h2>
+                    <p>
+                        Verify that the target microcontroller can
+                        accommodate the selected HRTOS configuration.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Before creating a project, check the memory
+                        capacity of the target device. The full HRTOS
+                        configuration has the following baseline
+                        requirements:
+                    </p>
+
+                    <div class="capability-grid">
+
+                        <div class="capability-item">
+                            <h3>8 KB+</h3>
+                            <p>CODE Memory</p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>1 KB+</h3>
+                            <p>XDATA Memory</p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>8051</h3>
+                            <p>CPU Architecture</p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Keil C51</h3>
+                            <p>Development Toolchain</p>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        These values are baseline requirements for
+                        the full system configuration. Actual resource
+                        consumption depends on the enabled modules,
+                        task configuration, and application code.
+                    </p>
+
+                    <p>
+                        Devices with limited external data memory
+                        should be evaluated carefully. A cooperative
+                        configuration may be more appropriate for
+                        some resource-constrained applications.
+                    </p>
+
+                    <p>
+                        For supported hardware information, see
+                        <a href="../hardware/">Hardware Platforms</a>.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Installation -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Step 01</span>
+                    <h2>Prepare the Development Environment</h2>
+                    <p>
+                        Set up the compiler and organize the project
+                        before integrating HRTOS.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+                        <h3>1. Install and configure Keil C51</h3>
+
+                        <p>
+                            Install a compatible Keil C51 development
+                            environment and make sure that the compiler
+                            can build a basic 8051 application.
+                        </p>
+
+                        <p>
+                            Select the correct target device and verify
+                            the memory model and compiler settings
+                            required by your hardware.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>2. Prepare the HRTOS files</h3>
+
+                        <p>
+                            Extract the HRTOS distribution and locate
+                            the library files, public headers,
+                            configuration files, and example projects.
+                        </p>
+
+                        <p>
+                            Keep the original package structure
+                            available for reference during integration.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>3. Create an application project</h3>
+
+                        <p>
+                            Create a new Keil C51 project for your
+                            target microcontroller.
+                        </p>
+
+                        <p>
+                            Add the application source files and
+                            configure the required include paths
+                            and library search paths.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>4. Review the system configuration</h3>
+
+                        <p>
+                            Check the HRTOS configuration options
+                            and select the modules and resource
+                            settings required by your application.
+                        </p>
+
+                        <p>
+                            Avoid enabling unnecessary modules
+                            during the initial bring-up process.
+                        </p>
+                    </div>
+
+                    <p>
+                        For detailed integration instructions, see
+                        the <a href="./installation.html">Installation Guide</a>.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Project Integration -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Step 02</span>
+                    <h2>Integrate HRTOS into Your Project</h2>
+                    <p>
+                        Add the required system components and
+                        prepare the application entry point.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS integration involves connecting the
+                        operating system library and its public
+                        interfaces to the application project.
+                    </p>
+
+                    <p>
+                        The following items should be checked
+                        during integration:
+                    </p>
+
+                    <div class="feature-grid">
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>01</span>
+                            </div>
+
+                            <h3>Include Paths</h3>
+
+                            <p>
+                                Make sure that the compiler can
+                                locate the HRTOS public header
+                                files and required device headers.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>02</span>
+                            </div>
+
+                            <h3>Library Linking</h3>
+
+                            <p>
+                                Add the appropriate HRTOS library
+                                files to the project and verify
+                                the linker configuration.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>03</span>
+                            </div>
+
+                            <h3>System Configuration</h3>
+
+                            <p>
+                                Review the system configuration
+                                and make sure that the selected
+                                settings match the target hardware.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>04</span>
+                            </div>
+
+                            <h3>Application Entry</h3>
+
+                            <p>
+                                Prepare the application startup
+                                code according to the initialization
+                                sequence documented by HRTOS.
+                            </p>
+                        </article>
+
+                    </div>
+
+                    <p>
+                        Use the official examples as the reference
+                        for the exact initialization sequence and
+                        interface usage. Avoid assuming that
+                        configuration details are identical across
+                        different HRTOS versions.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Task Development -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Step 03</span>
+                    <h2>Create Your First Tasks</h2>
+                    <p>
+                        Organize application functionality into
+                        independent tasks managed by HRTOS.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        A task is an independent unit of application
+                        execution. In a typical embedded project,
+                        different tasks can be assigned to different
+                        functions.
+                    </p>
+
+                    <div class="feature-grid">
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>01</span>
+                            </div>
+
+                            <h3>Sensor Task</h3>
+
+                            <p>
+                                Periodically acquire sensor data
+                                and update application variables.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>02</span>
+                            </div>
+
+                            <h3>Communication Task</h3>
+
+                            <p>
+                                Process serial communication,
+                                protocol messages, or external
+                                device requests.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>03</span>
+                            </div>
+
+                            <h3>Display Task</h3>
+
+                            <p>
+                                Update display information and
+                                present application status.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>04</span>
+                            </div>
+
+                            <h3>Background Task</h3>
+
+                            <p>
+                                Handle non-critical processing
+                                and periodic maintenance work.
+                            </p>
+                        </article>
+
+                    </div>
+
+                    <h3>Task Design Guidelines</h3>
+
+                    <ul>
+                        <li>Keep each task focused on a clear responsibility.</li>
+                        <li>Choose priorities according to response-time requirements.</li>
+                        <li>Use system synchronization mechanisms for shared resources.</li>
+                        <li>Avoid unnecessary busy-wait loops.</li>
+                        <li>Consider task execution time and stack requirements.</li>
+                    </ul>
+
+                    <p>
+                        For more information, see
+                        <a href="../features/scheduler.html">Task Scheduling</a>
+                        and
+                        <a href="./api.html">API Reference</a>.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Synchronization -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Step 04</span>
+                    <h2>Coordinate Tasks and Resources</h2>
+                    <p>
+                        Use synchronization and communication mechanisms
+                        to build reliable multi-task applications.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Semaphores</h3>
+
+                        <p>
+                            Coordinate task execution and manage
+                            access to shared system resources.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Mutexes</h3>
+
+                        <p>
+                            Protect shared resources and support
+                            priority inheritance when tasks
+                            compete for the same resource.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Events</h3>
+
+                        <p>
+                            Allow tasks to wait for and respond
+                            to application events.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Message Queues</h3>
+
+                        <p>
+                            Exchange data between tasks through
+                            structured message communication.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="content-narrow">
+                    <p>
+                        Select the appropriate synchronization
+                        mechanism based on the data flow and
+                        resource-sharing requirements of your
+                        application.
+                    </p>
+
+                    <p>
+                        Avoid sharing mutable data between tasks
+                        without a clearly defined synchronization
+                        strategy.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Build and Run -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Step 05</span>
+                    <h2>Build and Run the Application</h2>
+                    <p>
+                        Compile the project, program the target
+                        microcontroller, and verify system startup.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="feature-card">
+                        <h3>1. Compile the project</h3>
+
+                        <p>
+                            Build the application in Keil C51 and
+                            review the compiler and linker output.
+                        </p>
+
+                        <p>
+                            Resolve missing symbols, incorrect
+                            include paths, memory allocation
+                            problems, and configuration conflicts.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>2. Check memory usage</h3>
+
+                        <p>
+                            Review the generated memory usage
+                            report and confirm that the application
+                            fits within the target device's
+                            available CODE and data memory.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>3. Program the microcontroller</h3>
+
+                        <p>
+                            Download the generated program to
+                            the target device using the appropriate
+                            programming tool.
+                        </p>
+
+                        <p>
+                            Verify power supply, clock configuration,
+                            reset behavior, and basic hardware
+                            connections.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>4. Verify system operation</h3>
+
+                        <p>
+                            Check that the system initializes
+                            correctly and that registered tasks
+                            execute as expected.
+                        </p>
+
+                        <p>
+                            Use serial output, GPIO signals,
+                            debugging tools, or other suitable
+                            methods to observe system behavior.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Validation -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Validation</span>
+                    <h2>Verify Your First Application</h2>
+                    <p>
+                        Confirm the essential operating system
+                        behavior before expanding the application.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        A successful compilation does not necessarily
+                        mean that the complete application behaves
+                        correctly. Initial validation should focus
+                        on the basic system functions.
+                    </p>
+
+                    <div class="feature-grid">
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>01</span>
+                            </div>
+
+                            <h3>System Startup</h3>
+
+                            <p>
+                                Confirm that initialization completes
+                                and the application reaches its
+                                expected startup state.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>02</span>
+                            </div>
+
+                            <h3>Task Execution</h3>
+
+                            <p>
+                                Verify that registered tasks execute
+                                and that their priorities produce
+                                the expected scheduling behavior.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>03</span>
+                            </div>
+
+                            <h3>Timing Behavior</h3>
+
+                            <p>
+                                Measure periodic task behavior,
+                                interrupt response, and relevant
+                                application timing.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">
+                                <span>04</span>
+                            </div>
+
+                            <h3>Resource Stability</h3>
+
+                            <p>
+                                Check memory usage, stack behavior,
+                                shared-resource access, and
+                                long-running system stability.
+                            </p>
+                        </article>
+
+                    </div>
+
+                    <p>
+                        For measured performance information,
+                        see the
+                        <a href="../performance/">Performance</a>
+                        section.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Next Steps -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Next Steps</span>
+                    <h2>Continue Building with HRTOS</h2>
+                    <p>
+                        Explore more system features and practical
+                        examples as your application grows.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <h3>System Architecture</h3>
+
+                        <p>
+                            Understand the kernel structure,
+                            task management, memory organization,
+                            and interrupt model.
+                        </p>
+
+                        <a href="../architecture/" class="btn btn-secondary">
+                            Explore Architecture
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <h3>Hardware Drivers</h3>
+
+                        <p>
+                            Explore driver resources for sensors,
+                            communication interfaces, and
+                            display devices.
+                        </p>
+
+                        <a href="../drivers/" class="btn btn-secondary">
+                            Browse Drivers
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <h3>Application Examples</h3>
+
+                        <p>
+                            Learn from practical examples covering
+                            infrared communication, DHT11 sensors,
+                            OLED displays, and Modbus RTU.
+                        </p>
+
+                        <a href="../examples/" class="btn btn-secondary">
+                            View Examples
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <span class="section-tag">Start Developing</span>
+
+                    <h2>Build Your First HRTOS Application</h2>
+
+                    <p>
+                        Prepare your 8051 hardware, configure the
+                        development environment, and start building
+                        structured real-time embedded applications
+                        with HRTOS.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./installation.html" class="btn btn-primary">
+                            Installation Guide
+                        </a>
+
+                        <a href="../download/" class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system for 8051 and
+                        MCS-51 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="./">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2017-2026 HRTOS. All rights reserved.</p>
+                <p>Engineering Real-Time on 8051.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

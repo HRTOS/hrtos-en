@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hardware Platforms | 8051 MCU Support and Testing | HRTOS</title>
+    <meta name="description"
+        content="Explore the 8051 hardware platforms used for HRTOS development, integration, functional verification, and real-time performance testing.">
+    <meta name="keywords"
+        content="HRTOS hardware, 8051 hardware platform, STC12, STC8, 8051 MCU, Keil C51">
+
+    <link rel="canonical" href="https://en.hrtos.com/hardware/">
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="./" class="active">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="hero-content">
+
+                    <span class="section-tag">Hardware Platforms</span>
+
+                    <h1>8051 Hardware Platforms</h1>
+
+                    <p class="hero-description">
+                        Hardware foundations for HRTOS development,
+                        integration, and real-time system verification.
+                    </p>
+
+                    <p>
+                        HRTOS is designed specifically for the 8051 / MCS-51
+                        microcontroller architecture. Its development and
+                        verification rely on practical hardware platforms
+                        that help evaluate kernel behavior in real embedded
+                        environments.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./stc12.html" class="btn btn-primary">
+                            STC12 Platform
+                        </a>
+                        <a href="./stc8.html" class="btn btn-secondary">
+                            STC8 Platform
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Overview</span>
+                    <h2>Hardware-Oriented Development</h2>
+                    <p>
+                        HRTOS is evaluated on actual 8051 microcontrollers
+                        rather than relying exclusively on simulated environments.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Native 8051 Architecture</h3>
+                        <p>
+                            HRTOS targets the 8051 / MCS-51 architecture,
+                            with hardware-specific considerations for
+                            memory, registers, interrupts, and timing.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Practical Verification</h3>
+                        <p>
+                            Real hardware provides a practical environment
+                            for verifying task scheduling, interrupt handling,
+                            synchronization, and system behavior.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Performance Measurement</h3>
+                        <p>
+                            Timing measurements on target microcontrollers
+                            help characterize context switching, interrupt
+                            response, and timing accuracy.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Supported Platforms -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Platforms</span>
+                    <h2>Hardware Test Platforms</h2>
+                    <p>
+                        Explore the microcontroller platforms used in
+                        HRTOS development and testing.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">12</div>
+                        <h3>STC12C5A60S2</h3>
+
+                        <p>
+                            An 8051-based microcontroller platform used
+                            for HRTOS kernel development, functional
+                            verification, and timing measurements.
+                        </p>
+
+                        <ul>
+                            <li>8051 / MCS-51 architecture</li>
+                            <li>1T core</li>
+                            <li>11.0592 MHz test configuration</li>
+                            <li>Keil C51 development environment</li>
+                        </ul>
+
+                        <a href="./stc12.html" class="text-link">
+                            Explore STC12 Platform
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">8</div>
+                        <h3>STC8H8U64K</h3>
+
+                        <p>
+                            A platform used for extended HRTOS stress testing
+                            and long-duration system stability evaluation.
+                        </p>
+
+                        <ul>
+                            <li>8051-compatible architecture</li>
+                            <li>HRTOS stress-test target</li>
+                            <li>Long-duration execution testing</li>
+                            <li>Task and system behavior evaluation</li>
+                        </ul>
+
+                        <a href="./stc8.html" class="text-link">
+                            Explore STC8 Platform
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Verification -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Verification</span>
+                    <h2>What Is Tested on Hardware?</h2>
+                    <p>
+                        Hardware testing focuses on the core operating-system
+                        behaviors that matter in embedded applications.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Task Scheduling</h3>
+                        <p>
+                            Evaluate task switching, priority-based scheduling,
+                            time-slice behavior, and fast-task execution.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Interrupt Response</h3>
+                        <p>
+                            Measure interrupt response behavior and examine
+                            the interaction between interrupt handlers
+                            and task scheduling.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Synchronization</h3>
+                        <p>
+                            Verify event signaling, semaphores, mutexes,
+                            message passing, and task wake-up behavior.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">04</div>
+                        <h3>Timing Behavior</h3>
+                        <p>
+                            Evaluate system ticks, delay functions,
+                            time-related services, and timing accuracy.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">05</div>
+                        <h3>Resource Management</h3>
+                        <p>
+                            Examine task resources, memory usage,
+                            and the behavior of kernel-managed objects.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">06</div>
+                        <h3>Long-Duration Stability</h3>
+                        <p>
+                            Run extended workloads to observe system
+                            behavior over long execution periods.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Test Results -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Test Results</span>
+                    <h2>Measured on Real Hardware</h2>
+                    <p>
+                        HRTOS performance and stability evaluations include
+                        timing measurements and extended stress testing.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <div class="capability-grid">
+
+                        <div class="capability-item">
+                            <h3>Normal Task Switching</h3>
+                            <p>394.33 ?s</p>
+                            <span>STC12C5A60S2 test result</span>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Fast Task Switching</h3>
+                            <p>143.5 ?s</p>
+                            <span>STC12C5A60S2 test result</span>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Standard ISR Response</h3>
+                            <p>12.167 ?s</p>
+                            <span>STC12C5A60S2 test result</span>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Stress Test Duration</h3>
+                            <p>72+ Hours</p>
+                            <span>STC8H8U64K test record</span>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Stress Test Rounds</h3>
+                            <p>8,842</p>
+                            <span>STC8H8U64K test record</span>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Test Nodes</h3>
+                            <p>1,611</p>
+                            <span>STC8H8U64K test record</span>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        These figures represent recorded results from
+                        specific hardware and software configurations.
+                        They should not be interpreted as universal
+                        performance guarantees.
+                    </p>
+
+                    <a href="../performance/" class="text-link">
+                        Explore Detailed Performance Results
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Development Environment -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Development Environment</span>
+                    <h2>Hardware and Software Integration</h2>
+                    <p>
+                        HRTOS combines an 8051 hardware target with
+                        a dedicated embedded software development workflow.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Microcontroller</h3>
+                        <p>
+                            An 8051-compatible microcontroller provides
+                            the execution environment for the operating
+                            system and application.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Compiler and Toolchain</h3>
+                        <p>
+                            Keil C51 is the primary development toolchain
+                            used for building HRTOS-based 8051 applications.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Kernel and Application</h3>
+                        <p>
+                            The HRTOS kernel provides task scheduling,
+                            interrupt management, synchronization,
+                            and other operating-system services.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Related Resources -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">Explore More</span>
+                    <h2>Related Resources</h2>
+                    <p>
+                        Continue exploring the HRTOS system and its
+                        development resources.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>System Architecture</h3>
+                        <p>
+                            Understand the kernel structure, task model,
+                            scheduling mechanism, and interrupt architecture.
+                        </p>
+                        <a href="../architecture/" class="text-link">
+                            Explore Architecture
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Device Drivers</h3>
+                        <p>
+                            Explore hardware-related drivers and reusable
+                            components for embedded applications.
+                        </p>
+                        <a href="../drivers/" class="text-link">
+                            Explore Drivers
+                        </a>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Application Examples</h3>
+                        <p>
+                            Review practical examples demonstrating
+                            HRTOS-based embedded application development.
+                        </p>
+                        <a href="../examples/" class="text-link">
+                            Explore Examples
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+                    <span class="section-tag">Get Started</span>
+
+                    <h2>Develop on the 8051 Platform</h2>
+
+                    <p>
+                        Explore HRTOS, review the technical documentation,
+                        and build embedded applications with a dedicated
+                        8051 real-time operating system.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="../download/" class="btn btn-primary">
+                            Download HRTOS
+                        </a>
+                        <a href="../docs/getting-started.html" class="btn btn-secondary">
+                            Getting Started
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../download/">Download</a>
+                        <a href="../features/">Features</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../architecture/">Architecture</a>
+                        <a href="../performance/">Performance</a>
+                        <a href="./">Hardware</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    Copyright ? 2017-2026 HRTOS. All rights reserved.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

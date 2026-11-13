@@ -1,0 +1,1081 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 - Page Not Found | HRTOS</title>
+
+    <meta name="description"
+        content="The requested page could not be found. Explore HRTOS, a real-time operating system designed specifically for the 8051 architecture.">
+
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#050b18">
+
+    <link rel="icon" href="./assets/images/logo.svg" type="image/svg+xml">
+
+    <style>
+        /* =====================================
+           GLOBAL
+        ===================================== */
+
+        :root {
+            --bg: #050b18;
+            --bg-light: #0a1630;
+            --blue: #38bdf8;
+            --blue-strong: #2563eb;
+            --purple: #818cf8;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.14);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1200px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        .header {
+            height: 76px;
+            position: relative;
+            z-index: 100;
+            background: rgba(5, 11, 24, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 37px;
+            height: 37px;
+            object-fit: contain;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #fff, #7dd3fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav a {
+            position: relative;
+            font-size: 13px;
+            font-weight: 500;
+            color: #aab8cc;
+            transition: color 0.25s;
+            white-space: nowrap;
+        }
+
+        .nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -9px;
+            width: 0;
+            height: 2px;
+            background: var(--blue);
+            transition: width 0.25s;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.04);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 19px;
+            height: 2px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            transition: 0.25s;
+        }
+
+        .menu-toggle.active span:first-child {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:last-child {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* =====================================
+           HERO
+        ===================================== */
+
+        .hero {
+            min-height: 820px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 100px 0 110px;
+
+            background:
+                radial-gradient(ellipse at 50% 35%,
+                    rgba(37, 99, 235, 0.22), transparent 48%),
+                radial-gradient(ellipse at 15% 85%,
+                    rgba(79, 70, 229, 0.14), transparent 38%),
+                radial-gradient(ellipse at 90% 15%,
+                    rgba(14, 165, 233, 0.13), transparent 35%),
+                var(--bg);
+        }
+
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.045) 1px, transparent 1px);
+            background-size: 55px 55px;
+            mask-image: linear-gradient(
+                to bottom,
+                transparent,
+                black 15%,
+                black 80%,
+                transparent
+            );
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .orb-one {
+            width: 450px;
+            height: 450px;
+            top: 5%;
+            left: -230px;
+            background: radial-gradient(
+                circle,
+                rgba(37, 99, 235, 0.13),
+                transparent 70%
+            );
+        }
+
+        .orb-two {
+            width: 550px;
+            height: 550px;
+            bottom: -220px;
+            right: -180px;
+            background: radial-gradient(
+                circle,
+                rgba(129, 140, 248, 0.13),
+                transparent 70%
+            );
+        }
+
+        .orbit {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border: 1px solid rgba(56, 189, 248, 0.07);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .orbit::before,
+        .orbit::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(56, 189, 248, 0.055);
+            border-radius: 50%;
+        }
+
+        .orbit::before {
+            inset: 55px;
+        }
+
+        .orbit::after {
+            inset: 120px;
+        }
+
+        /* =====================================
+           PARTICLES
+        ===================================== */
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #7dd3fc;
+            box-shadow: 0 0 14px #38bdf8;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.55;
+        }
+
+        .particle:nth-child(1) {
+            left: 12%;
+            top: 20%;
+        }
+
+        .particle:nth-child(2) {
+            left: 25%;
+            top: 70%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(3) {
+            right: 16%;
+            top: 25%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(4) {
+            right: 25%;
+            bottom: 20%;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(5) {
+            left: 45%;
+            top: 12%;
+            animation-delay: 1.5s;
+        }
+
+        .particle:nth-child(6) {
+            left: 75%;
+            top: 65%;
+            animation-delay: 2.5s;
+        }
+
+        .particle:nth-child(7) {
+            left: 8%;
+            top: 50%;
+            animation-delay: 3.5s;
+        }
+
+        .particle:nth-child(8) {
+            right: 8%;
+            top: 55%;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.25;
+            }
+
+            50% {
+                transform: translateY(-35px) scale(1.8);
+                opacity: 1;
+            }
+        }
+
+        /* =====================================
+           MAIN CONTENT
+        ===================================== */
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .status-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 18px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 50px;
+            background: rgba(14, 165, 233, 0.07);
+            color: #7dd3fc;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #38bdf8;
+            box-shadow: 0 0 12px #38bdf8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 5px #38bdf8;
+            }
+
+            50% {
+                box-shadow: 0 0 18px #38bdf8;
+            }
+        }
+
+        /* =====================================
+           404 NUMBER
+        ===================================== */
+
+        .error-number {
+            position: relative;
+            display: inline-block;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(150px, 24vw, 280px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -15px;
+
+            background: linear-gradient(
+                135deg,
+                #ffffff 5%,
+                #bae6fd 25%,
+                #38bdf8 48%,
+                #3b82f6 70%,
+                #a5b4fc 95%
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.25));
+
+            animation: numberGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes numberGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.2));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 55px rgba(56, 189, 248, 0.5));
+            }
+        }
+
+        .error-title {
+            margin-top: 35px;
+            font-size: clamp(30px, 4.5vw, 48px);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+        }
+
+        .error-title span {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .error-description {
+            max-width: 620px;
+            margin: 23px auto 0;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        /* =====================================
+           BUTTONS
+        ===================================== */
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            min-width: 205px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px 26px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            color: white;
+            background: linear-gradient(110deg, #2563eb, #4f46e5);
+            border: 1px solid rgba(96, 165, 250, 0.5);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.55);
+            background: linear-gradient(110deg, #3b82f6, #6366f1);
+        }
+
+        .btn-secondary {
+            color: #dbeafe;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .btn-secondary:hover {
+            color: white;
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .btn-arrow {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover .btn-arrow {
+            transform: translateX(5px);
+        }
+
+        /* =====================================
+           DIVIDER
+        ===================================== */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 65px auto 30px;
+        }
+
+        .divider-line {
+            width: 65px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #38bdf8);
+        }
+
+        .divider-line:last-child {
+            background: linear-gradient(90deg, #38bdf8, transparent);
+        }
+
+        .divider-diamond {
+            width: 7px;
+            height: 7px;
+            background: #38bdf8;
+            transform: rotate(45deg);
+            box-shadow: 0 0 12px #38bdf8;
+        }
+
+        /* =====================================
+           QUICK LINKS
+        ===================================== */
+
+        .quick-title {
+            margin-bottom: 22px;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .quick-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 11px;
+        }
+
+        .quick-links a {
+            padding: 10px 17px;
+            color: #cbd5e1;
+            font-size: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.5);
+            transition: all 0.25s;
+        }
+
+        .quick-links a:hover {
+            color: #7dd3fc;
+            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(56, 189, 248, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .signature {
+            margin-top: 50px;
+            color: #475569;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .signature strong {
+            color: #64748b;
+        }
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        .footer {
+            position: relative;
+            background: #030815;
+            border-top: 1px solid rgba(56, 189, 248, 0.12);
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            left: 15%;
+            top: 0;
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(56, 189, 248, 0.4),
+                transparent
+            );
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr 1fr;
+            gap: 55px;
+            padding: 65px 0 50px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            max-width: 310px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .footer-column h3 {
+            color: #e2e8f0;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-column a {
+            display: block;
+            width: fit-content;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 12px;
+            transition: color 0.25s;
+        }
+
+        .footer-column a:hover {
+            color: #38bdf8;
+        }
+
+        .footer-bottom {
+            min-height: 65px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            color: #475569;
+            font-size: 11px;
+        }
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 1050px) {
+            .nav {
+                gap: 17px;
+            }
+
+            .nav a {
+                font-size: 12px;
+            }
+
+            .footer-main {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 12px 24px 20px;
+                background: rgba(5, 11, 24, 0.98);
+                border-bottom: 1px solid var(--border);
+                backdrop-filter: blur(20px);
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .nav a {
+                padding: 13px 0;
+                font-size: 14px;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+            }
+
+            .nav a::after {
+                display: none;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: calc(100% - 36px);
+            }
+
+            .header {
+                height: 68px;
+            }
+
+            .nav {
+                top: 68px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 90px 0 85px;
+            }
+
+            .error-number {
+                font-size: clamp(125px, 38vw, 190px);
+                letter-spacing: -8px;
+            }
+
+            .error-title {
+                margin-top: 25px;
+                font-size: 30px;
+                letter-spacing: -0.8px;
+            }
+
+            .error-description {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 13px;
+                margin-top: 30px;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 310px;
+            }
+
+            .divider {
+                margin-top: 48px;
+            }
+
+            .quick-links {
+                gap: 9px;
+            }
+
+            .quick-links a {
+                padding: 9px 12px;
+                font-size: 11px;
+            }
+
+            .signature {
+                margin-top: 38px;
+                font-size: 9px;
+            }
+
+            .orbit {
+                width: 420px;
+                height: 420px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px 20px;
+                padding: 45px 0 35px;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding: 18px 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+        <div class="container header-inner">
+
+            <a href="/" class="logo">
+                <img src="./assets/images/logo.svg" alt="HRTOS">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="nav" id="mainNav">
+                <a href="/">Home</a>
+                <a href="/product/">Product</a>
+                <a href="/features/">Features</a>
+                <a href="/architecture/">Architecture</a>
+                <a href="/performance/">Performance</a>
+                <a href="/hardware/">Hardware</a>
+                <a href="/docs/">Documentation</a>
+                <a href="/download/">Download</a>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+                aria-controls="mainNav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="grid-bg"></div>
+
+            <div class="orb orb-one"></div>
+            <div class="orb orb-two"></div>
+            <div class="orbit"></div>
+
+            <div class="particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <div class="status-label">
+                        <span class="status-dot"></span>
+                        SYSTEM MESSAGE
+                    </div>
+
+                    <div class="error-number">
+                        404
+                    </div>
+
+                    <h1 class="error-title">
+                        Lost in <span>Digital Space</span>
+                    </h1>
+
+                    <p class="error-description">
+                        The page you're looking for seems to have
+                        disappeared from our system. It may have been
+                        moved, renamed, or no longer exists.
+                        <br>
+                        Don't worry. Your next destination is just
+                        one click away.
+                    </p>
+
+                    <div class="actions">
+
+                        <a href="/" class="btn btn-primary">
+                            Back to Homepage
+                            
+                        </a>
+
+                        <a href="/docs/" class="btn btn-secondary">
+                            Explore Documentation
+                            
+                        </a>
+
+                    </div>
+
+                    <div class="divider">
+                        <span class="divider-line"></span>
+                        <span class="divider-diamond"></span>
+                        <span class="divider-line"></span>
+                    </div>
+
+                    <div class="quick-title">
+                        Explore HRTOS
+                    </div>
+
+                    <div class="quick-links">
+                        <a href="/product/">Product</a>
+                        <a href="/features/">Features</a>
+                        <a href="/architecture/">Architecture</a>
+                        <a href="/performance/">Performance</a>
+                        <a href="/hardware/">Hardware</a>
+                        <a href="/drivers/">Drivers</a>
+                        <a href="/examples/">Examples</a>
+                        <a href="/docs/">Documentation</a>
+                        <a href="/download/">Downloads</a>
+                    </div>
+
+                    <div class="signature">
+                        <strong>HRTOS</strong>
+                        &nbsp; | &nbsp;
+                        ENGINEERING REAL-TIME ON 8051
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-main">
+
+                <div class="footer-brand">
+
+                    <a href="/" class="logo">
+                        <img src="./assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                        A continuously maintained real-time operating
+                        system designed specifically for the 8051
+                        architecture.
+                    </p>
+
+                </div>
+
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <a href="/product/">Product</a>
+                    <a href="/features/">Features</a>
+                    <a href="/architecture/">Architecture</a>
+                    <a href="/performance/">Performance</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <a href="/hardware/">Hardware</a>
+                    <a href="/drivers/">Drivers</a>
+                    <a href="/examples/">Examples</a>
+                    <a href="/docs/">Documentation</a>
+                    <a href="/download/">Download</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <a href="/about/">About HRTOS</a>
+                    <a href="/about/history.html">Project History</a>
+                    <a href="/about/contact.html">Contact</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2017-2026 HRTOS. All rights reserved.
+                </p>
+
+                <p>
+                    Built for the 8051 ecosystem.
+                </p>
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- INLINE JAVASCRIPT -->
+
+    <script>
+        (function () {
+            const toggle = document.getElementById("menuToggle");
+            const nav = document.getElementById("mainNav");
+
+            toggle.addEventListener("click", function () {
+                const isActive = nav.classList.toggle("active");
+
+                toggle.classList.toggle("active", isActive);
+                toggle.setAttribute("aria-expanded", String(isActive));
+            });
+
+            nav.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("active");
+                    toggle.classList.remove("active");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    nav.classList.remove("active");
+                    toggle.classList.remove("active");
+                    toggle.setAttribute("aria-expanded", "false");
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

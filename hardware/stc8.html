@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>STC8 Hardware Platform | HRTOS 8051 RTOS</title>
+
+    <meta name="description"
+        content="Explore HRTOS running on the STC8H8U64K 8051 microcontroller, including multi-task stress testing, long-duration operation, system stability and hardware validation.">
+
+    <meta name="keywords"
+        content="STC8H8U64K, STC8, HRTOS hardware, 8051 RTOS, 8051 operating system, multi-task stress test, embedded system stability">
+
+    <link rel="canonical" href="https://en.hrtos.com/hardware/stc8.html">
+
+    <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="./" class="active">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        HARDWARE PLATFORM / STC8
+                    </span>
+
+                    <h1>
+                        STC8H8U64K
+                    </h1>
+
+                    <p class="hero-description">
+                        An 8051 hardware platform for evaluating
+                        HRTOS under extended workloads and
+                        multi-task execution.
+                    </p>
+
+                    <p>
+                        The STC8H8U64K platform is used for
+                        long-duration operation and stress testing,
+                        providing practical evidence of HRTOS
+                        stability under sustained system workloads.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../performance/stress-test.html"
+                            class="btn btn-primary">
+                            View Stress Tests
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            Hardware Overview
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Platform Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        PLATFORM OVERVIEW
+                    </span>
+
+                    <h2>STC8 Hardware Platform</h2>
+
+                    <p>
+                        The STC8H8U64K provides a practical
+                        8051 hardware environment for evaluating
+                        HRTOS system behavior under extended
+                        execution and multi-task workloads.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>8051 Architecture</h3>
+
+                        <p>
+                            An enhanced 8051 microcontroller
+                            platform designed for embedded
+                            control applications.
+                        </p>
+
+                        <ul>
+                            <li>MCS-51 architecture</li>
+                            <li>Embedded control environment</li>
+                            <li>8051 instruction set</li>
+                            <li>Keil C51 development support</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Extended Execution</h3>
+
+                        <p>
+                            Used to evaluate HRTOS during
+                            sustained execution and repeated
+                            multi-task scheduling operations.
+                        </p>
+
+                        <ul>
+                            <li>Long-duration execution</li>
+                            <li>Repeated task scheduling</li>
+                            <li>Extended workload testing</li>
+                            <li>Runtime stability evaluation</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>System Validation</h3>
+
+                        <p>
+                            Practical hardware testing provides
+                            a reference for evaluating operating
+                            system behavior beyond basic functionality.
+                        </p>
+
+                        <ul>
+                            <li>Multi-task stress testing</li>
+                            <li>Resource management evaluation</li>
+                            <li>Execution consistency</li>
+                            <li>Error monitoring</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware Configuration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        HARDWARE CONFIGURATION
+                    </span>
+
+                    <h2>Platform Configuration</h2>
+
+                    <p>
+                        The STC8H8U64K is the hardware platform
+                        used for the documented HRTOS stress-test
+                        campaign.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-grid">
+
+                        <div class="capability-item">
+                            <h3>Microcontroller</h3>
+                            <p>
+                                STC8H8U64K
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Architecture</h3>
+                            <p>
+                                8051 / MCS-51
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Program Memory</h3>
+                            <p>
+                                64 KB Flash
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Development Toolchain</h3>
+                            <p>
+                                Keil C51
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Operating System</h3>
+                            <p>
+                                HRTOS V4.0.0
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Test Purpose</h3>
+                            <p>
+                                Long-duration and multi-task stress testing
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        Actual operating frequency, memory
+                        configuration and peripheral settings
+                        depend on the test board and firmware
+                        configuration.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Stress Test -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        STRESS TESTING
+                    </span>
+
+                    <h2>Extended Multi-Task Testing</h2>
+
+                    <p>
+                        HRTOS was evaluated through repeated
+                        execution rounds and extended workloads
+                        on the STC8H8U64K platform.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Execution Rounds</h3>
+
+                        <div class="stat-value">
+                            8,842
+                        </div>
+
+                        <p>
+                            Recorded execution rounds
+                            during the stress-test campaign.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>CPU Utilization</h3>
+
+                        <div class="stat-value">
+                            ~71%
+                        </div>
+
+                        <p>
+                            Approximate CPU utilization
+                            during the documented test.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Continuous Runtime</h3>
+
+                        <div class="stat-value">
+                            72+ Hours
+                        </div>
+
+                        <p>
+                            Extended continuous execution
+                            during stability evaluation.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Results -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        TEST RESULTS
+                    </span>
+
+                    <h2>System Stability Validation</h2>
+
+                    <p>
+                        The stress-test campaign evaluates
+                        system execution, workload handling
+                        and runtime stability.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <div class="capability-grid">
+
+                        <div class="capability-item">
+                            <h3>Execution Rounds</h3>
+                            <p>
+                                8,842
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>CPU Utilization</h3>
+                            <p>
+                                Approximately 71%
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Continuous Runtime</h3>
+                            <p>
+                                72+ Hours
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Test Nodes</h3>
+                            <p>
+                                1,611
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Test Variants</h3>
+                            <p>
+                                35 Million+
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h3>Reported Errors</h3>
+                            <p>
+                                0
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        These figures describe the recorded
+                        test campaign under its specific
+                        test conditions. They should not be
+                        interpreted as a universal guarantee
+                        of error-free operation under every
+                        possible workload.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Testing Objectives -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        VALIDATION OBJECTIVES
+                    </span>
+
+                    <h2>What the Stress Test Evaluates</h2>
+
+                    <p>
+                        Extended workloads help evaluate
+                        multiple aspects of operating system
+                        behavior beyond basic task execution.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Task Scheduling</h3>
+
+                        <p>
+                            Repeated task switching and scheduling
+                            activity under sustained system workloads.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Resource Management</h3>
+
+                        <p>
+                            System resource allocation and management
+                            during repeated execution.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Long-Duration Operation</h3>
+
+                        <p>
+                            Extended runtime evaluation to identify
+                            potential instability during continuous operation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Multi-Task Execution</h3>
+
+                        <p>
+                            Concurrent task activity and repeated
+                            scheduling operations under load.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Execution Consistency</h3>
+
+                        <p>
+                            Repeated test execution to observe
+                            consistency and unexpected system behavior.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Error Detection</h3>
+
+                        <p>
+                            Monitoring test results for reported
+                            execution errors throughout the test campaign.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Engineering Validation -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="content-narrow">
+
+                    <span class="section-tag">
+                        ENGINEERING VALIDATION
+                    </span>
+
+                    <h2>Beyond Basic Functionality</h2>
+
+                    <p>
+                        A real-time operating system must do more
+                        than start tasks and perform context switches.
+                        Its behavior must also remain consistent
+                        during extended execution.
+                    </p>
+
+                    <p>
+                        The STC8H8U64K stress-test campaign provides
+                        additional evidence of HRTOS operation under
+                        sustained workloads.
+                    </p>
+
+                    <p>
+                        By combining repeated execution rounds,
+                        multi-task workloads and extended runtime,
+                        the evaluation provides a practical reference
+                        for system stability on an 8051 platform.
+                    </p>
+
+                    <p>
+                        Together with the STC12 performance
+                        measurements, these tests cover two
+                        complementary aspects of HRTOS engineering:
+                        real-time execution performance and
+                        long-duration system stability.
+                    </p>
+
+                    <a href="../performance/"
+                        class="btn btn-primary">
+                        Explore Performance
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Platform Comparison -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        HARDWARE PLATFORMS
+                    </span>
+
+                    <h2>STC12 and STC8</h2>
+
+                    <p>
+                        Different hardware platforms are used
+                        to evaluate different aspects of HRTOS.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>STC12C5A60S2</h3>
+
+                        <p>
+                            Focuses on kernel timing behavior,
+                            context switching, interrupt response
+                            and scheduling performance.
+                        </p>
+
+                        <a href="./stc12.html"
+                            class="text-link">
+                            Explore STC12
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>STC8H8U64K</h3>
+
+                        <p>
+                            Focuses on extended workloads,
+                            multi-task stress testing
+                            and long-duration stability.
+                        </p>
+
+                        <span class="text-link">
+                            Current Platform
+                        </span>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build with HRTOS</h2>
+
+                    <p>
+                        Explore the documentation, examine
+                        practical examples and start developing
+                        applications with HRTOS.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="../download/"
+                            class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

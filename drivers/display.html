@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>8051 Display Drivers | HRTOS Display Resources</title>
+
+    <meta name="description"
+        content="Explore display driver design and integration for 8051 microcontrollers with HRTOS. Learn about LCD, OLED, TFT interfaces, display tasks, and resource management.">
+
+    <meta name="keywords"
+        content="8051 display driver, 8051 LCD, 8051 OLED, 8051 TFT, HRTOS display, STC display interface">
+
+    <meta name="author" content="HRTOS Project">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="./" class="active">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">DISPLAY RESOURCES</span>
+
+                    <h1>8051 Display Interfaces</h1>
+
+                    <p class="hero-description">
+                        Display integration and driver design for 8051-based
+                        embedded systems.
+                    </p>
+
+                    <p>
+                        Display devices provide the visual interface between
+                        embedded systems and users. HRTOS provides a multitasking
+                        environment in which display operations can be organized
+                        alongside sensing, communication, and application tasks.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="./" class="btn btn-primary">
+                            Explore Driver Resources
+                        </a>
+
+                        <a href="../hardware/" class="btn btn-secondary">
+                            Hardware Platforms
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Display Categories -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">DISPLAY TECHNOLOGIES</span>
+
+                    <h2>Common Display Types</h2>
+
+                    <p>
+                        Different display technologies offer different
+                        characteristics in terms of interface complexity,
+                        memory requirements, refresh behavior, and visual
+                        capabilities.
+                    </p>
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">01</div>
+
+                        <h3>Character LCD</h3>
+
+                        <p>
+                            Character LCD modules are commonly used in
+                            embedded control systems for displaying text,
+                            status information, and simple measurements.
+                        </p>
+
+                        <ul>
+                            <li>Character-based output</li>
+                            <li>Simple command and data interface</li>
+                            <li>Suitable for status displays</li>
+                            <li>Low-complexity user interfaces</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">02</div>
+
+                        <h3>Graphic LCD</h3>
+
+                        <p>
+                            Graphic LCD devices support pixel-based rendering
+                            and provide more flexibility for custom layouts,
+                            symbols, and graphical information.
+                        </p>
+
+                        <ul>
+                            <li>Pixel-based graphics</li>
+                            <li>Custom symbols and interface elements</li>
+                            <li>Screen buffer management</li>
+                            <li>Partial screen updates</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">03</div>
+
+                        <h3>OLED Displays</h3>
+
+                        <p>
+                            OLED modules are widely used in compact embedded
+                            devices where clear text and graphical output
+                            are required.
+                        </p>
+
+                        <ul>
+                            <li>High-contrast output</li>
+                            <li>Text and graphics rendering</li>
+                            <li>Serial or parallel interfaces</li>
+                            <li>Compact display applications</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">04</div>
+
+                        <h3>TFT Displays</h3>
+
+                        <p>
+                            TFT displays provide color graphics and richer
+                            visual interfaces for embedded products with
+                            sufficient processing and memory resources.
+                        </p>
+
+                        <ul>
+                            <li>Color graphics</li>
+                            <li>Image and bitmap rendering</li>
+                            <li>Display controller communication</li>
+                            <li>Higher memory and bandwidth requirements</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">05</div>
+
+                        <h3>Segment Displays</h3>
+
+                        <p>
+                            Segment displays are suitable for simple numerical
+                            readouts, counters, measurements, and dedicated
+                            status indicators.
+                        </p>
+
+                        <ul>
+                            <li>Numerical information</li>
+                            <li>Low-complexity output</li>
+                            <li>Simple update operations</li>
+                            <li>Resource-conscious applications</li>
+                        </ul>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">06</div>
+
+                        <h3>Custom Display Modules</h3>
+
+                        <p>
+                            Custom display modules can be integrated through
+                            dedicated communication protocols and application-
+                            specific control interfaces.
+                        </p>
+
+                        <ul>
+                            <li>Module-specific protocols</li>
+                            <li>Custom command handling</li>
+                            <li>Application-oriented output</li>
+                            <li>Flexible integration architecture</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Interfaces -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">HARDWARE INTERFACES</span>
+
+                    <h2>Display Communication Interfaces</h2>
+
+                    <p>
+                        Display modules use different electrical and
+                        communication interfaces. The appropriate interface
+                        depends on the display controller and target
+                        microcontroller.
+                    </p>
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+                        <h3>GPIO</h3>
+
+                        <p>
+                            General-purpose I/O pins can be used for parallel
+                            display control, command signals, and simple
+                            serial protocols.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>SPI</h3>
+
+                        <p>
+                            SPI provides a serial communication interface
+                            commonly used by graphic displays and display
+                            controller modules.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>I?C</h3>
+
+                        <p>
+                            I?C is frequently used by compact character and
+                            graphic display modules that support serial
+                            command and data transfer.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>Parallel Bus</h3>
+
+                        <p>
+                            Parallel interfaces transfer multiple data bits
+                            simultaneously and may be used when the target
+                            MCU provides sufficient I/O resources.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>UART</h3>
+
+                        <p>
+                            UART-based display modules can receive commands
+                            and display data through a serial communication
+                            channel.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>Custom Protocols</h3>
+
+                        <p>
+                            Some display modules use proprietary command
+                            formats and dedicated communication sequences.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HRTOS Integration -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">RTOS INTEGRATION</span>
+
+                    <h2>Display Operations in HRTOS</h2>
+
+                    <p>
+                        Display operations can be organized as independent
+                        application tasks, allowing visual updates to coexist
+                        with real-time control and communication activities.
+                    </p>
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">01</div>
+
+                        <h3>Display Tasks</h3>
+
+                        <p>
+                            A dedicated task can manage display updates,
+                            coordinate rendering operations, and refresh
+                            user interface information.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">02</div>
+
+                        <h3>Data Exchange</h3>
+
+                        <p>
+                            Application tasks can exchange display data
+                            through RTOS synchronization and communication
+                            mechanisms.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">03</div>
+
+                        <h3>Periodic Updates</h3>
+
+                        <p>
+                            Periodic task execution can be used to refresh
+                            measurements, system status, and other
+                            time-dependent information.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">04</div>
+
+                        <h3>Event-Driven Updates</h3>
+
+                        <p>
+                            Display updates can be triggered by events such
+                            as sensor changes, communication messages, or
+                            user input.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Design Considerations -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">ENGINEERING CONSIDERATIONS</span>
+
+                    <h2>Display Driver Design</h2>
+
+                    <p>
+                        Display integration on 8051 microcontrollers requires
+                        careful consideration of execution time, memory
+                        availability, interface timing, and task coordination.
+                    </p>
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <h3>Memory Management</h3>
+
+                    <p>
+                        Display buffers and graphics data can consume
+                        significant memory. On resource-constrained 8051
+                        devices, buffer sizes and data placement should be
+                        carefully designed according to available internal
+                        and external memory.
+                    </p>
+
+
+                    <h3>Execution Time</h3>
+
+                    <p>
+                        Display refresh operations may involve large amounts
+                        of data transfer. Long-running operations should be
+                        organized to avoid unnecessary interference with
+                        time-sensitive application tasks.
+                    </p>
+
+
+                    <h3>Interface Timing</h3>
+
+                    <p>
+                        Display controllers often require specific timing
+                        sequences for initialization, command transmission,
+                        and data transfer. These requirements should be
+                        considered when designing driver routines.
+                    </p>
+
+
+                    <h3>Task Coordination</h3>
+
+                    <p>
+                        Multiple application tasks may need to update the
+                        same display. Shared display resources should be
+                        protected and update requests should be coordinated
+                        to prevent conflicting operations.
+                    </p>
+
+
+                    <h3>Refresh Optimization</h3>
+
+                    <p>
+                        Updating only the changed portions of a screen can
+                        reduce communication overhead and improve overall
+                        system responsiveness.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Design Principles -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">SYSTEM DESIGN</span>
+
+                    <h2>Building Responsive Embedded Interfaces</h2>
+
+                    <p>
+                        A well-structured display subsystem separates
+                        hardware communication, rendering logic, and
+                        application-level presentation.
+                    </p>
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+                        <h3>Hardware Abstraction</h3>
+
+                        <p>
+                            Separate display-specific hardware operations
+                            from application-level display logic.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>Modular Architecture</h3>
+
+                        <p>
+                            Organize communication, rendering, and user
+                            interface functions into reusable modules.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>Predictable Execution</h3>
+
+                        <p>
+                            Consider execution time and scheduling behavior
+                            when integrating display operations with
+                            time-sensitive tasks.
+                        </p>
+                    </div>
+
+
+                    <div class="capability-item">
+                        <h3>Resource Awareness</h3>
+
+                        <p>
+                            Balance display functionality against the
+                            memory, CPU, and peripheral resources available
+                            on the target 8051 MCU.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <span class="section-tag">EXPLORE HRTOS</span>
+
+                    <h2>Build Embedded Systems with HRTOS</h2>
+
+                    <p>
+                        Explore HRTOS architecture, supported hardware
+                        platforms, and application examples to understand
+                        how real-time task management can support
+                        8051-based embedded systems.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../architecture/" class="btn btn-primary">
+                            Explore Architecture
+                        </a>
+
+                        <a href="../examples/" class="btn btn-secondary">
+                            View Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                    </p>
+
+                    <p>
+                        A continuously maintained operating system
+                        for the 8051 microcontroller family.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../features/">Features</a>
+                        <a href="../architecture/">Architecture</a>
+                        <a href="../performance/">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                        <a href="./">Drivers</a>
+                        <a href="../examples/">Examples</a>
+                    </div>
+
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright ? 2017-2026 HRTOS Project.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Designed for 8051 Embedded Systems.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
