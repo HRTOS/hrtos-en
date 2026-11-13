@@ -30,8 +30,12 @@
     <link rel="stylesheet" href="../assets/css/responsive.css">
 
     <style>
+        /* ==============================
+           Download Hero
+        ============================== */
+
         .download-hero {
-            padding: 100px 0 75px;
+            padding: 100px 20px 75px;
             text-align: center;
             background:
                 radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.18), transparent 42%),
@@ -62,11 +66,16 @@
             line-height: 1.8;
         }
 
+        /* ==============================
+           Main Download
+        ============================== */
+
         .download-section {
             padding: 75px 0;
         }
 
         .download-card {
+            width: 100%;
             max-width: 900px;
             margin: 0 auto;
             padding: 42px;
@@ -107,16 +116,18 @@
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .download-info {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin: 30px 0;
         }
 
         .download-info-item {
+            min-width: 0;
             padding: 18px;
             background: rgba(30, 48, 72, 0.65);
             border-radius: 10px;
@@ -136,7 +147,12 @@
             color: #e5edf7;
             font-size: 15px;
             font-weight: 600;
+            overflow-wrap: anywhere;
         }
+
+        /* ==============================
+           Download Buttons
+        ============================== */
 
         .download-actions {
             display: flex;
@@ -155,6 +171,7 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 700;
+            text-align: center;
             transition: all 0.25s ease;
         }
 
@@ -190,14 +207,19 @@
             line-height: 1.8;
         }
 
+        /* ==============================
+           Resources
+        ============================== */
+
         .resource-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 22px;
             margin-top: 38px;
         }
 
         .resource-card {
+            min-width: 0;
             padding: 28px;
             border: 1px solid rgba(148, 163, 184, 0.16);
             border-radius: 14px;
@@ -244,14 +266,19 @@
             color: #93c5fd;
         }
 
+        /* ==============================
+           Requirements
+        ============================== */
+
         .requirements {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin-top: 35px;
         }
 
         .requirement-item {
+            min-width: 0;
             padding: 22px;
             border-radius: 12px;
             background: rgba(15, 29, 49, 0.8);
@@ -270,6 +297,10 @@
             line-height: 1.7;
             margin: 0;
         }
+
+        /* ==============================
+           CTA
+        ============================== */
 
         .download-cta {
             padding: 65px 30px;
@@ -293,65 +324,257 @@
             margin: 0 auto 25px;
             line-height: 1.8;
         }
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
 
-.nav-links a {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: color 0.2s ease;
-}
+        /* ==============================
+           Navigation
+        ============================== */
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: #60a5fa;
-}
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+        }
 
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-}
-        @media (max-width: 768px) {
-            .download-hero {
-                padding: 75px 0 55px;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #60a5fa;
+        }
+
+        /* ==============================
+           Tablet
+        ============================== */
+
+        @media (max-width: 1024px) {
+
+            .header-inner {
+                gap: 18px;
             }
 
-            .download-card {
-                padding: 26px 20px;
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
             }
 
             .resource-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .requirements {
-                grid-template-columns: 1fr;
+        }
+
+        /* ==============================
+           Mobile
+        ============================== */
+
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .download-hero {
+                padding: 65px 20px 45px;
+            }
+
+            .download-hero .eyebrow {
+                font-size: 11px;
+                letter-spacing: 1.5px;
+                margin-bottom: 14px;
+            }
+
+            .download-hero h1 {
+                font-size: clamp(32px, 8vw, 40px);
+                line-height: 1.2;
+                margin-bottom: 16px;
+            }
+
+            .download-hero p {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            .download-section {
+                padding: 45px 0;
+            }
+
+            .download-card {
+                padding: 25px 18px;
+                border-radius: 14px;
+            }
+
+            .download-card-header {
+                flex-direction: column;
+                gap: 14px;
+                margin-bottom: 22px;
+            }
+
+            .download-card h2 {
+                font-size: 25px;
+            }
+
+            .download-card-header p {
+                font-size: 13px;
+            }
+
+            .version-badge {
+                font-size: 10px;
+                padding: 7px 11px;
             }
 
             .download-info {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+                margin: 22px 0;
             }
 
-            .resource-card p {
-                min-height: auto;
+            .download-info-item {
+                padding: 14px 11px;
+                border-radius: 8px;
+            }
+
+            .download-info-item span {
+                font-size: 10px;
+                letter-spacing: 0.5px;
+                margin-bottom: 7px;
+            }
+
+            .download-info-item strong {
+                font-size: 12px;
+                line-height: 1.5;
             }
 
             .download-actions {
                 flex-direction: column;
+                gap: 12px;
+                margin-top: 22px;
             }
 
             .download-actions a {
                 width: 100%;
+                min-height: 48px;
+                padding: 12px 15px;
+                box-sizing: border-box;
+                font-size: 13px;
             }
+
+            .download-note {
+                margin-top: 20px;
+                padding: 13px 14px;
+                font-size: 12px;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 25px;
+            }
+
+            .resource-card {
+                padding: 23px 20px;
+            }
+
+            .resource-card h3 {
+                font-size: 18px;
+            }
+
+            .resource-card p {
+                min-height: 0;
+                font-size: 13px;
+                margin-bottom: 15px;
+            }
+
+            .requirements {
+                grid-template-columns: 1fr;
+                gap: 13px;
+                margin-top: 25px;
+            }
+
+            .requirement-item {
+                padding: 19px;
+            }
+
+            .requirement-item p {
+                font-size: 13px;
+            }
+
+            .download-cta {
+                padding: 40px 20px;
+                border-radius: 14px;
+            }
+
+            .download-cta h2 {
+                font-size: 23px;
+                line-height: 1.35;
+            }
+
+            .download-cta p {
+                font-size: 13px;
+            }
+
+            /* Navigation is handled by the shared mobile menu */
+            .header-inner {
+                gap: 12px;
+            }
+
         }
+
+        /* ==============================
+           Small Mobile
+        ============================== */
+
+        @media (max-width: 420px) {
+
+            .download-section .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .download-card {
+                padding: 22px 15px;
+            }
+
+            .download-info {
+                gap: 8px;
+            }
+
+            .download-info-item {
+                padding: 12px 9px;
+            }
+
+            .download-info-item strong {
+                font-size: 11px;
+            }
+
+            .download-hero {
+                padding-top: 55px;
+            }
+
+            .download-cta {
+                padding: 35px 16px;
+            }
+
+        }
+
     </style>
 </head>
 
@@ -362,8 +585,9 @@
         <div class="container header-inner">
 
             <a class="brand" href="../index.html" aria-label="HRTOS Home">
-                <img src="../assets/images/logo.svg" alt="HRTOS Logo" class="brand-logo">
-                
+                <img src="../assets/images/logo.svg"
+                    alt="HRTOS Logo"
+                    class="brand-logo">
             </a>
 
             <nav class="nav-links">
@@ -376,7 +600,10 @@
                 <a href="./index.html" class="active">Download</a>
             </nav>
 
-            <a href="https://github.com/HRTOS" class="header-cta" target="_blank" rel="noopener">
+            <a href="https://github.com/HRTOS"
+                class="header-cta"
+                target="_blank"
+                rel="noopener">
                 GitHub
             </a>
 
@@ -446,10 +673,10 @@
                     <div class="download-actions">
 
                         <a href="https://hrtos.com/download/HRTOS%20V4.0.0%20LTS.7z"
-    class="download-primary"
-    download>
-    Download HRTOS 4.0.0 LTS
-</a>
+                            class="download-primary"
+                            download>
+                            Download HRTOS 4.0.0 LTS
+                        </a>
 
                         <a href="../product/releases.html"
                             class="download-secondary">
@@ -459,7 +686,7 @@
                     </div>
 
                     <div class="download-note">
-                        The download link should point to the official HRTOS
+                        The download link points to the official HRTOS
                         release package. Please refer to the release page for
                         the latest version and package details.
                     </div>
@@ -590,7 +817,8 @@
                         examples to begin your development.
                     </p>
 
-                    <div class="download-actions" style="justify-content:center;">
+                    <div class="download-actions"
+                        style="justify-content:center;">
 
                         <a href="../docs/getting-started.html"
                             class="download-primary">
@@ -655,7 +883,7 @@
 
             <div class="footer-bottom">
                 <p>
-                    ? 2017¨C2026 HRTOS Project. All rights reserved.
+                    &copy; 2017¨C2026 HRTOS Project. All rights reserved.
                 </p>
 
                 <div>
