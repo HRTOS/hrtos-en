@@ -1036,3 +1036,89 @@
         grid-template-columns: 1fr 1fr;
     }
 }
+/* =========================================
+   Mobile: Force all content grids to one column
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    /* All common grids become single-column */
+    .content-grid,
+    .features-grid,
+    .card-grid,
+    .philosophy-grid,
+    .scope-grid,
+    .architecture-grid,
+    .resource-grid,
+    .stats-grid,
+    .requirements,
+    .footer-grid,
+    .footer-main,
+    .footer-links {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) !important;
+        width: 100%;
+    }
+
+    /* Cards */
+    .content-card,
+    .feature-card,
+    .card,
+    .resource-card,
+    .stat-card,
+    .scope-card,
+    .philosophy-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    /* Prevent grid children from overflowing */
+    .content-grid > *,
+    .features-grid > *,
+    .card-grid > *,
+    .resource-grid > *,
+    .stats-grid > * {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* Images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Long text and code */
+    pre,
+    code {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    /* Section spacing */
+    .section {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    /* Hero */
+    .page-hero {
+        padding: 60px 0 40px;
+    }
+
+    /* Buttons */
+    .btn,
+    .button,
+    .header-cta {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}
