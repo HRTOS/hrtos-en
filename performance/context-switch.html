@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS Context Switching | 8051 RTOS Task Switching Performance</title>
+
+    <meta name="description"
+        content="Explore HRTOS task context switching on 8051 microcontrollers, including normal task switching, fast task switching, register bank management, scheduling overhead, and hardware measurements.">
+
+    <meta name="keywords"
+        content="HRTOS context switching, 8051 context switch, 8051 RTOS task switching, fast task switching, register bank switching, task scheduling performance">
+
+    <meta name="author" content="HRTOS Project">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/context-switch.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <meta property="og:title" content="HRTOS Context Switching">
+    <meta property="og:description"
+        content="Understand normal and fast task context switching mechanisms and measured execution performance in HRTOS.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://en.hrtos.com/performance/context-switch.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HRTOS Context Switching",
+        "url": "https://en.hrtos.com/performance/context-switch.html",
+        "description": "Technical explanation and hardware measurements of normal and fast task context switching in HRTOS for 8051 microcontrollers."
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">TASK EXECUTION PERFORMANCE</span>
+
+                    <h1>Context Switching</h1>
+
+                    <p class="hero-description">
+                        Explore how HRTOS manages task execution contexts
+                        on 8051 microcontrollers, including normal task
+                        switching, fast task switching, register bank
+                        organization, and measured scheduling overhead.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./benchmarks.html" class="btn btn-primary">
+                            Performance Benchmarks
+                        </a>
+
+                        <a href="../architecture/scheduling.html" class="btn btn-secondary">
+                            Scheduling Architecture
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">OVERVIEW</span>
+
+                    <h2>Task Context Switching on 8051</h2>
+
+                    <p>
+                        Context switching allows a multitasking operating
+                        system to suspend one task and resume another
+                        while preserving the execution state of each task.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        On 8051 microcontrollers, context management
+                        requires consideration of the processor's
+                        register organization, stack behavior,
+                        internal memory, and execution environment.
+                    </p>
+
+                    <p>
+                        Unlike larger processors with extensive
+                        hardware context support, the classic 8051
+                        architecture relies heavily on software
+                        to preserve and restore task execution state.
+                    </p>
+
+                    <p>
+                        HRTOS provides two task execution categories:
+                        normal tasks and fast tasks. These categories
+                        use different context management approaches
+                        to accommodate different execution requirements.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Two Context Models -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">CONTEXT MANAGEMENT</span>
+
+                    <h2>Two Task Context Models</h2>
+
+                    <p>
+                        HRTOS uses separate execution context
+                        management mechanisms for normal and
+                        fast tasks.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Normal Task Context</h3>
+
+                        <p>
+                            Normal tasks use software-managed
+                            context preservation and restoration.
+                            The operating system maintains the
+                            required processor state when switching
+                            between normal tasks.
+                        </p>
+
+                        <a href="../architecture/task-management.html" class="text-link">
+                            Task Management
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Fast Task Context</h3>
+
+                        <p>
+                            Fast tasks use dedicated 8051 register-bank
+                            resources to reduce the amount of context
+                            management required during task switching.
+                        </p>
+
+                        <a href="../architecture/scheduling.html" class="text-link">
+                            Scheduling Architecture
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Normal Task Switching -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">NORMAL TASKS</span>
+
+                    <h2>Normal Task Context Switching</h2>
+
+                    <p>
+                        Normal task switching preserves the processor
+                        state required for a task to continue
+                        execution from its previous position.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        The normal task context management mechanism
+                        is designed to support general application
+                        execution and multitasking operations.
+                    </p>
+
+                    <p>
+                        When a task switch occurs, the operating system
+                        manages the relevant execution context,
+                        including the processor state and the
+                        task's execution position.
+                    </p>
+
+                    <p>
+                        This software-managed approach provides
+                        a general task execution model for
+                        applications that require multiple
+                        independent tasks.
+                    </p>
+
+                </div>
+
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+
+                        <div class="flow-number">01</div>
+
+                        <h3>Switch Trigger</h3>
+
+                        <p>
+                            A scheduling request or time-slice
+                            condition initiates task switching.
+                        </p>
+
+                    </div>
+
+                    <div class="flow-connector"></div>
+
+                    <div class="flow-step">
+
+                        <div class="flow-number">02</div>
+
+                        <h3>Save Context</h3>
+
+                        <p>
+                            The current task's required processor
+                            state is preserved.
+                        </p>
+
+                    </div>
+
+                    <div class="flow-connector"></div>
+
+                    <div class="flow-step">
+
+                        <div class="flow-number">03</div>
+
+                        <h3>Select Task</h3>
+
+                        <p>
+                            The scheduler selects the next
+                            eligible task for execution.
+                        </p>
+
+                    </div>
+
+                    <div class="flow-connector"></div>
+
+                    <div class="flow-step">
+
+                        <div class="flow-number">04</div>
+
+                        <h3>Restore Context</h3>
+
+                        <p>
+                            The selected task's execution
+                            context is restored.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p class="section-note">
+                    This flow illustrates the conceptual
+                    task switching process rather than
+                    a complete instruction-level execution trace.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Fast Task Switching -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">FAST TASKS</span>
+
+                    <h2>Fast Task Context Switching</h2>
+
+                    <p>
+                        Fast tasks take advantage of the
+                        8051 register-bank organization
+                        to reduce context management overhead.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        The 8051 architecture provides multiple
+                        register banks. HRTOS uses dedicated
+                        register-bank resources for fast task
+                        execution.
+                    </p>
+
+                    <p>
+                        By using separate register-bank resources,
+                        fast tasks can reduce the need to save
+                        and restore certain general-purpose
+                        registers during task switching.
+                    </p>
+
+                    <p>
+                        This mechanism provides an alternative
+                        execution path for tasks that benefit
+                        from lower context switching overhead.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Dedicated Register Banks</h3>
+
+                        <p>
+                            Fast task execution uses dedicated
+                            register-bank resources within
+                            the 8051 architecture.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Reduced Context Operations</h3>
+
+                        <p>
+                            Register-bank allocation reduces
+                            the amount of general-purpose
+                            register context that must be
+                            managed during switching.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Separate Task Category</h3>
+
+                        <p>
+                            Fast tasks are managed separately
+                            from normal tasks within the
+                            HRTOS task configuration.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Hardware-Oriented Optimization</h3>
+
+                        <p>
+                            The mechanism makes use of an
+                            existing 8051 processor feature
+                            rather than requiring additional
+                            hardware resources.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Register Bank -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">8051 REGISTER ORGANIZATION</span>
+
+                    <h2>Register Banks and Task Execution</h2>
+
+                    <p>
+                        The 8051 register-bank mechanism provides
+                        an important hardware resource for
+                        fast task context management.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        The classic 8051 architecture provides
+                        four register banks, selected through
+                        the RS1 and RS0 bits in the PSW register.
+                        Each bank contains four register groups,
+                        R0 through R7.
+                    </p>
+
+                    <p>
+                        HRTOS allocates dedicated register-bank
+                        resources for fast task execution.
+                        This arrangement reduces the need for
+                        software-based preservation of the
+                        corresponding working registers.
+                    </p>
+
+                    <p>
+                        Actual register-bank availability and
+                        behavior depend on the specific
+                        8051-compatible microcontroller
+                        and its hardware implementation.
+                    </p>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Register Bank</th>
+                                <th>General 8051 Function</th>
+                                <th>HRTOS Context</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Bank 0</td>
+                                <td>Default register bank</td>
+                                <td>Normal execution context</td>
+                            </tr>
+
+                            <tr>
+                                <td>Bank 1</td>
+                                <td>Alternative register bank</td>
+                                <td>Available according to system configuration</td>
+                            </tr>
+
+                            <tr>
+                                <td>Bank 2</td>
+                                <td>Alternative register bank</td>
+                                <td>Dedicated fast task context</td>
+                            </tr>
+
+                            <tr>
+                                <td>Bank 3</td>
+                                <td>Alternative register bank</td>
+                                <td>Interrupt execution context</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="section-note">
+                    Register-bank assignments shown here describe
+                    the referenced HRTOS configuration.
+                    Application code and interrupt handling must
+                    follow the corresponding register-bank
+                    usage rules.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Benchmark Results -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">HARDWARE MEASUREMENTS</span>
+
+                    <h2>Context Switching Benchmarks</h2>
+
+                    <p>
+                        Measured context switching times on
+                        an STC12C5A60S2 operating at 11.0592 MHz
+                        in 1T mode.
+                    </p>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">143.5</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Fast Task
+                        </div>
+
+                        <p>
+                            Scheduling-bit triggered
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">229.5</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Fast Task
+                        </div>
+
+                        <p>
+                            Time-slice triggered
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">394.33</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Normal Task
+                        </div>
+
+                        <p>
+                            Scheduling-bit triggered
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">550.33</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Normal Task
+                        </div>
+
+                        <p>
+                            Time-slice triggered
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Task Type</th>
+                                <th>Switching Condition</th>
+                                <th>Measured Time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Fast Task</td>
+                                <td>Scheduling Bit</td>
+                                <td>143.5 us</td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Task</td>
+                                <td>Time Slice</td>
+                                <td>229.5 us</td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task</td>
+                                <td>Scheduling Bit</td>
+                                <td>394.33 us</td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task</td>
+                                <td>Time Slice</td>
+                                <td>550.33 us</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="section-note">
+                    These values are measured execution times
+                    under the specified test conditions.
+                    Different task states, compiler settings,
+                    and hardware configurations may produce
+                    different results.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Performance Analysis -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">PERFORMANCE ANALYSIS</span>
+
+                    <h2>Understanding the Measurement Results</h2>
+
+                    <p>
+                        The measured results demonstrate
+                        the difference between the two
+                        context management approaches.
+                    </p>
+
+                </div>
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Fast Task Execution</h3>
+
+                        <p>
+                            Fast task switching requires less
+                            general-purpose register context
+                            management through dedicated
+                            register-bank resources.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Normal Task Flexibility</h3>
+
+                        <p>
+                            Normal tasks use a more general
+                            software-managed context model
+                            for broader application execution.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Trigger-Dependent Overhead</h3>
+
+                        <p>
+                            Scheduling-bit and time-slice
+                            switching follow different
+                            execution paths, resulting in
+                            different measured times.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Architecture-Aware Optimization</h3>
+
+                        <p>
+                            The fast task mechanism demonstrates
+                            how native 8051 processor features
+                            can be used to optimize operating
+                            system execution.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Configuration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">TASK CONFIGURATION</span>
+
+                    <h2>HRTOS Task Configuration</h2>
+
+                    <p>
+                        The standard HRTOS 4.x configuration
+                        provides separate capacity for
+                        normal and fast tasks.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>OS_PROCESS_MAX</td>
+                                <td>16</td>
+                                <td>Maximum number of normal tasks</td>
+                            </tr>
+
+                            <tr>
+                                <td>OS_FAST_TASK_MAX</td>
+                                <td>2</td>
+                                <td>Maximum number of fast tasks</td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task IDs</td>
+                                <td>0-15</td>
+                                <td>Normal task identifier range</td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Task IDs</td>
+                                <td>16-17</td>
+                                <td>Fast task identifier range</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="section-note">
+                    These values describe the standard
+                    HRTOS 4.x configuration profile.
+                    Actual task capacity depends on
+                    the selected build configuration.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Design Considerations -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">DESIGN CONSIDERATIONS</span>
+
+                    <h2>Using Fast and Normal Tasks</h2>
+
+                    <p>
+                        Different task categories provide
+                        different execution characteristics.
+                        The appropriate model depends on
+                        application requirements.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <h3>Normal Tasks</h3>
+
+                        <p>
+                            Suitable for general application
+                            logic, background operations,
+                            communication processing,
+                            and ordinary multitasking workloads.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Fast Tasks</h3>
+
+                        <p>
+                            Suitable for selected execution
+                            paths where reduced context
+                            switching overhead is beneficial.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Register Resource Planning</h3>
+
+                        <p>
+                            Application development must
+                            consider register-bank allocation
+                            and avoid unintended conflicts
+                            with kernel and interrupt usage.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Hardware Compatibility</h3>
+
+                        <p>
+                            The selected MCU must provide
+                            compatible register-bank
+                            functionality and sufficient
+                            system resources.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">EXPLORE FURTHER</span>
+
+                    <h2>Related Technical Resources</h2>
+
+                    <p>
+                        Explore the architecture and performance
+                        characteristics of other HRTOS subsystems.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <h3>Scheduling Architecture</h3>
+
+                        <p>
+                            Understand task priorities,
+                            scheduling levels, and
+                            execution coordination.
+                        </p>
+
+                        <a href="../architecture/scheduling.html" class="text-link">
+                            Explore Scheduling
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Task Management</h3>
+
+                        <p>
+                            Explore task registration,
+                            task states, and execution management.
+                        </p>
+
+                        <a href="../architecture/task-management.html" class="text-link">
+                            Explore Task Management
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Interrupt Latency</h3>
+
+                        <p>
+                            Examine interrupt response
+                            and nested interrupt behavior.
+                        </p>
+
+                        <a href="./interrupt-latency.html" class="text-link">
+                            Explore Interrupt Latency
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Performance Benchmarks</h3>
+
+                        <p>
+                            Review additional measurements
+                            of HRTOS kernel operations.
+                        </p>
+
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Explore HRTOS Architecture</h2>
+
+                    <p>
+                        Discover how task management,
+                        scheduling, interrupt handling,
+                        and hardware-aware context management
+                        work together in HRTOS.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../architecture/" class="btn btn-primary">
+                            System Architecture
+                        </a>
+
+                        <a href="../docs/" class="btn btn-secondary">
+                            Technical Documentation
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Technology</h4>
+                        <a href="../features/">Features</a>
+                        <a href="../architecture/">Architecture</a>
+                        <a href="./">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../drivers/">Drivers</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    2017-2026 HRTOS Project.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Designed for 8051. Built for real-time applications.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

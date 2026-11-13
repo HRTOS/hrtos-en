@@ -1,0 +1,852 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Task Management Architecture | HRTOS</title>
+
+    <meta name="description"
+        content="Explore HRTOS task management architecture for 8051 microcontrollers, including task registration, task IDs, normal tasks, fast tasks, task states, and execution management.">
+
+    <meta name="keywords"
+        content="8051 task management, 8051 RTOS, task registration, task context, fast task, HRTOS">
+
+    <link rel="canonical" href="https://en.hrtos.com/architecture/task-management.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script src="../assets/js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="site-logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/index.html">Product</a>
+                <a href="../features/index.html">Features</a>
+                <a href="index.html" class="active">Architecture</a>
+                <a href="../performance/index.html">Performance</a>
+                <a href="../hardware/index.html">Hardware</a>
+                <a href="../drivers/index.html">Drivers</a>
+                <a href="../examples/index.html">Examples</a>
+                <a href="../docs/index.html">Documentation</a>
+                <a href="../download/index.html">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="section-tag">SYSTEM ARCHITECTURE</div>
+
+                <h1>Task Management</h1>
+
+                <p class="hero-description">
+                    A structured task management mechanism for organizing
+                    concurrent application activities on 8051 and MCS-51
+                    microcontrollers.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="../features/scheduler.html" class="btn btn-primary">
+                        Scheduling Features
+                    </a>
+
+                    <a href="scheduling.html" class="btn btn-secondary">
+                        Scheduling Architecture
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Overview -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">OVERVIEW</div>
+                <h2>Task Management Model</h2>
+                <p>
+                    HRTOS organizes application execution into independent
+                    task contexts managed by the kernel.
+                </p>
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    A task represents an execution unit within the
+                    operating system. Instead of placing all application
+                    logic inside a single main loop, developers can
+                    organize different functions into separate tasks.
+                </p>
+
+                <p>
+                    Each task has an associated context and scheduling
+                    information. The kernel manages task execution
+                    together with timing services, synchronization
+                    mechanisms, and interrupt handling.
+                </p>
+
+                <p>
+                    This structure makes it easier to separate application
+                    responsibilities, coordinate asynchronous events,
+                    and maintain predictable execution behavior.
+                </p>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+                    <h3>Task Registration</h3>
+                    <p>
+                        Application tasks are registered with the kernel
+                        and assigned task identities and execution settings.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Context Management</h3>
+                    <p>
+                        Task execution contexts are maintained so that
+                        execution can resume after a task switch.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+                    <h3>Execution Coordination</h3>
+                    <p>
+                        Tasks cooperate with scheduling, timing,
+                        synchronization, and communication services.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Task Types -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">TASK TYPES</div>
+                <h2>Normal Tasks and Fast Tasks</h2>
+                <p>
+                    HRTOS provides two task-context categories for
+                    different execution requirements.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">16</div>
+
+                    <h3>Normal Tasks</h3>
+
+                    <p>
+                        Normal tasks provide the general execution
+                        environment for application logic and kernel
+                        service interaction.
+                    </p>
+
+                    <ul>
+                        <li>Task IDs: 0-15</li>
+                        <li>Maximum contexts: 16</li>
+                        <li>Context size: 13 bytes per task</li>
+                        <li>Suitable for general application workloads</li>
+                    </ul>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">02</div>
+
+                    <h3>Fast Tasks</h3>
+
+                    <p>
+                        Fast tasks use a dedicated context mechanism
+                        to reduce task-switch overhead for selected
+                        time-sensitive workloads.
+                    </p>
+
+                    <ul>
+                        <li>Task IDs: 16-17</li>
+                        <li>Maximum contexts: 2</li>
+                        <li>Context size: 5 bytes per task</li>
+                        <li>Dedicated fast-task execution path</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="content-narrow">
+                <p>
+                    Normal and fast tasks are distinct context categories.
+                    Fast tasks should be reserved for workloads that
+                    benefit from their dedicated execution mechanism,
+                    rather than used as a general replacement for
+                    normal tasks.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Task IDs -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">TASK IDENTIFICATION</div>
+                <h2>Task ID Organization</h2>
+                <p>
+                    Task IDs provide a consistent way to identify
+                    task contexts within the standard configuration.
+                </p>
+            </div>
+
+            <div class="table-container">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Task ID Range</th>
+                            <th>Task Category</th>
+                            <th>Capacity</th>
+                            <th>Context Size</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>0-15</td>
+                            <td>Normal Task</td>
+                            <td>16</td>
+                            <td>13 bytes</td>
+                        </tr>
+
+                        <tr>
+                            <td>16-17</td>
+                            <td>Fast Task</td>
+                            <td>2</td>
+                            <td>5 bytes</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    The standard configuration provides 18 task
+                    contexts in total: 16 normal task contexts and
+                    2 fast-task contexts.
+                </p>
+
+                <p>
+                    Task IDs identify kernel-managed contexts.
+                    They should not be confused with application
+                    priority values or hardware interrupt vector numbers.
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Task Registration -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">TASK REGISTRATION</div>
+                <h2>Registering Application Tasks</h2>
+                <p>
+                    Task registration connects application entry
+                    functions with kernel-managed task contexts.
+                </p>
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    During system initialization, application tasks
+                    are registered with the operating system.
+                    The registration process establishes the
+                    information required by the kernel to manage
+                    their execution.
+                </p>
+
+                <p>
+                    Task configuration includes the task entry
+                    function and the relevant execution parameters.
+                    The exact API declaration and parameter order
+                    should follow the HRTOS V4.0.0 API documentation.
+                </p>
+
+            </div>
+
+            <div class="architecture-flow">
+
+                <div class="flow-step">
+                    <div class="flow-number">01</div>
+                    <h3>Define Task Function</h3>
+                    <p>
+                        Implement the application logic as a task
+                        entry function.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">02</div>
+                    <h3>Register Task</h3>
+                    <p>
+                        Associate the task function with an available
+                        task context and configuration.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">03</div>
+                    <h3>Initialize Services</h3>
+                    <p>
+                        Configure the required timing, synchronization,
+                        and communication resources.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">04</div>
+                    <h3>Start Execution</h3>
+                    <p>
+                        Start the operating system and allow the
+                        scheduler to manage task execution.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Task Lifecycle -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">TASK LIFECYCLE</div>
+                <h2>Task Execution Lifecycle</h2>
+                <p>
+                    Tasks interact with the kernel throughout their
+                    execution, waiting, and scheduling cycles.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+                    <h3>Registered</h3>
+                    <p>
+                        The task has been configured and associated
+                        with a kernel-managed context.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Eligible for Execution</h3>
+                    <p>
+                        The task can participate in scheduling
+                        when its execution conditions are satisfied.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+                    <h3>Running</h3>
+                    <p>
+                        The task currently owns the CPU and executes
+                        its application code.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">04</div>
+                    <h3>Waiting</h3>
+                    <p>
+                        The task waits for a timing condition,
+                        synchronization event, or communication resource.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="content-narrow">
+                <p>
+                    This lifecycle is a conceptual description of
+                    task execution. The actual internal state model
+                    and transition rules are defined by the HRTOS
+                    kernel implementation.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Task and Kernel Services -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">KERNEL INTEGRATION</div>
+                <h2>Task Interaction with Kernel Services</h2>
+                <p>
+                    Task management works together with the other
+                    kernel subsystems to coordinate application execution.
+                </p>
+            </div>
+
+            <div class="capability-grid">
+
+                <div class="capability-item">
+                    <h3>Scheduling</h3>
+                    <p>
+                        Determines which eligible task receives
+                        CPU execution according to the scheduling policy.
+                    </p>
+                    <a href="scheduling.html" class="text-link">
+                        Scheduling Architecture
+                    </a>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Timing Services</h3>
+                    <p>
+                        Provides delay and timing-related mechanisms
+                        that influence when tasks become eligible.
+                    </p>
+                    <a href="../features/scheduler.html" class="text-link">
+                        Scheduling Features
+                    </a>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Synchronization</h3>
+                    <p>
+                        Coordinates task execution through events,
+                        semaphores, mutexes, and unified waiting.
+                    </p>
+                    <a href="../features/synchronization.html" class="text-link">
+                        Synchronization Features
+                    </a>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Communication</h3>
+                    <p>
+                        Enables data exchange between tasks through
+                        message queues and mailboxes.
+                    </p>
+                    <a href="../features/communication.html" class="text-link">
+                        Communication Features
+                    </a>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Interrupt Handling</h3>
+                    <p>
+                        Coordinates interrupt execution with
+                        task-level processing.
+                    </p>
+                    <a href="interrupt-model.html" class="text-link">
+                        Interrupt Model
+                    </a>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Memory Management</h3>
+                    <p>
+                        Stores task contexts in the configured
+                        memory regions of the 8051 system.
+                    </p>
+                    <a href="memory.html" class="text-link">
+                        Memory Architecture
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- 8051 Context -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">8051 IMPLEMENTATION</div>
+                <h2>Task Contexts on 8051</h2>
+                <p>
+                    Task management is closely related to the
+                    register and memory architecture of the MCS-51.
+                </p>
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    The 8051 architecture has limited internal RAM
+                    and a register-bank-based CPU organization.
+                    A task-switching implementation must account
+                    for the CPU state required to resume execution.
+                </p>
+
+                <p>
+                    HRTOS uses separate context storage arrangements
+                    for normal tasks and fast tasks. This allows
+                    the kernel to balance task capacity and
+                    context-switch overhead within the memory
+                    constraints of the target device.
+                </p>
+
+            </div>
+
+            <div class="table-container">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Context Category</th>
+                            <th>Number of Contexts</th>
+                            <th>Bytes per Context</th>
+                            <th>Total Storage</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Normal Tasks</td>
+                            <td>16</td>
+                            <td>13</td>
+                            <td>208 bytes</td>
+                        </tr>
+
+                        <tr>
+                            <td>Fast Tasks</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>10 bytes</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>18</strong></td>
+                            <td>¡ª</td>
+                            <td><strong>218 bytes</strong></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <p class="content-narrow">
+                These figures describe task-context storage in the
+                documented standard memory layout. They do not
+                represent the complete RAM consumption of the
+                operating system or application.
+            </p>
+
+            <a href="memory.html" class="text-link">
+                View detailed memory layout
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- Configuration -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">CONFIGURATION</div>
+                <h2>Task Management Parameters</h2>
+                <p>
+                    The standard HRTOS configuration defines
+                    the available task-context capacity.
+                </p>
+            </div>
+
+            <div class="table-container">
+
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td><code>OS_PROCESS_MAX</code></td>
+                            <td>16</td>
+                            <td>
+                                Maximum number of normal task contexts.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_FAST_TASK_MAX</code></td>
+                            <td>2</td>
+                            <td>
+                                Maximum number of fast-task contexts.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_SCHED_LEVEL_MAX</code></td>
+                            <td>10</td>
+                            <td>
+                                Configured scheduling-level limit.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="content-narrow">
+                <p>
+                    The values shown above describe the standard
+                    HRTOS V4.x configuration. Custom builds may
+                    use different settings according to the
+                    target hardware and application requirements.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Related Pages -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">RELATED ARCHITECTURE</div>
+                <h2>Explore the Architecture</h2>
+                <p>
+                    Learn more about the kernel subsystems that
+                    support task management and execution.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <h3>Kernel Architecture</h3>
+                    <p>
+                        Explore the overall kernel structure
+                        and service organization.
+                    </p>
+                    <a href="kernel.html" class="text-link">
+                        Explore Kernel
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Scheduling Architecture</h3>
+                    <p>
+                        Understand priority-based scheduling
+                        and task-switching mechanisms.
+                    </p>
+                    <a href="scheduling.html" class="text-link">
+                        Explore Scheduling
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Resource Management</h3>
+                    <p>
+                        Review how kernel resources and
+                        communication objects are organized.
+                    </p>
+                    <a href="resource-management.html" class="text-link">
+                        Explore Resource Management
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Interrupt Model</h3>
+                    <p>
+                        Learn how interrupt handling interacts
+                        with task-level execution.
+                    </p>
+                    <a href="interrupt-model.html" class="text-link">
+                        Explore Interrupt Model
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+
+            <div class="cta-content">
+
+                <h2>Build Structured 8051 Applications</h2>
+
+                <p>
+                    Explore HRTOS documentation, APIs, and practical
+                    examples for developing task-based embedded systems.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="../docs/index.html" class="btn btn-primary">
+                        Documentation
+                    </a>
+
+                    <a href="../download/index.html" class="btn btn-secondary">
+                        Download HRTOS
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+
+                    <p>
+                        HRTOS is an operating system project
+                        for 8051 and MCS-51 microcontrollers,
+                        focused on real-time execution and
+                        practical embedded applications.
+                    </p>
+
+                </div>
+
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="../product/overview.html">Overview</a>
+                    <a href="../product/releases.html">Releases</a>
+                    <a href="../download/index.html">Download</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Technology</h4>
+                    <a href="../features/index.html">Features</a>
+                    <a href="index.html">Architecture</a>
+                    <a href="../performance/index.html">Performance</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../docs/index.html">Documentation</a>
+                    <a href="../drivers/index.html">Drivers</a>
+                    <a href="../examples/index.html">Examples</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>About</h4>
+                    <a href="../about/index.html">About HRTOS</a>
+                    <a href="../about/history.html">Project History</a>
+                    <a href="../about/contact.html">Contact</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    ? 2017-2026 HRTOS. All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

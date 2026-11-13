@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stress Test | HRTOS Performance</title>
+    <meta name="description"
+        content="Explore HRTOS long-duration stress testing on the STC8H8U64K 8051 microcontroller, including execution rounds, CPU utilization, test nodes, and tested variants.">
+    <meta name="keywords"
+        content="HRTOS, 8051 RTOS, stress test, long-duration test, STC8H8U64K, reliability testing, embedded operating system">
+    <meta name="author" content="HRTOS Project">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/stress-test.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Stress Test | HRTOS">
+    <meta property="og:description"
+        content="Long-duration execution and stress testing results for HRTOS on 8051 microcontrollers.">
+    <meta property="og:url" content="https://en.hrtos.com/performance/stress-test.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HRTOS Stress Test",
+        "description": "Long-duration stress testing and execution results for HRTOS on the STC8H8U64K microcontroller.",
+        "url": "https://en.hrtos.com/performance/stress-test.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "HRTOS",
+            "url": "https://en.hrtos.com/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+     <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <a href="./">Performance</a>
+                    <span>/</span>
+                    <span>Stress Test</span>
+                </div>
+
+                <div class="hero-content">
+                    <span class="section-label">PERFORMANCE</span>
+
+                    <h1>Stress Testing</h1>
+
+                    <p class="hero-description">
+                        Long-duration stress testing helps evaluate the
+                        operational stability of an embedded operating
+                        system under sustained execution load. This page
+                        presents the HRTOS stress test results obtained
+                        on the STC8H8U64K microcontroller.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">OVERVIEW</span>
+                    <h2>Long-Duration System Testing</h2>
+                    <p>
+                        Embedded operating systems must maintain consistent
+                        behavior during continuous operation. Stress testing
+                        provides an opportunity to observe task execution,
+                        scheduling activity, and system behavior over
+                        extended periods.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+                    <p>
+                        HRTOS was subjected to an extended execution test
+                        using an STC8H8U64K microcontroller. The test
+                        exercised the system through repeated execution
+                        rounds and multiple test configurations.
+                    </p>
+
+                    <p>
+                        The objective was to examine sustained operation
+                        under a substantial execution load and identify
+                        unexpected behavior during repeated testing.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Key Results -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TEST RESULTS</span>
+                    <h2>Stress Test Summary</h2>
+                    <p>
+                        The following figures summarize the recorded
+                        results from the STC8H8U64K stress test.
+                    </p>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-value">72+</div>
+                        <div class="stat-label">Test Duration</div>
+                        <p>Hours</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">8,842</div>
+                        <div class="stat-label">Execution Rounds</div>
+                        <p>Recorded rounds</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">~71%</div>
+                        <div class="stat-label">CPU Utilization</div>
+                        <p>Approximate test load</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">1,611</div>
+                        <div class="stat-label">Test Nodes</div>
+                        <p>Recorded nodes</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">35M+</div>
+                        <div class="stat-label">Tested Variants</div>
+                        <p>Tested combinations</p>
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Recorded Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Test duration</td>
+                                <td>More than 72 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Execution rounds</td>
+                                <td>8,842</td>
+                            </tr>
+                            <tr>
+                                <td>Approximate CPU utilization</td>
+                                <td>71%</td>
+                            </tr>
+                            <tr>
+                                <td>Test nodes</td>
+                                <td>1,611</td>
+                            </tr>
+                            <tr>
+                                <td>Tested variants</td>
+                                <td>More than 35 million</td>
+                            </tr>
+                            <tr>
+                                <td>Reported test errors</td>
+                                <td>None during the recorded test</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    These figures describe the recorded test run.
+                    They are not a formal proof of system correctness
+                    or a guarantee of error-free operation in every
+                    application and hardware configuration.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Test Objectives -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TEST OBJECTIVES</span>
+                    <h2>What the Stress Test Examines</h2>
+                    <p>
+                        Extended execution testing helps observe system
+                        behavior that may not be apparent during short
+                        functional tests.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Continuous Operation</h3>
+                        <p>
+                            Observe whether the system continues to
+                            execute over an extended period without
+                            unexpected interruption.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Repeated Execution</h3>
+                        <p>
+                            Exercise repeated execution cycles to
+                            increase the number of opportunities for
+                            detecting intermittent issues.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Execution Load</h3>
+                        <p>
+                            Maintain a substantial CPU workload during
+                            testing to examine system behavior under
+                            sustained processing activity.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Configuration Coverage</h3>
+                        <p>
+                            Run a large number of test variants across
+                            the recorded test nodes and execution
+                            configurations.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Platform -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">HARDWARE PLATFORM</span>
+                    <h2>STC8H8U64K</h2>
+                    <p>
+                        The long-duration stress test was conducted on
+                        the STC8H8U64K, an 8051-compatible microcontroller
+                        from the STC8 family.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>Target Platform</h3>
+
+                    <p>
+                        The STC8H8U64K was used as the target hardware
+                        for sustained HRTOS execution. This test is
+                        separate from the timing measurements performed
+                        on the STC12C5A60S2 platform.
+                    </p>
+
+                    <p>
+                        The two platforms serve different purposes in
+                        the performance documentation: the STC12C5A60S2
+                        provides the reference platform for detailed
+                        timing measurements, while the STC8H8U64K was
+                        used for the recorded long-duration stress test.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <tbody>
+                            <tr>
+                                <th>Microcontroller</th>
+                                <td>STC8H8U64K</td>
+                            </tr>
+                            <tr>
+                                <th>MCU Family</th>
+                                <td>STC8</td>
+                            </tr>
+                            <tr>
+                                <th>Architecture</th>
+                                <td>8051-compatible</td>
+                            </tr>
+                            <tr>
+                                <th>Test Type</th>
+                                <td>Long-duration stress test</td>
+                            </tr>
+                            <tr>
+                                <th>Test Duration</th>
+                                <td>More than 72 hours</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Interpretation -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">RESULT INTERPRETATION</span>
+                    <h2>Understanding the Results</h2>
+                    <p>
+                        Stress test results provide practical evidence
+                        of system behavior under the conditions that
+                        were tested. They should be interpreted within
+                        the scope of the test configuration.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>Long-Duration Execution</h3>
+
+                    <p>
+                        Running for more than 72 hours provides a
+                        longer observation window than a short
+                        functional test. The recorded execution
+                        rounds and CPU utilization indicate that
+                        the system was exercised repeatedly under
+                        sustained processing activity.
+                    </p>
+
+                    <h3>Test Coverage</h3>
+
+                    <p>
+                        The recorded 1,611 test nodes and more than
+                        35 million tested variants represent the
+                        scale of the test activity. These figures
+                        describe the test coverage achieved by this
+                        particular test process; they do not imply
+                        exhaustive coverage of every possible
+                        runtime state.
+                    </p>
+
+                    <h3>Reported Errors</h3>
+
+                    <p>
+                        No errors were reported during the recorded
+                        stress test. This is useful engineering
+                        evidence for the tested configuration, but
+                        it does not replace formal verification,
+                        application-level validation, or testing
+                        under different hardware conditions.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Testing Scope -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TESTING SCOPE</span>
+                    <h2>What This Test Does Not Claim</h2>
+                    <p>
+                        A clear description of test scope is important
+                        when interpreting embedded system reliability
+                        results.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Not a Formal Proof</h3>
+                        <p>
+                            A long-duration test cannot prove the
+                            absence of all software defects or
+                            unexpected execution states.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Not Universal Hardware Coverage</h3>
+                        <p>
+                            Results from the STC8H8U64K do not
+                            automatically apply to every 8051-compatible
+                            microcontroller.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Not a Real-Time Guarantee</h3>
+                        <p>
+                            Stress testing alone does not establish
+                            worst-case execution time or prove
+                            hard real-time deadlines.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Not an Application Certification</h3>
+                        <p>
+                            Each application still requires validation
+                            under its own hardware, workload, and
+                            timing requirements.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">EXPLORE MORE</span>
+                    <h2>Related Performance Topics</h2>
+                    <p>
+                        Explore the other performance measurements
+                        and test documentation for HRTOS.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Performance Benchmarks</h3>
+                        <p>
+                            Review the measured performance of
+                            scheduling, task switching, and timing.
+                        </p>
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Context Switching</h3>
+                        <p>
+                            Learn about normal and fast task
+                            context switching behavior.
+                        </p>
+                        <a href="./context-switch.html" class="text-link">
+                            View Context Switching
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Latency</h3>
+                        <p>
+                            Explore interrupt execution and
+                            nested interrupt measurements.
+                        </p>
+                        <a href="./interrupt-latency.html" class="text-link">
+                            View Interrupt Latency
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Test Environment</h3>
+                        <p>
+                            Review the hardware and software
+                            configurations used for testing.
+                        </p>
+                        <a href="./test-environment.html" class="text-link">
+                            View Test Environment
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+<div class="cta-content">
+                <h2>Explore HRTOS</h2>
+
+                <p>
+                    Learn more about the HRTOS architecture,
+                    real-time scheduling, interrupt handling,
+                    and embedded system capabilities.
+                </p>
+
+                <div class="cta-buttons">
+                    <a href="../architecture/" class="btn btn-primary">
+                        System Architecture
+                    </a>
+
+                    <a href="../docs/" class="btn btn-secondary">
+                        Documentation
+                    </a>
+                </div>
+</div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="../product/">Overview</a></li>
+                        <li><a href="../product/releases.html">Releases</a></li>
+                        <li><a href="../download/">Download</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li><a href="../features/">Features</a></li>
+                        <li><a href="../architecture/">Architecture</a></li>
+                        <li><a href="./">Performance</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../docs/">Documentation</a></li>
+                        <li><a href="../drivers/">Drivers</a></li>
+                        <li><a href="../examples/">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="../about/">About HRTOS</a></li>
+                        <li><a href="../about/history.html">History</a></li>
+                        <li><a href="../about/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>2017-2026 HRTOS Project. All rights reserved.</p>
+                <p>Designed for 8051. Built for real-time applications.</p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,915 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-Time Task Scheduling | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore HRTOS real-time task scheduling for 8051 microcontrollers, including priority-based preemptive scheduling, time slicing, fast tasks and context switching.">
+
+    <meta name="keywords"
+        content="8051 RTOS scheduler, real-time task scheduling, preemptive scheduling, priority scheduler, HRTOS, 8051 operating system">
+
+    <link rel="canonical"
+        href="https://en.hrtos.com/features/scheduler.html">
+
+    <link rel="icon" href="../assets/images/logo.svg"
+        type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="./" class="active">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        SYSTEM FEATURES / SCHEDULING
+                    </span>
+
+                    <h1>
+                        Real-Time Task Scheduling
+                    </h1>
+
+                    <p class="hero-description">
+                        Priority-based task scheduling
+                        designed for 8051 embedded systems.
+                    </p>
+
+                    <p>
+                        HRTOS provides a structured task scheduling
+                        mechanism that coordinates task execution
+                        according to priority, scheduling conditions
+                        and system timing requirements.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../architecture/scheduling.html"
+                            class="btn btn-primary">
+                            Scheduling Architecture
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            All Features
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        OVERVIEW
+                    </span>
+
+                    <h2>Task Scheduling in Embedded Systems</h2>
+
+                    <p>
+                        A real-time operating system coordinates
+                        multiple independent tasks while managing
+                        processor time and execution priorities.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Traditional single-loop embedded applications
+                        often combine hardware handling, data
+                        processing and communication in one execution
+                        flow.
+                    </p>
+
+                    <p>
+                        As application complexity increases,
+                        maintaining this structure becomes difficult.
+                        Task scheduling provides a way to divide
+                        application functions into independent
+                        execution units.
+                    </p>
+
+                    <p>
+                        HRTOS manages these tasks through a
+                        priority-based scheduling architecture
+                        designed specifically for the 8051
+                        microcontroller family.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Scheduling Features -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SCHEDULING FEATURES
+                    </span>
+
+                    <h2>Core Scheduling Capabilities</h2>
+
+                    <p>
+                        HRTOS combines priority management,
+                        preemptive execution and time-based
+                        scheduling services.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Priority Scheduling -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Priority-Based Scheduling</h3>
+
+                        <p>
+                            Tasks are assigned priorities
+                            to determine their scheduling
+                            order and execution precedence.
+                        </p>
+
+                        <ul>
+                            <li>Multiple task priority levels</li>
+                            <li>Priority-based execution</li>
+                            <li>High-priority task handling</li>
+                            <li>Idle task management</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Preemptive Scheduling -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Preemptive Scheduling</h3>
+
+                        <p>
+                            Higher-priority ready tasks
+                            can preempt lower-priority
+                            task execution according to
+                            the scheduling rules.
+                        </p>
+
+                        <ul>
+                            <li>Priority-driven preemption</li>
+                            <li>Scheduling requests</li>
+                            <li>Task context switching</li>
+                            <li>Responsive task execution</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Time Slice -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Time-Slice Scheduling</h3>
+
+                        <p>
+                            Time-slice scheduling provides
+                            time-based execution opportunities
+                            for tasks under the applicable
+                            scheduling conditions.
+                        </p>
+
+                        <ul>
+                            <li>Time-based task scheduling</li>
+                            <li>Timer-driven scheduling</li>
+                            <li>Coordinated task execution</li>
+                            <li>Configurable system timing</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Fast Tasks -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Fast Task Support</h3>
+
+                        <p>
+                            HRTOS provides a separate fast-task
+                            mechanism for applications requiring
+                            a different execution context
+                            and reduced context-switch overhead.
+                        </p>
+
+                        <ul>
+                            <li>Dedicated fast-task slots</li>
+                            <li>Separate context management</li>
+                            <li>Register bank utilization</li>
+                            <li>Fast task switching</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Priority Model -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        PRIORITY MODEL
+                    </span>
+
+                    <h2>Task Priority Organization</h2>
+
+                    <p>
+                        HRTOS uses priority levels to organize
+                        task execution and distinguish different
+                        scheduling requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        The HRTOS scheduling configuration
+                        supports multiple priority levels,
+                        allowing applications to assign
+                        execution importance according
+                        to functional requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Priority</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>0</td>
+                                <td>Idle</td>
+                                <td>
+                                    Idle task
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1 - 7</td>
+                                <td>Normal</td>
+                                <td>
+                                    Normal application tasks
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>8</td>
+                                <td>High / Fast</td>
+                                <td>
+                                    High-priority fast-task execution
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>9 - 10</td>
+                                <td>Interrupt</td>
+                                <td>
+                                    Interrupt execution priority levels
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        Interrupt priority levels are part
+                        of the system's interrupt execution
+                        model and should not be interpreted
+                        as ordinary application task priorities.
+                    </p>
+
+                    <p>
+                        Actual task scheduling behavior
+                        depends on task state, priority
+                        and the configured scheduling rules.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Fast Tasks -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        FAST TASK ARCHITECTURE
+                    </span>
+
+                    <h2>A Dedicated Fast-Task Mechanism</h2>
+
+                    <p>
+                        HRTOS provides a separate execution
+                        mechanism for fast tasks, taking
+                        advantage of the register bank
+                        architecture available on 8051
+                        microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <h3>Separate Execution Context</h3>
+
+                    <p>
+                        Normal tasks and fast tasks use
+                        different context management
+                        strategies.
+                    </p>
+
+                    <p>
+                        The fast-task mechanism uses
+                        dedicated register bank resources,
+                        reducing the amount of context
+                        that must be saved and restored
+                        during fast-task switching.
+                    </p>
+
+
+                    <h3>Fast-Task Configuration</h3>
+
+                    <p>
+                        The standard HRTOS configuration
+                        provides two fast-task slots,
+                        identified separately from
+                        normal task IDs.
+                    </p>
+
+                    <ul>
+                        <li>Normal task IDs: 0 - 15</li>
+                        <li>Fast task IDs: 16 - 17</li>
+                        <li>Fast-task capacity: 2 tasks</li>
+                        <li>Dedicated fast-task context resources</li>
+                    </ul>
+
+
+                    <h3>Typical Applications</h3>
+
+                    <p>
+                        Fast tasks can be useful for
+                        frequently executed operations
+                        where reducing context-switch
+                        overhead is important.
+                    </p>
+
+                    <p>
+                        Their use should be determined
+                        by actual application timing
+                        requirements and available
+                        hardware resources.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Context Switching -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        CONTEXT SWITCHING
+                    </span>
+
+                    <h2>Managing Task Execution Contexts</h2>
+
+                    <p>
+                        Context switching allows the processor
+                        to suspend one task and resume another
+                        while preserving the required execution
+                        state.
+                    </p>
+
+                </div>
+
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">01</span>
+
+                        <h3>Current Task</h3>
+
+                        <p>
+                            The processor executes the
+                            currently selected task.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Scheduling Request</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">02</span>
+
+                        <h3>Context Management</h3>
+
+                        <p>
+                            The required execution context
+                            is preserved and the next
+                            task is selected.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Context Restore</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">03</span>
+
+                        <h3>Next Task</h3>
+
+                        <p>
+                            The processor resumes execution
+                            using the selected task's
+                            context.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        Context management is particularly
+                        important on 8051 architectures,
+                        where register banks, internal RAM,
+                        external RAM and stack resources
+                        must be carefully coordinated.
+                    </p>
+
+                    <p>
+                        HRTOS uses different context
+                        management strategies for normal
+                        and fast tasks.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Time Management -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        TIME MANAGEMENT
+                    </span>
+
+                    <h2>Timer-Driven Scheduling</h2>
+
+                    <p>
+                        System timing provides the foundation
+                        for delay operations, time-based
+                        task management and periodic
+                        scheduling activities.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS uses Timer 0 as its system
+                        timing source in the documented
+                        standard configuration.
+                    </p>
+
+                    <p>
+                        The system time base supports
+                        task delay operations and
+                        time-related scheduling services.
+                    </p>
+
+                    <p>
+                        Timer configuration and clock
+                        settings determine the actual
+                        timing accuracy and system
+                        execution characteristics.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Performance -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        PERFORMANCE
+                    </span>
+
+                    <h2>Measured Context-Switch Performance</h2>
+
+                    <p>
+                        Context-switch performance has been
+                        evaluated on real 8051 hardware
+                        under documented test conditions.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        On an STC12C5A60S2 running at
+                        11.0592 MHz in 1T mode,
+                        HRTOS demonstrated the following
+                        measured task-switching times.
+                    </p>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Switch Type</th>
+                                <th>Measured Time</th>
+                                <th>Test Condition</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Normal Task</td>
+                                <td>394.33 us</td>
+                                <td>
+                                    Scheduling-bit triggered
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task</td>
+                                <td>550.33 us</td>
+                                <td>
+                                    Time-slice scheduling
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Task</td>
+                                <td>143.5 us</td>
+                                <td>
+                                    Scheduling-bit triggered
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Task</td>
+                                <td>229.5 us</td>
+                                <td>
+                                    Time-slice scheduling
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        These values represent measured
+                        task-switching times under the
+                        specified test conditions.
+                        They are not universal guarantees
+                        for all 8051 devices or clock
+                        configurations.
+                    </p>
+
+                    <a href="../performance/context-switch.html"
+                        class="btn btn-primary">
+                        View Context-Switch Benchmarks
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Features -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED FEATURES
+                    </span>
+
+                    <h2>Explore Other System Capabilities</h2>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <h3>Interrupt Management</h3>
+
+                        <p>
+                            Explore interrupt handling,
+                            nested interrupts and
+                            task wake-up mechanisms.
+                        </p>
+
+                        <a href="./interrupt.html"
+                            class="text-link">
+                            Interrupt Management
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Synchronization</h3>
+
+                        <p>
+                            Learn about semaphores,
+                            mutexes, events and
+                            resource coordination.
+                        </p>
+
+                        <a href="./synchronization.html"
+                            class="text-link">
+                            Synchronization
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Communication</h3>
+
+                        <p>
+                            Discover message queues,
+                            mailboxes and inter-task
+                            communication.
+                        </p>
+
+                        <a href="./communication.html"
+                            class="text-link">
+                            Communication
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Explore the HRTOS Architecture</h2>
+
+                    <p>
+                        Learn how the kernel manages task
+                        execution, memory resources and
+                        scheduling operations.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../architecture/scheduling.html"
+                            class="btn btn-primary">
+                            Scheduling Architecture
+                        </a>
+
+                        <a href="../docs/getting-started.html"
+                            class="btn btn-secondary">
+                            Get Started
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

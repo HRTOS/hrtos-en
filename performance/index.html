@@ -1,0 +1,924 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS Performance | 8051 RTOS Benchmarks and Testing</title>
+
+    <meta name="description"
+        content="Explore HRTOS performance measurements, including task context switching, interrupt latency, timing accuracy, hardware benchmarks, and long-duration stress testing on 8051 microcontrollers.">
+
+    <meta name="keywords"
+        content="HRTOS performance, 8051 RTOS benchmark, 8051 context switching, interrupt latency, real-time timing accuracy, 8051 stress testing">
+
+    <meta name="author" content="HRTOS Project">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <meta property="og:title" content="HRTOS Performance">
+    <meta property="og:description"
+        content="Hardware-based performance measurements and verification of HRTOS on 8051 microcontrollers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://en.hrtos.com/performance/">
+    <meta property="og:site_name" content="HRTOS">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HRTOS Performance",
+        "url": "https://en.hrtos.com/performance/",
+        "description": "Performance benchmarks, context switching measurements, interrupt latency, timing accuracy, and stress testing of HRTOS on 8051 microcontrollers."
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">PERFORMANCE & VERIFICATION</span>
+
+                    <h1>HRTOS Performance</h1>
+
+                    <p class="hero-description">
+                        Hardware-based performance evaluation of HRTOS,
+                        covering task scheduling, context switching,
+                        interrupt response, timing accuracy, and
+                        long-duration system stability on 8051 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./benchmarks.html" class="btn btn-primary">
+                            Explore Benchmarks
+                        </a>
+
+                        <a href="./test-environment.html" class="btn btn-secondary">
+                            Test Environment
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">OVERVIEW</span>
+
+                    <h2>Performance Based on Hardware Measurements</h2>
+
+                    <p>
+                        HRTOS performance is evaluated through practical
+                        measurements on physical 8051 microcontrollers.
+                        The evaluation covers execution overhead,
+                        real-time response, timing behavior, and
+                        operational stability.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        On resource-constrained 8-bit microcontrollers,
+                        operating system performance is closely related
+                        to processor architecture, memory organization,
+                        interrupt handling, and scheduling mechanisms.
+                        These factors directly influence the execution
+                        cost of operating system services.
+                    </p>
+
+                    <p>
+                        HRTOS performance testing focuses on measurable
+                        execution behavior under defined hardware
+                        configurations. Rather than relying only on
+                        theoretical specifications, the results provide
+                        practical reference data for evaluating the
+                        operating system on its target platform.
+                    </p>
+
+                    <p>
+                        The following sections present individual
+                        measurements and testing procedures, including
+                        context switching, interrupt latency,
+                        timing accuracy, and stress testing.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Performance Categories -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">PERFORMANCE CATEGORIES</span>
+
+                    <h2>Performance Evaluation Areas</h2>
+
+                    <p>
+                        HRTOS performance evaluation is divided into
+                        several areas to examine different aspects
+                        of real-time system execution.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Performance Benchmarks</h3>
+
+                        <p>
+                            Measured execution time and operating
+                            overhead of important HRTOS kernel
+                            operations and system services.
+                        </p>
+
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Context Switching</h3>
+
+                        <p>
+                            Execution time measurements for normal
+                            and fast task switching, including
+                            different scheduling trigger conditions.
+                        </p>
+
+                        <a href="./context-switch.html" class="text-link">
+                            Context Switch Measurements
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Interrupt Latency</h3>
+
+                        <p>
+                            Interrupt response measurements,
+                            interrupt entry overhead, and
+                            nested interrupt execution behavior.
+                        </p>
+
+                        <a href="./interrupt-latency.html" class="text-link">
+                            Interrupt Measurements
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Timing Accuracy</h3>
+
+                        <p>
+                            Evaluation of system timing behavior,
+                            delay functions, and timer-based
+                            timekeeping accuracy.
+                        </p>
+
+                        <a href="./timing-accuracy.html" class="text-link">
+                            Timing Measurements
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>05</span>
+                        </div>
+
+                        <h3>Stress Testing</h3>
+
+                        <p>
+                            Long-duration execution, repeated
+                            multitasking operations, and
+                            system stability under sustained load.
+                        </p>
+
+                        <a href="./stress-test.html" class="text-link">
+                            Stress Test Results
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>06</span>
+                        </div>
+
+                        <h3>Test Environment</h3>
+
+                        <p>
+                            Hardware platforms, processor
+                            configurations, compiler settings,
+                            and measurement conditions.
+                        </p>
+
+                        <a href="./test-environment.html" class="text-link">
+                            Test Configuration
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Benchmark Highlights -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">MEASURED PERFORMANCE</span>
+
+                    <h2>Selected Performance Measurements</h2>
+
+                    <p>
+                        Representative measurements obtained
+                        from actual HRTOS hardware testing.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        The following results were measured on an
+                        STC12C5A60S2 microcontroller operating at
+                        11.0592 MHz in 1T mode.
+                    </p>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-value">143.5</div>
+                        <div class="stat-unit">us</div>
+                        <div class="stat-label">
+                            Fast Task Switching
+                        </div>
+                        <p>
+                            Scheduling-bit triggered switching
+                        </p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-value">394.33</div>
+                        <div class="stat-unit">us</div>
+                        <div class="stat-label">
+                            Normal Task Switching
+                        </div>
+                        <p>
+                            Scheduling-bit triggered switching
+                        </p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-value">12.167</div>
+                        <div class="stat-unit">us</div>
+                        <div class="stat-label">
+                            Interrupt Response
+                        </div>
+                        <p>
+                            Measured interrupt execution latency
+                        </p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-value">72+</div>
+                        <div class="stat-unit">Hours</div>
+                        <div class="stat-label">
+                            Continuous Stress Test
+                        </div>
+                        <p>
+                            Long-duration system stability test
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <p class="section-note">
+                    These measurements represent specific test
+                    configurations and execution conditions.
+                    They should not be interpreted as universal
+                    performance guarantees across all 8051 devices.
+                    The continuous stress test was conducted
+                    separately on an STC8H8U64K platform.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Context Switching -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">TASK EXECUTION</span>
+
+                    <h2>Task Context Switching Performance</h2>
+
+                    <p>
+                        Context switching is one of the fundamental
+                        operations of a multitasking operating system.
+                        Its execution cost directly affects scheduling
+                        overhead and task response behavior.
+                    </p>
+                </div>
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Normal Task Switching</h3>
+
+                        <p>
+                            Normal task context switching manages
+                            task execution states and restores the
+                            required processor context during
+                            scheduling operations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Fast Task Switching</h3>
+
+                        <p>
+                            Fast tasks use dedicated register-bank
+                            resources to reduce context management
+                            overhead under supported execution conditions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Scheduling Overhead</h3>
+
+                        <p>
+                            Different scheduling trigger conditions
+                            can produce different execution costs.
+                            Measurements distinguish these paths.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Execution Consistency</h3>
+
+                        <p>
+                            Repeated measurements help evaluate
+                            switching behavior under a fixed
+                            hardware and compiler configuration.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="section-actions">
+                    <a href="./context-switch.html" class="btn btn-primary">
+                        Explore Context Switching
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Interrupt Performance -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">INTERRUPT RESPONSE</span>
+
+                    <h2>Interrupt Latency and Response</h2>
+
+                    <p>
+                        Interrupt response is an important consideration
+                        in embedded real-time systems, particularly
+                        when external events require prompt processing.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS interrupt performance testing examines
+                        interrupt execution overhead and nested
+                        interrupt behavior on the target 8051 platform.
+                    </p>
+
+                    <p>
+                        The measurements provide practical reference
+                        values for understanding the time required
+                        for interrupt-related execution under
+                        specific hardware conditions.
+                    </p>
+
+                </div>
+
+                <div class="section-actions">
+                    <a href="./interrupt-latency.html" class="btn btn-primary">
+                        Explore Interrupt Latency
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Timing Performance -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">TIME MANAGEMENT</span>
+
+                    <h2>Timing Accuracy and System Time</h2>
+
+                    <p>
+                        Accurate timekeeping is essential for
+                        periodic task execution, delay operations,
+                        and time-dependent application logic.
+                    </p>
+                </div>
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>System Tick</h3>
+
+                        <p>
+                            Timer-based system time provides
+                            the timing reference for operating
+                            system scheduling and time management.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Millisecond Delays</h3>
+
+                        <p>
+                            Delay functions can be evaluated
+                            against actual elapsed time to examine
+                            timing accuracy.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Periodic Execution</h3>
+
+                        <p>
+                            Time-based task execution is evaluated
+                            in relation to the configured system
+                            timing mechanism.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Measurement Deviation</h3>
+
+                        <p>
+                            Measured elapsed time can be compared
+                            with configured timing intervals
+                            to identify timing deviation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="section-actions">
+                    <a href="./timing-accuracy.html" class="btn btn-primary">
+                        Explore Timing Accuracy
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Stress Testing -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">SYSTEM STABILITY</span>
+
+                    <h2>Long-Duration Stress Testing</h2>
+
+                    <p>
+                        Performance evaluation also considers
+                        sustained system operation and repeated
+                        multitasking execution.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS has undergone extended stress testing
+                        on the STC8H8U64K microcontroller.
+                        The test involved repeated execution
+                        and a large number of test iterations
+                        over an extended period.
+                    </p>
+
+                    <p>
+                        The test record includes more than
+                        72 hours of continuous operation,
+                        8,842 test rounds, and over 35 million
+                        tested variants without reported errors.
+                    </p>
+
+                </div>
+
+                <div class="section-actions">
+                    <a href="./stress-test.html" class="btn btn-primary">
+                        Explore Stress Test Results
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Environment -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">TEST CONFIGURATION</span>
+
+                    <h2>Hardware and Measurement Environment</h2>
+
+                    <p>
+                        Performance measurements are meaningful
+                        only when their hardware and software
+                        configurations are clearly identified.
+                    </p>
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Test Platform</th>
+                                <th>Configuration</th>
+                                <th>Evaluation Focus</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>STC12C5A60S2</td>
+                                <td>11.0592 MHz, 1T</td>
+                                <td>
+                                    Context switching, interrupt
+                                    response, and timing measurements
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>STC8H8U64K</td>
+                                <td>8051-compatible MCU</td>
+                                <td>
+                                    Long-duration stress testing
+                                    and system stability
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Development Toolchain</td>
+                                <td>Keil C51</td>
+                                <td>
+                                    Compilation and target execution
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="section-actions">
+                    <a href="./test-environment.html" class="btn btn-primary">
+                        View Test Environment
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">EXPLORE FURTHER</span>
+
+                    <h2>Performance Test Documentation</h2>
+
+                    <p>
+                        Explore detailed measurement results,
+                        testing procedures, and hardware configurations.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Performance Benchmarks</h3>
+                        <p>
+                            Review measured execution times
+                            and operating system overhead.
+                        </p>
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+                    </div>
+
+
+                    <div class="feature-card">
+                        <h3>Context Switching</h3>
+                        <p>
+                            Examine normal and fast task
+                            switching measurements.
+                        </p>
+                        <a href="./context-switch.html" class="text-link">
+                            View Measurements
+                        </a>
+                    </div>
+
+
+                    <div class="feature-card">
+                        <h3>Interrupt Latency</h3>
+                        <p>
+                            Explore interrupt response
+                            and nested interrupt measurements.
+                        </p>
+                        <a href="./interrupt-latency.html" class="text-link">
+                            View Measurements
+                        </a>
+                    </div>
+
+
+                    <div class="feature-card">
+                        <h3>Timing Accuracy</h3>
+                        <p>
+                            Examine delay functions
+                            and system time accuracy.
+                        </p>
+                        <a href="./timing-accuracy.html" class="text-link">
+                            View Timing Tests
+                        </a>
+                    </div>
+
+
+                    <div class="feature-card">
+                        <h3>Stress Testing</h3>
+                        <p>
+                            Review long-duration execution
+                            and stability test records.
+                        </p>
+                        <a href="./stress-test.html" class="text-link">
+                            View Stress Tests
+                        </a>
+                    </div>
+
+
+                    <div class="feature-card">
+                        <h3>Test Environment</h3>
+                        <p>
+                            Review hardware platforms
+                            and measurement configurations.
+                        </p>
+                        <a href="./test-environment.html" class="text-link">
+                            View Test Environment
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Explore HRTOS on Real Hardware</h2>
+
+                    <p>
+                        Learn about the HRTOS architecture,
+                        examine its technical documentation,
+                        and evaluate its capabilities on
+                        supported 8051 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/" class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="../download/" class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Technology</h4>
+                        <a href="../features/">Features</a>
+                        <a href="../architecture/">Architecture</a>
+                        <a href="./">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../drivers/">Drivers</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    2017-2026 HRTOS Project.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Designed for 8051. Built for real-time applications.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

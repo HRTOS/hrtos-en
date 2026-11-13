@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inter-Task Communication | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore HRTOS inter-task communication mechanisms, including message queues, mailboxes, message passing and unified wait mechanisms for 8051 embedded systems.">
+
+    <meta name="keywords"
+        content="8051 RTOS communication, HRTOS message queue, embedded mailbox, inter-task communication, 8051 operating system">
+
+    <link rel="canonical"
+        href="https://en.hrtos.com/features/communication.html">
+
+    <link rel="icon" href="../assets/images/logo.svg"
+        type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="./" class="active">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        SYSTEM FEATURES / COMMUNICATION
+                    </span>
+
+                    <h1>
+                        Inter-Task Communication
+                    </h1>
+
+                    <p class="hero-description">
+                        Structured communication between tasks
+                        in resource-constrained embedded systems.
+                    </p>
+
+                    <p>
+                        HRTOS provides built-in communication
+                        mechanisms that allow independent tasks
+                        to exchange data, coordinate operations
+                        and build modular embedded applications.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/api.html"
+                            class="btn btn-primary">
+                            Explore API
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            All Features
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        OVERVIEW
+                    </span>
+
+                    <h2>Communication Between Independent Tasks</h2>
+
+                    <p>
+                        In a multitasking embedded system, different
+                        tasks often need to exchange information
+                        without directly depending on each other's
+                        internal implementation.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        For example, a sensor acquisition task may
+                        collect hardware data, while another task
+                        processes the measurements and a third task
+                        handles communication with an external device.
+                    </p>
+
+                    <p>
+                        HRTOS provides communication objects to
+                        coordinate these operations. Tasks can
+                        exchange information through defined
+                        interfaces instead of relying entirely
+                        on shared global variables.
+                    </p>
+
+                    <p>
+                        This approach helps improve software
+                        modularity, task independence and
+                        application maintainability.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Communication Mechanisms -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        COMMUNICATION MECHANISMS
+                    </span>
+
+                    <h2>Built-in Communication Services</h2>
+
+                    <p>
+                        HRTOS provides multiple communication
+                        mechanisms for different application
+                        requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Message Queue -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Message Queues</h3>
+
+                        <p>
+                            Message queues provide a structured
+                            way to transfer messages between
+                            independent tasks.
+                        </p>
+
+                        <ul>
+                            <li>Queued message delivery</li>
+                            <li>Producer-consumer communication</li>
+                            <li>Decoupled task execution</li>
+                            <li>Configurable system resources</li>
+                        </ul>
+
+                        <p>
+                            Suitable for sensor data processing,
+                            command delivery and asynchronous
+                            application workflows.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Mailbox -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Mailboxes</h3>
+
+                        <p>
+                            Mailboxes provide a communication
+                            interface for exchanging messages
+                            between tasks.
+                        </p>
+
+                        <ul>
+                            <li>Task-to-task messaging</li>
+                            <li>Message-based coordination</li>
+                            <li>Reduced direct task dependency</li>
+                            <li>Structured data exchange</li>
+                        </ul>
+
+                        <p>
+                            Useful for command notifications,
+                            task coordination and transferring
+                            application information.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Message Passing -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Message Passing</h3>
+
+                        <p>
+                            Message passing provides a structured
+                            communication model between application
+                            tasks.
+                        </p>
+
+                        <ul>
+                            <li>Explicit message exchange</li>
+                            <li>Task-level communication</li>
+                            <li>Modular application design</li>
+                            <li>Separation of application functions</li>
+                        </ul>
+
+                        <p>
+                            It allows application components to
+                            communicate through defined interfaces.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Unified Wait -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Unified Wait Mechanism</h3>
+
+                        <p>
+                            HRTOS provides a unified waiting
+                            mechanism for task synchronization
+                            and communication operations.
+                        </p>
+
+                        <ul>
+                            <li>Blocking wait operations</li>
+                            <li>Event-driven task execution</li>
+                            <li>Timeout-based waiting</li>
+                            <li>Coordinated task wake-up</li>
+                        </ul>
+
+                        <p>
+                            This helps tasks wait for required
+                            resources or events without continuous
+                            polling.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Workflow -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION WORKFLOW
+                    </span>
+
+                    <h2>A Typical Multitasking Application</h2>
+
+                    <p>
+                        Communication mechanisms help separate
+                        hardware acquisition, data processing
+                        and external communication.
+                    </p>
+
+                </div>
+
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">01</span>
+
+                        <h3>Sensor Task</h3>
+
+                        <p>
+                            Acquires sensor data from hardware
+                            interfaces.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Message</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">02</span>
+
+                        <h3>Processing Task</h3>
+
+                        <p>
+                            Receives data and performs
+                            application-level processing.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Message</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">03</span>
+
+                        <h3>Communication Task</h3>
+
+                        <p>
+                            Sends processed information
+                            to external devices or systems.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        In this example, each task focuses on
+                        a specific responsibility. Communication
+                        objects provide the connection between
+                        these independent functional modules.
+                    </p>
+
+                    <p>
+                        The actual task execution and wake-up
+                        behavior are managed by the HRTOS kernel.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Design Benefits -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        ENGINEERING BENEFITS
+                    </span>
+
+                    <h2>Designed for Structured Embedded Software</h2>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Task Independence</h3>
+
+                        <p>
+                            Communication interfaces reduce
+                            unnecessary dependencies between
+                            application tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Modular Architecture</h3>
+
+                        <p>
+                            Application functions can be divided
+                            into independent tasks with clearly
+                            defined responsibilities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Event-Driven Processing</h3>
+
+                        <p>
+                            Tasks can wait for messages and events
+                            instead of continuously checking
+                            communication conditions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Resource Awareness</h3>
+
+                        <p>
+                            Communication resources are managed
+                            within the constraints of embedded
+                            memory and system configuration.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Features -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED FEATURES
+                    </span>
+
+                    <h2>Explore Other System Capabilities</h2>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <h3>Task Scheduling</h3>
+
+                        <p>
+                            Explore priority-based scheduling
+                            and task execution management.
+                        </p>
+
+                        <a href="./scheduler.html"
+                            class="text-link">
+                            Scheduling
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Interrupt Management</h3>
+
+                        <p>
+                            Learn about interrupt handling,
+                            nested interrupts and event response.
+                        </p>
+
+                        <a href="./interrupt.html"
+                            class="text-link">
+                            Interrupt Management
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Synchronization</h3>
+
+                        <p>
+                            Explore semaphores, mutexes,
+                            events and resource coordination.
+                        </p>
+
+                        <a href="./synchronization.html"
+                            class="text-link">
+                            Synchronization
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Modular Applications with HRTOS</h2>
+
+                    <p>
+                        Explore the technical documentation
+                        and practical examples to understand
+                        how HRTOS communication services
+                        can be used in embedded applications.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/api.html"
+                            class="btn btn-primary">
+                            Explore API Documentation
+                        </a>
+
+                        <a href="../examples/"
+                            class="btn btn-secondary">
+                            View Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

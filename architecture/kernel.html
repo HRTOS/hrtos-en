@@ -1,0 +1,977 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS Kernel Architecture | 8051 Real-Time Kernel</title>
+
+    <meta name="description"
+        content="Explore the HRTOS kernel architecture for 8051 microcontrollers, including kernel services, task management, scheduling, timing, synchronization, communication, and interrupt integration.">
+
+    <meta name="keywords"
+        content="HRTOS kernel, 8051 RTOS kernel, 8051 operating system, MCS-51 kernel architecture, real-time kernel, embedded operating system">
+
+    <meta name="author" content="HRTOS Project">
+
+    <link rel="canonical" href="https://en.hrtos.com/architecture/kernel.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <meta property="og:title" content="HRTOS Kernel Architecture">
+    <meta property="og:description"
+        content="Learn how the HRTOS kernel organizes task execution, scheduling, timing, synchronization, communication, and interrupt handling on 8051 microcontrollers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://en.hrtos.com/architecture/kernel.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "HRTOS Kernel Architecture",
+        "description": "Technical overview of the HRTOS kernel structure and its operating system services for 8051 microcontrollers.",
+        "author": {
+            "@type": "Organization",
+            "name": "HRTOS Project"
+        },
+        "mainEntityOfPage": "https://en.hrtos.com/architecture/kernel.html"
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="./" class="active">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">KERNEL ARCHITECTURE</span>
+
+                    <h1>HRTOS Kernel</h1>
+
+                    <p class="hero-description">
+                        A dedicated operating system kernel for
+                        8051 and MCS-51 microcontrollers, integrating
+                        task execution, real-time scheduling,
+                        timing, synchronization, and communication.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./" class="btn btn-primary">
+                            Architecture Overview
+                        </a>
+
+                        <a href="../docs/" class="btn btn-secondary">
+                            Technical Documentation
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">OVERVIEW</span>
+                    <h2>A Kernel Designed for 8051 Systems</h2>
+                    <p>
+                        HRTOS provides an integrated kernel environment
+                        for building structured, task-oriented applications
+                        on resource-constrained 8051 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        The HRTOS kernel coordinates multiple application
+                        tasks and provides the services required for
+                        real-time application development. These include
+                        task management, priority-based scheduling,
+                        system timing, interrupt integration,
+                        synchronization, and inter-task communication.
+                    </p>
+
+                    <p>
+                        Its implementation takes into account the
+                        characteristics of the MCS-51 architecture,
+                        including its register banks, memory spaces,
+                        interrupt mechanisms, and limited hardware resources.
+                    </p>
+
+                    <p>
+                        Rather than relying on the assumptions of a
+                        larger processor architecture, HRTOS organizes
+                        its execution and resource management mechanisms
+                        around the practical constraints of 8051 devices.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Kernel Organization -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">KERNEL ORGANIZATION</span>
+                    <h2>Kernel Service Structure</h2>
+                    <p>
+                        The kernel is composed of cooperating services
+                        that manage execution, timing, and communication
+                        between application tasks.
+                    </p>
+                </div>
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+                        <div class="flow-number">01</div>
+                        <h3>Task Management</h3>
+                        <p>
+                            Maintains task definitions, execution contexts,
+                            and task-related state.
+                        </p>
+                    </div>
+
+                    <div class="flow-connector"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">02</div>
+                        <h3>Scheduling</h3>
+                        <p>
+                            Selects the task to execute according
+                            to the configured scheduling priorities
+                            and system state.
+                        </p>
+                    </div>
+
+                    <div class="flow-connector"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">03</div>
+                        <h3>Kernel Services</h3>
+                        <p>
+                            Provides timing, synchronization,
+                            waiting, and inter-task communication.
+                        </p>
+                    </div>
+
+                    <div class="flow-connector"></div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">04</div>
+                        <h3>Hardware Integration</h3>
+                        <p>
+                            Coordinates processor-specific execution,
+                            timer resources, and interrupt handling.
+                        </p>
+                    </div>
+
+                </div>
+
+                <p class="section-note">
+                    This is a conceptual view of the kernel's
+                    responsibilities, not a strict internal
+                    function-call hierarchy.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Kernel Responsibilities -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">CORE SERVICES</span>
+                    <h2>Core Kernel Responsibilities</h2>
+                    <p>
+                        HRTOS brings together the fundamental services
+                        needed to organize concurrent application
+                        activities on an 8051 microcontroller.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+                        <h3>Task Management</h3>
+                        <p>
+                            Provides task registration and execution
+                            context management for normal and fast tasks.
+                        </p>
+                        <a href="./task-management.html" class="text-link">
+                            Task Management
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+                        <h3>Priority-Based Scheduling</h3>
+                        <p>
+                            Organizes task execution using configured
+                            priority levels and scheduling mechanisms.
+                        </p>
+                        <a href="./scheduling.html" class="text-link">
+                            Scheduling Model
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+                        <h3>System Timing</h3>
+                        <p>
+                            Uses a hardware timer as the system time
+                            source for time-related kernel services.
+                        </p>
+                        <a href="../performance/timing-accuracy.html" class="text-link">
+                            Timing Accuracy
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+                        <h3>Interrupt Integration</h3>
+                        <p>
+                            Defines how interrupt execution interacts
+                            with kernel state and task-level operations.
+                        </p>
+                        <a href="./interrupt-model.html" class="text-link">
+                            Interrupt Model
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>05</span>
+                        </div>
+                        <h3>Synchronization</h3>
+                        <p>
+                            Provides synchronization mechanisms
+                            for coordinating task execution and access
+                            to shared resources.
+                        </p>
+                        <a href="../features/synchronization.html" class="text-link">
+                            Synchronization Features
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>06</span>
+                        </div>
+                        <h3>Inter-Task Communication</h3>
+                        <p>
+                            Provides message-based communication
+                            mechanisms for exchanging information
+                            between application tasks.
+                        </p>
+                        <a href="../features/communication.html" class="text-link">
+                            Communication Features
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Task Execution -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">TASK EXECUTION</span>
+                    <h2>Normal and Fast Task Execution</h2>
+                    <p>
+                        HRTOS provides two task categories with
+                        different execution context arrangements.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Normal tasks form the primary application
+                        execution environment. They use the standard
+                        task context mechanism and support the
+                        configured normal task capacity.
+                    </p>
+
+                    <p>
+                        Fast tasks use a separate execution context
+                        arrangement that takes advantage of dedicated
+                        8051 register-bank resources. This provides
+                        an alternative execution path for applications
+                        that require a different context-switching
+                        cost profile.
+                    </p>
+
+                    <p>
+                        The two task categories are part of the
+                        same operating system environment, but
+                        they should not be assumed to have identical
+                        context management or resource requirements.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Task Category</th>
+                                <th>Task IDs</th>
+                                <th>Capacity</th>
+                                <th>Context Arrangement</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Normal Tasks</td>
+                                <td>0-15</td>
+                                <td>16</td>
+                                <td>Standard task contexts</td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Tasks</td>
+                                <td>16-17</td>
+                                <td>2</td>
+                                <td>Dedicated register-bank resources</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="hero-actions">
+                    <a href="./task-management.html" class="btn btn-primary">
+                        Task Management Details
+                    </a>
+
+                    <a href="./scheduling.html" class="btn btn-secondary">
+                        Scheduling Details
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Scheduling and Time -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">EXECUTION CONTROL</span>
+                    <h2>Scheduling and Time Management</h2>
+                    <p>
+                        Task execution and time-related services
+                        are coordinated through the kernel's
+                        scheduling and timing mechanisms.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS uses priority-based scheduling to organize
+                        application task execution. Task priorities
+                        and execution states influence which task
+                        is selected by the scheduler.
+                    </p>
+
+                    <p>
+                        A hardware timer provides the system timing
+                        source. In the standard HRTOS 4.x configuration,
+                        Timer0 is used as the system time base.
+                    </p>
+
+                    <p>
+                        Time-related services allow applications
+                        to organize delays and waiting operations
+                        without relying exclusively on continuous
+                        polling loops.
+                    </p>
+
+                </div>
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+                        <h3>Priority Levels</h3>
+                        <p>
+                            The standard configuration defines
+                            10 scheduler levels through
+                            OS_SCHED_LEVEL_MAX.
+                        </p>
+                    </div>
+
+                    <div class="capability-item">
+                        <h3>Timer0 Time Base</h3>
+                        <p>
+                            Timer0 provides the configured
+                            system timing source.
+                        </p>
+                    </div>
+
+                    <div class="capability-item">
+                        <h3>Task Delays</h3>
+                        <p>
+                            Time-related kernel services support
+                            application delay and waiting behavior.
+                        </p>
+                    </div>
+
+                    <div class="capability-item">
+                        <h3>Scheduling Integration</h3>
+                        <p>
+                            Timing events are coordinated with
+                            task execution and kernel state.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Synchronization and Communication -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">TASK COORDINATION</span>
+                    <h2>Synchronization and Communication</h2>
+                    <p>
+                        The kernel provides services that allow
+                        independent tasks to coordinate their
+                        activities and exchange information.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Semaphores</h3>
+                        <p>
+                            Synchronization primitives for coordinating
+                            task execution and resource availability.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Mutexes</h3>
+                        <p>
+                            Mutual exclusion mechanisms for protecting
+                            shared resources, including priority inheritance.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Events</h3>
+                        <p>
+                            Event-based synchronization for coordinating
+                            task responses to system conditions.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Message Queues and Mailboxes</h3>
+                        <p>
+                            Message-based mechanisms for communication
+                            between independent tasks.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Unified Waiting</h3>
+                        <p>
+                            A common waiting model that supports
+                            coordination around kernel synchronization
+                            and communication objects.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Resource Coordination</h3>
+                        <p>
+                            Kernel services help organize access
+                            to shared system resources.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="hero-actions">
+                    <a href="../features/synchronization.html" class="btn btn-primary">
+                        Synchronization Features
+                    </a>
+
+                    <a href="../features/communication.html" class="btn btn-secondary">
+                        Communication Features
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 8051 Specific Design -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">8051 IMPLEMENTATION</span>
+                    <h2>Architecture-Aware Kernel Design</h2>
+                    <p>
+                        Kernel implementation is closely related
+                        to the native memory and execution model
+                        of the target microcontroller.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Register Banks</h3>
+                        <p>
+                            Execution context management considers
+                            the 8051 register-bank organization,
+                            including dedicated resources for fast tasks.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Memory Spaces</h3>
+                        <p>
+                            Kernel structures are organized with
+                            consideration for DATA, IDATA, XDATA,
+                            and CODE memory spaces.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Mechanisms</h3>
+                        <p>
+                            Interrupt execution and nesting rules
+                            are designed around the target processor's
+                            interrupt architecture.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Resource Constraints</h3>
+                        <p>
+                            Task capacity, context storage,
+                            and system resources are configured
+                            for the requirements of 8051 systems.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="hero-actions">
+                    <a href="./memory.html" class="btn btn-primary">
+                        Memory Organization
+                    </a>
+
+                    <a href="./resource-management.html" class="btn btn-secondary">
+                        Resource Management
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Configuration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">KERNEL CONFIGURATION</span>
+                    <h2>Standard HRTOS 4.x Parameters</h2>
+                    <p>
+                        The following parameters describe
+                        the referenced standard kernel configuration.
+                    </p>
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Configuration</th>
+                                <th>Value</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>OS_PROCESS_MAX</td>
+                                <td>16</td>
+                                <td>Maximum number of normal tasks</td>
+                            </tr>
+
+                            <tr>
+                                <td>OS_FAST_TASK_MAX</td>
+                                <td>2</td>
+                                <td>Maximum number of fast tasks</td>
+                            </tr>
+
+                            <tr>
+                                <td>OS_SCHED_LEVEL_MAX</td>
+                                <td>10</td>
+                                <td>Configured scheduler levels</td>
+                            </tr>
+
+                            <tr>
+                                <td>OS_TIME_T0</td>
+                                <td>10000</td>
+                                <td>Timer0 timing configuration</td>
+                            </tr>
+
+                            <tr>
+                                <td>OS_TIME_ONCE_DEFAULT</td>
+                                <td>5</td>
+                                <td>Default time-related configuration</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="section-note">
+                    Parameter meanings and units should be interpreted
+                    according to the corresponding HRTOS configuration
+                    definitions and API documentation.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Performance -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">IMPLEMENTATION PERFORMANCE</span>
+                    <h2>Measured Kernel Execution</h2>
+                    <p>
+                        Kernel performance is evaluated through
+                        measurements on actual 8051-compatible
+                        microcontroller hardware.
+                    </p>
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Measurement</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Normal task switch, scheduling-bit path</td>
+                                <td>394.33 ?s</td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal task switch, time-slice path</td>
+                                <td>550.33 ?s</td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast task switch, scheduling-bit path</td>
+                                <td>143.5 ?s</td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast task switch, time-slice path</td>
+                                <td>229.5 ?s</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        <strong>Test platform:</strong>
+                        STC12C5A60S2, 11.0592 MHz, 1T mode.
+                    </p>
+
+                    <p>
+                        These values are measured execution times
+                        for the specified test paths. They are
+                        platform-specific results, not universal
+                        guarantees or worst-case execution bounds
+                        for every application.
+                    </p>
+
+                </div>
+
+                <div class="hero-actions">
+                    <a href="../performance/" class="btn btn-primary">
+                        Performance Overview
+                    </a>
+
+                    <a href="../performance/context-switch.html" class="btn btn-secondary">
+                        Context Switch Measurements
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Topics -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">EXPLORE FURTHER</span>
+                    <h2>Kernel Architecture Topics</h2>
+                    <p>
+                        Explore the individual components
+                        of the HRTOS kernel in more detail.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Task Management</h3>
+                        <p>
+                            Learn how HRTOS organizes task
+                            registration and execution contexts.
+                        </p>
+                        <a href="./task-management.html" class="text-link">
+                            Explore Task Management
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Scheduling Model</h3>
+                        <p>
+                            Understand task priorities
+                            and scheduling behavior.
+                        </p>
+                        <a href="./scheduling.html" class="text-link">
+                            Explore Scheduling
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Memory Organization</h3>
+                        <p>
+                            Explore memory spaces and
+                            kernel context storage.
+                        </p>
+                        <a href="./memory.html" class="text-link">
+                            Explore Memory Architecture
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Model</h3>
+                        <p>
+                            Learn about interrupt execution
+                            and nested interrupt restrictions.
+                        </p>
+                        <a href="./interrupt-model.html" class="text-link">
+                            Explore Interrupt Model
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build with the HRTOS Kernel</h2>
+
+                    <p>
+                        Explore the documentation, review the API,
+                        and evaluate HRTOS on supported 8051 hardware.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/" class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="../download/" class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 and MCS-51 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Technology</h4>
+                        <a href="../features/">Features</a>
+                        <a href="./">Architecture</a>
+                        <a href="../performance/">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../drivers/">Drivers</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    &copy; 2017-2026 HRTOS Project.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Designed for 8051. Built for real-time applications.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,950 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Memory Architecture | HRTOS 8051 Memory Organization</title>
+
+    <meta name="description"
+        content="Explore the HRTOS memory architecture for 8051 microcontrollers, including DATA, IDATA, XDATA, CODE memory spaces, task contexts, and kernel memory organization.">
+
+    <meta name="keywords"
+        content="HRTOS memory architecture, 8051 memory organization, DATA IDATA XDATA CODE, 8051 RTOS memory, MCS-51 memory model, task context storage">
+
+    <meta name="author" content="HRTOS Project">
+
+    <link rel="canonical" href="https://en.hrtos.com/architecture/memory.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <meta property="og:title" content="HRTOS Memory Architecture">
+    <meta property="og:description"
+        content="Understand how HRTOS organizes memory and task contexts within the 8051 memory model.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://en.hrtos.com/architecture/memory.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "HRTOS Memory Architecture",
+        "description": "Technical overview of memory organization and task context storage in HRTOS for 8051 microcontrollers.",
+        "author": {
+            "@type": "Organization",
+            "name": "HRTOS Project"
+        },
+        "mainEntityOfPage": "https://en.hrtos.com/architecture/memory.html"
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="./" class="active">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">KERNEL ARCHITECTURE</span>
+
+                    <h1>Memory Architecture</h1>
+
+                    <p class="hero-description">
+                        A memory organization model designed around
+                        the distinct memory spaces and limited resources
+                        of 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./" class="btn btn-primary">
+                            Architecture Overview
+                        </a>
+
+                        <a href="../docs/" class="btn btn-secondary">
+                            Technical Documentation
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">OVERVIEW</span>
+                    <h2>Memory Management on the 8051</h2>
+                    <p>
+                        Memory organization is a fundamental part
+                        of operating system design on resource-constrained
+                        microcontrollers.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Unlike many modern microcontrollers, the classic
+                        8051 architecture uses several distinct memory
+                        spaces. Internal data memory, external data memory,
+                        and program memory have different addressing
+                        characteristics and access mechanisms.
+                    </p>
+
+                    <p>
+                        HRTOS takes these architectural differences
+                        into account when organizing kernel data,
+                        task execution contexts, and application resources.
+                    </p>
+
+                    <p>
+                        The memory layout must be considered together
+                        with the selected microcontroller, compiler,
+                        linker configuration, and application requirements.
+                        Available memory and its placement directly
+                        influence which HRTOS configuration can be used.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 8051 Memory Model -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">8051 MEMORY MODEL</span>
+                    <h2>Four Important Memory Spaces</h2>
+                    <p>
+                        The Keil C51 development environment provides
+                        memory-space definitions that correspond
+                        to the characteristics of the 8051 architecture.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+                        <h3>DATA</h3>
+                        <p>
+                            Directly addressable internal data memory.
+                            Frequently used for variables that require
+                            efficient access.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+                        <h3>IDATA</h3>
+                        <p>
+                            Indirectly addressable internal data memory,
+                            commonly associated with the 8051 internal
+                            RAM addressing model.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+                        <h3>XDATA</h3>
+                        <p>
+                            External data memory space used for
+                            additional data storage and kernel
+                            data structures.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+                        <h3>CODE</h3>
+                        <p>
+                            Program memory space used for executable
+                            instructions and constant data.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Memory Space Details -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">MEMORY SPACES</span>
+                    <h2>Understanding the Memory Areas</h2>
+                    <p>
+                        Each memory space has a different role
+                        in an 8051-based embedded application.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>DATA Memory</h3>
+
+                    <p>
+                        DATA refers to the directly addressable
+                        internal data memory area. It is valuable
+                        for frequently accessed variables and
+                        time-sensitive data operations.
+                    </p>
+
+                    <p>
+                        Because internal RAM is limited, DATA
+                        allocation must be planned carefully.
+                        Stack usage, local variables, register-bank
+                        allocation, and other application data
+                        all compete for internal memory resources.
+                    </p>
+
+                    <h3>IDATA Memory</h3>
+
+                    <p>
+                        IDATA provides indirect access to internal
+                        data memory. It is commonly used for data
+                        structures and variables that benefit
+                        from indirect addressing.
+                    </p>
+
+                    <p>
+                        Its actual available capacity depends
+                        on the specific 8051-compatible device
+                        and its internal RAM implementation.
+                    </p>
+
+                    <h3>XDATA Memory</h3>
+
+                    <p>
+                        XDATA provides an external data memory
+                        address space. On many enhanced 8051
+                        microcontrollers, this space is implemented
+                        using on-chip expanded RAM.
+                    </p>
+
+                    <p>
+                        HRTOS uses XDATA for kernel data structures
+                        and task context storage in its standard
+                        configuration. The available XDATA capacity
+                        is therefore an important hardware selection
+                        consideration.
+                    </p>
+
+                    <h3>CODE Memory</h3>
+
+                    <p>
+                        CODE is the program memory space used
+                        for executable instructions and constant
+                        program data.
+                    </p>
+
+                    <p>
+                        Kernel code, application code, and other
+                        program components occupy this space.
+                        The required capacity depends on the selected
+                        kernel build and application features.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HRTOS Memory Requirements -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">SYSTEM REQUIREMENTS</span>
+                    <h2>HRTOS Memory Requirements</h2>
+                    <p>
+                        The full HRTOS configuration requires
+                        sufficient program memory and external
+                        data memory resources.
+                    </p>
+                </div>
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+                        <h3>XDATA</h3>
+                        <p>
+                            <strong>At least 1 KB</strong>
+                        </p>
+                        <p>
+                            Required for the full HRTOS configuration
+                            and its external data structures.
+                        </p>
+                    </div>
+
+                    <div class="capability-item">
+                        <h3>CODE</h3>
+                        <p>
+                            <strong>At least 8 KB</strong>
+                        </p>
+                        <p>
+                            Required program memory capacity
+                            for the full HRTOS configuration.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        These are baseline requirements for the
+                        full HRTOS configuration, not a guarantee
+                        that every application will fit within
+                        the same memory budget.
+                    </p>
+
+                    <p>
+                        Application code, driver modules, communication
+                        components, constants, and additional data
+                        structures may require more memory.
+                    </p>
+
+                    <p>
+                        The final memory footprint should be verified
+                        using the actual build output and linker
+                        memory map.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Kernel Memory Layout -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">KERNEL MEMORY LAYOUT</span>
+                    <h2>Standard HRTOS 4.x Memory Organization</h2>
+                    <p>
+                        The following addresses describe a referenced
+                        HRTOS 4.x memory layout.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS organizes selected kernel data and
+                        task execution contexts within defined
+                        memory regions. Separating these structures
+                        makes the memory layout easier to inspect
+                        and validate during development.
+                    </p>
+
+                    <p>
+                        The following table shows the documented
+                        memory regions for the referenced configuration.
+                        These addresses should not be assumed to apply
+                        unchanged to every device or custom build.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Memory Region</th>
+                                <th>Address Range</th>
+                                <th>Size</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>XDATA Pool</td>
+                                <td>0x0200-0x03FF</td>
+                                <td>512 bytes</td>
+                                <td>
+                                    Configured kernel external
+                                    data memory region
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Task Contexts</td>
+                                <td>0x0222-0x022B</td>
+                                <td>10 bytes</td>
+                                <td>
+                                    Two fast task contexts,
+                                    5 bytes each
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task Contexts</td>
+                                <td>0x022C-0x02FB</td>
+                                <td>208 bytes</td>
+                                <td>
+                                    Sixteen normal task contexts,
+                                    13 bytes each
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>DATA Stack Region</td>
+                                <td>0x42-0x7F</td>
+                                <td>62 bytes</td>
+                                <td>
+                                    Configured internal DATA
+                                    stack area
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>IDATA Stack Region</td>
+                                <td>0xDB-0xE7</td>
+                                <td>13 bytes</td>
+                                <td>
+                                    Configured internal IDATA
+                                    stack area
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="section-note">
+                    The XDATA pool is a 512-byte address range.
+                    The task context regions are located within
+                    this pool and should not be counted as additional
+                    memory outside it.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Context Storage -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">TASK CONTEXT STORAGE</span>
+                    <h2>Task Context Organization</h2>
+                    <p>
+                        Task context storage is an important part
+                        of the kernel's execution model.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        When task execution is suspended and later
+                        resumed, the operating system must preserve
+                        the execution information required by
+                        the corresponding task context mechanism.
+                    </p>
+
+                    <p>
+                        HRTOS uses different context storage
+                        arrangements for normal tasks and fast tasks.
+                        This reflects their different execution
+                        models and register-bank usage.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>16</span>
+                        </div>
+
+                        <h3>Normal Task Contexts</h3>
+
+                        <p>
+                            The standard configuration provides
+                            sixteen normal task contexts.
+                        </p>
+
+                        <p>
+                            Each context occupies 13 bytes
+                            in the documented XDATA layout.
+                        </p>
+
+                        <p>
+                            Total context storage:
+                            <strong>208 bytes</strong>.
+                        </p>
+
+                    </div>
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Fast Task Contexts</h3>
+
+                        <p>
+                            Two fast task contexts are provided
+                            in the standard configuration.
+                        </p>
+
+                        <p>
+                            Each context occupies 5 bytes
+                            in the documented XDATA layout.
+                        </p>
+
+                        <p>
+                            Total context storage:
+                            <strong>10 bytes</strong>.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        These context sizes describe the allocated
+                        storage structures in the referenced layout.
+                        They should not be interpreted as the total
+                        memory required by a task, since application
+                        variables, stack usage, and other runtime
+                        resources are separate considerations.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Internal Stack -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">STACK ORGANIZATION</span>
+                    <h2>Internal Stack Considerations</h2>
+                    <p>
+                        Internal RAM is a limited resource on
+                        8051 microcontrollers and requires careful
+                        allocation.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Stack usage is closely related to function
+                        calls, interrupt entry, nested execution,
+                        local variables, and compiler-generated
+                        code.
+                    </p>
+
+                    <p>
+                        HRTOS uses configured internal memory
+                        regions for its stack-related organization.
+                        The DATA and IDATA areas must be considered
+                        together with application memory usage
+                        and the target device's internal RAM limits.
+                    </p>
+
+                    <p>
+                        Developers should verify stack consumption
+                        under realistic execution conditions,
+                        especially when interrupt nesting and
+                        deeply nested function calls are involved.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>DATA Stack</h3>
+                        <p>
+                            The documented configuration reserves
+                            the DATA address range 0x42-0x7F
+                            for its stack organization.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>IDATA Stack</h3>
+                        <p>
+                            The documented configuration uses
+                            the IDATA address range 0xDB-0xE7
+                            for its stack organization.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Nesting</h3>
+                        <p>
+                            Nested interrupt execution adds
+                            stack and execution-state requirements
+                            that must be included in memory planning.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Memory Planning -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">DEVELOPMENT GUIDANCE</span>
+                    <h2>Memory Planning and Verification</h2>
+                    <p>
+                        A successful build does not automatically
+                        guarantee that an application has sufficient
+                        runtime memory resources.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Check the Linker Map</h3>
+                        <p>
+                            Inspect the generated memory map
+                            to verify CODE, XDATA, DATA,
+                            and IDATA allocation.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Account for Application Data</h3>
+                        <p>
+                            Include application variables,
+                            driver buffers, communication buffers,
+                            and constant data in memory planning.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Review Stack Usage</h3>
+                        <p>
+                            Evaluate function call depth,
+                            interrupt nesting, and local variable
+                            requirements.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Verify the Target Device</h3>
+                        <p>
+                            Confirm that the selected chip provides
+                            sufficient internal RAM, XDATA,
+                            and program memory.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Hardware Compatibility -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">HARDWARE CONSIDERATIONS</span>
+                    <h2>Memory Resources Across 8051 Devices</h2>
+                    <p>
+                        Different 8051-compatible microcontrollers
+                        provide different amounts of internal RAM,
+                        expanded data memory, and program memory.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        The classic 8051 architecture and modern
+                        enhanced 8051-compatible devices can differ
+                        significantly in their available memory
+                        resources.
+                    </p>
+
+                    <p>
+                        The full HRTOS configuration requires
+                        at least 1 KB of XDATA and 8 KB of CODE.
+                        Devices with smaller XDATA capacity may
+                        require a different system configuration
+                        or a reduced-feature implementation.
+                    </p>
+
+                    <p>
+                        For example, the 89C52RC provides a much
+                        smaller XDATA capacity than the standard
+                        full HRTOS requirement. HRTOS also has
+                        a COOP branch intended for constrained
+                        environments.
+                    </p>
+
+                </div>
+
+                <div class="hero-actions">
+
+                    <a href="../hardware/" class="btn btn-primary">
+                        Supported Hardware
+                    </a>
+
+                    <a href="../hardware/stc12.html" class="btn btn-secondary">
+                        STC12 Platform
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Topics -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-tag">RELATED ARCHITECTURE</span>
+                    <h2>Explore Related Topics</h2>
+                    <p>
+                        Learn how memory organization interacts
+                        with other parts of the HRTOS kernel.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Kernel Architecture</h3>
+                        <p>
+                            Understand the overall kernel structure
+                            and its main services.
+                        </p>
+                        <a href="./kernel.html" class="text-link">
+                            Explore Kernel
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Task Management</h3>
+                        <p>
+                            Learn about task registration
+                            and execution contexts.
+                        </p>
+                        <a href="./task-management.html" class="text-link">
+                            Explore Task Management
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Scheduling Model</h3>
+                        <p>
+                            Understand task priorities
+                            and context switching.
+                        </p>
+                        <a href="./scheduling.html" class="text-link">
+                            Explore Scheduling
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Resource Management</h3>
+                        <p>
+                            Explore kernel resource allocation
+                            and resource coordination.
+                        </p>
+                        <a href="./resource-management.html" class="text-link">
+                            Explore Resource Management
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build with HRTOS</h2>
+
+                    <p>
+                        Review the documentation, configure
+                        the target environment, and evaluate
+                        HRTOS on supported 8051 hardware.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/" class="btn btn-primary">
+                            Read Documentation
+                        </a>
+
+                        <a href="../download/" class="btn btn-secondary">
+                            Download HRTOS
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 and MCS-51 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Technology</h4>
+                        <a href="../features/">Features</a>
+                        <a href="./">Architecture</a>
+                        <a href="../performance/">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../drivers/">Drivers</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    &copy; 2017-2026 HRTOS Project.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Designed for 8051. Built for real-time applications.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

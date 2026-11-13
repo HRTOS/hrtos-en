@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scheduling Architecture | HRTOS</title>
+
+    <meta name="description"
+        content="Explore the HRTOS scheduling architecture, including priority-based scheduling, time-slice scheduling, fast tasks, and task context switching on 8051/MCS-51 microcontrollers.">
+
+    <meta name="keywords"
+        content="8051 scheduler, 8051 RTOS scheduling, priority scheduling, time-slice scheduling, HRTOS, MCS-51">
+
+    <link rel="canonical" href="https://en.hrtos.com/architecture/scheduling.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script src="../assets/js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="site-logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/index.html">Product</a>
+                <a href="../features/index.html">Features</a>
+                <a href="index.html" class="active">Architecture</a>
+                <a href="../performance/index.html">Performance</a>
+                <a href="../hardware/index.html">Hardware</a>
+                <a href="../drivers/index.html">Drivers</a>
+                <a href="../examples/index.html">Examples</a>
+                <a href="../docs/index.html">Documentation</a>
+                <a href="../download/index.html">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="section-tag">SYSTEM ARCHITECTURE</div>
+
+                <h1>Scheduling Architecture</h1>
+
+                <p class="hero-description">
+                    A priority-based scheduling architecture designed for
+                    predictable task execution and efficient context switching
+                    on resource-constrained 8051 microcontrollers.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="../features/scheduler.html" class="btn btn-primary">
+                        Scheduling Features
+                    </a>
+
+                    <a href="../performance/context-switch.html" class="btn btn-secondary">
+                        Context Switch Performance
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Overview -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">OVERVIEW</div>
+                <h2>Scheduling Model</h2>
+                <p>
+                    HRTOS combines priority-based task selection with
+                    cooperative scheduling requests and time-slice-based
+                    scheduling opportunities.
+                </p>
+            </div>
+
+            <div class="content-narrow">
+                <p>
+                    The scheduler determines which eligible task should
+                    execute next. It considers task priority, task state,
+                    scheduling requests, and the configured scheduling
+                    policy.
+                </p>
+
+                <p>
+                    The scheduling architecture is designed around the
+                    constraints of the 8051 architecture, where CPU time,
+                    internal RAM, external RAM, and register resources
+                    must be carefully managed.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+                    <h3>Priority-Based Selection</h3>
+                    <p>
+                        Task priority is used to determine execution
+                        precedence among eligible tasks.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Time-Slice Scheduling</h3>
+                    <p>
+                        Timer-driven scheduling opportunities support
+                        periodic task rotation according to the
+                        configured policy.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+                    <h3>Fast Task Execution</h3>
+                    <p>
+                        A separate fast-task context mechanism provides
+                        a lower-overhead execution path for selected
+                        time-sensitive tasks.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Scheduling Flow -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">EXECUTION FLOW</div>
+                <h2>Scheduling Process</h2>
+                <p>
+                    The scheduler evaluates execution conditions and
+                    selects the next eligible task.
+                </p>
+            </div>
+
+            <div class="architecture-flow">
+
+                <div class="flow-step">
+                    <div class="flow-number">01</div>
+                    <h3>Scheduling Trigger</h3>
+                    <p>
+                        A scheduling request or timer-driven scheduling
+                        opportunity occurs.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">02</div>
+                    <h3>Task Evaluation</h3>
+                    <p>
+                        The kernel evaluates task states and scheduling
+                        priorities.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">03</div>
+                    <h3>Task Selection</h3>
+                    <p>
+                        An eligible task is selected according to the
+                        scheduling policy.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">04</div>
+                    <h3>Context Switch</h3>
+                    <p>
+                        The required task context is restored and
+                        execution continues.
+                    </p>
+                </div>
+
+            </div>
+
+            <p class="content-narrow">
+                This diagram illustrates the conceptual scheduling
+                sequence. The actual execution path depends on the
+                scheduling trigger and kernel state.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- Priority Model -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">PRIORITY MODEL</div>
+                <h2>Task Priority Levels</h2>
+                <p>
+                    HRTOS uses a configurable priority model to organize
+                    task execution and interrupt-related scheduling levels.
+                </p>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Priority</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>Idle</td>
+                            <td>
+                                Idle-level execution when no higher-priority
+                                eligible task requires CPU time.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>1-7</td>
+                            <td>Normal</td>
+                            <td>
+                                Priority levels used by normal tasks.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>8</td>
+                            <td>High / Fast</td>
+                            <td>
+                                High-priority execution level associated
+                                with fast-task scheduling.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>9</td>
+                            <td>Interrupt</td>
+                            <td>
+                                Interrupt-related scheduling level.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>10</td>
+                            <td>Nested Interrupt</td>
+                            <td>
+                                Scheduling level associated with nested
+                                interrupt execution.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="content-narrow">
+                <p>
+                    Priority levels describe the kernel's execution
+                    hierarchy. They should not be interpreted as a
+                    guarantee that every interrupt or task transition
+                    can occur at any arbitrary point in execution.
+                    Interrupt nesting and scheduling API restrictions
+                    remain applicable.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Normal Tasks -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">NORMAL TASKS</div>
+                <h2>Normal Task Scheduling</h2>
+                <p>
+                    The normal task mechanism supports general application
+                    workloads and kernel services.
+                </p>
+            </div>
+
+            <div class="capability-grid">
+
+                <div class="capability-item">
+                    <h3>Task Capacity</h3>
+                    <p>
+                        The standard configuration supports up to
+                        16 normal task contexts.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Priority Organization</h3>
+                    <p>
+                        Normal tasks use the configured priority levels
+                        to establish execution precedence.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Scheduling Requests</h3>
+                    <p>
+                        Kernel scheduling requests allow execution
+                        to move to another eligible task when
+                        scheduling conditions are met.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Time-Slice Support</h3>
+                    <p>
+                        Timer-driven scheduling provides an additional
+                        scheduling opportunity for normal task execution.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Fast Tasks -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">FAST TASKS</div>
+                <h2>Fast Task Scheduling</h2>
+                <p>
+                    A dedicated execution path for selected tasks
+                    that require reduced context-switch overhead.
+                </p>
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    In addition to normal tasks, HRTOS provides a
+                    fast-task mechanism with dedicated task contexts.
+                    This mechanism is intended for selected workloads
+                    where reducing task-switch overhead is important.
+                </p>
+
+                <p>
+                    Fast tasks use a separate context organization
+                    and are limited in number. They are not simply
+                    normal tasks with a higher numeric priority;
+                    their execution mechanism is specifically designed
+                    for a different context-switch path.
+                </p>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Dedicated Contexts</h3>
+                    <p>
+                        The standard configuration provides two
+                        fast-task contexts.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">05</div>
+                    <h3>Compact Context</h3>
+                    <p>
+                        Each fast-task context occupies 5 bytes
+                        in the documented standard memory layout.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">?s</div>
+                    <h3>Reduced Switching Overhead</h3>
+                    <p>
+                        The dedicated context mechanism provides
+                        a faster measured task-switch path than
+                        the normal task mechanism on the tested platform.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Timer and Time Slice -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">TIME MANAGEMENT</div>
+                <h2>Timer-Driven Scheduling</h2>
+                <p>
+                    Timer0 provides the system timing foundation
+                    for periodic kernel time management.
+                </p>
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    HRTOS uses Timer0 as its system timer source.
+                    Timer-driven timing services maintain the kernel's
+                    time base and provide scheduling opportunities
+                    according to the configured system parameters.
+                </p>
+
+                <p>
+                    Time-slice scheduling and task delay services
+                    are related to the system timing mechanism,
+                    but they serve different purposes. A delay request
+                    determines when a task becomes eligible again,
+                    while time-slice scheduling provides an opportunity
+                    to reconsider task execution.
+                </p>
+
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Configuration</th>
+                            <th>Standard Value</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><code>OS_TIME_T0</code></td>
+                            <td>10000</td>
+                            <td>
+                                Timer0 timing configuration.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_TIME_ONCE_DEFAULT</code></td>
+                            <td>5</td>
+                            <td>
+                                Default one-time scheduling interval
+                                configuration.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Timer Source</td>
+                            <td>Timer0</td>
+                            <td>
+                                System timing source.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <p class="content-narrow">
+                These values describe the documented standard
+                configuration. Actual timing behavior depends on
+                the target MCU, oscillator frequency, timer setup,
+                and system configuration.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- Performance -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">MEASURED PERFORMANCE</div>
+                <h2>Task Switching Performance</h2>
+                <p>
+                    Measured task-switch execution times on a real
+                    8051 target provide a practical reference for
+                    evaluating scheduling overhead.
+                </p>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Switch Path</th>
+                            <th>Scheduling Bit Path</th>
+                            <th>Time-Slice Path</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Normal Task</td>
+                            <td>394.33 ?s</td>
+                            <td>550.33 ?s</td>
+                        </tr>
+
+                        <tr>
+                            <td>Fast Task</td>
+                            <td>143.50 ?s</td>
+                            <td>229.50 ?s</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="content-narrow">
+
+                <p>
+                    <strong>Test platform:</strong>
+                    STC12C5A60S2, 1T mode, 11.0592 MHz.
+                </p>
+
+                <p>
+                    The figures represent measured task-switch
+                    execution times under the stated test conditions.
+                    They are reference measurements rather than
+                    universal worst-case execution-time guarantees.
+                </p>
+
+                <a href="../performance/context-switch.html" class="text-link">
+                    View detailed context-switch benchmarks
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Configuration -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">CONFIGURATION</div>
+                <h2>Scheduling Configuration</h2>
+                <p>
+                    The following parameters define the standard
+                    scheduling capacity and priority organization.
+                </p>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><code>OS_PROCESS_MAX</code></td>
+                            <td>16</td>
+                            <td>
+                                Maximum number of normal task contexts.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_FAST_TASK_MAX</code></td>
+                            <td>2</td>
+                            <td>
+                                Maximum number of fast-task contexts.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_SCHED_LEVEL_MAX</code></td>
+                            <td>10</td>
+                            <td>
+                                Configured scheduling-level limit.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_TIME_T0</code></td>
+                            <td>10000</td>
+                            <td>
+                                Timer0 timing configuration.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>OS_TIME_ONCE_DEFAULT</code></td>
+                            <td>5</td>
+                            <td>
+                                Default one-time timing configuration.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Related Architecture -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">RELATED ARCHITECTURE</div>
+                <h2>Explore Other Subsystems</h2>
+                <p>
+                    Scheduling works together with task management,
+                    interrupt handling, memory organization, and
+                    kernel resource management.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <h3>Kernel</h3>
+                    <p>
+                        Learn about the overall kernel service
+                        organization and execution model.
+                    </p>
+                    <a href="kernel.html" class="text-link">
+                        Explore Kernel
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Task Management</h3>
+                    <p>
+                        Understand task creation, registration,
+                        states, and lifecycle management.
+                    </p>
+                    <a href="task-management.html" class="text-link">
+                        Explore Task Management
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Interrupt Model</h3>
+                    <p>
+                        Learn how interrupts interact with task
+                        execution and scheduling.
+                    </p>
+                    <a href="interrupt-model.html" class="text-link">
+                        Explore Interrupt Model
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Memory Architecture</h3>
+                    <p>
+                        Review the memory regions and task-context
+                        storage used by HRTOS.
+                    </p>
+                    <a href="memory.html" class="text-link">
+                        Explore Memory
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+
+            <div class="cta-content">
+                <h2>Explore HRTOS</h2>
+
+                <p>
+                    Discover the complete 8051 operating system
+                    architecture, technical documentation, and
+                    practical application examples.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="../docs/index.html" class="btn btn-primary">
+                        Documentation
+                    </a>
+
+                    <a href="../download/index.html" class="btn btn-secondary">
+                        Download HRTOS
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+
+                    <p>
+                        HRTOS is an operating system project
+                        for 8051 and MCS-51 microcontrollers,
+                        focused on real-time execution and
+                        practical embedded applications.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="../product/overview.html">Overview</a>
+                    <a href="../product/releases.html">Releases</a>
+                    <a href="../download/index.html">Download</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Technology</h4>
+                    <a href="../features/index.html">Features</a>
+                    <a href="index.html">Architecture</a>
+                    <a href="../performance/index.html">Performance</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../docs/index.html">Documentation</a>
+                    <a href="../drivers/index.html">Drivers</a>
+                    <a href="../examples/index.html">Examples</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>About</h4>
+                    <a href="../about/index.html">About HRTOS</a>
+                    <a href="../about/history.html">Project History</a>
+                    <a href="../about/contact.html">Contact</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    ? 2017-2026 HRTOS. All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

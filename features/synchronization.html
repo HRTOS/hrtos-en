@@ -1,0 +1,795 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Task Synchronization | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore HRTOS task synchronization mechanisms for 8051 microcontrollers, including semaphores, mutexes, events, priority inheritance and unified task waiting.">
+
+    <meta name="keywords"
+        content="8051 RTOS synchronization, semaphore, mutex, priority inheritance, event management, HRTOS, embedded operating system">
+
+    <link rel="canonical"
+        href="https://en.hrtos.com/features/synchronization.html">
+
+    <link rel="icon" href="../assets/images/logo.svg"
+        type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="./" class="active">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        SYSTEM FEATURES / SYNCHRONIZATION
+                    </span>
+
+                    <h1>
+                        Task Synchronization
+                    </h1>
+
+                    <p class="hero-description">
+                        Coordinating concurrent tasks
+                        and protecting shared resources
+                        in 8051 embedded systems.
+                    </p>
+
+                    <p>
+                        HRTOS provides synchronization
+                        mechanisms that allow application
+                        tasks to coordinate execution,
+                        respond to events and manage
+                        shared system resources.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../architecture/kernel.html"
+                            class="btn btn-primary">
+                            Explore Kernel Architecture
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            All Features
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        OVERVIEW
+                    </span>
+
+                    <h2>Synchronization in Multitasking Systems</h2>
+
+                    <p>
+                        Multiple tasks often need to coordinate
+                        their execution or access shared resources
+                        safely.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        In an embedded application, different
+                        tasks may access the same peripheral,
+                        data structure or system resource.
+                    </p>
+
+                    <p>
+                        Without proper synchronization,
+                        concurrent operations can lead to
+                        inconsistent data, resource conflicts
+                        and unpredictable application behavior.
+                    </p>
+
+                    <p>
+                        HRTOS provides kernel-level synchronization
+                        services to help application developers
+                        manage these interactions through
+                        structured interfaces.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Core Mechanisms -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        SYNCHRONIZATION MECHANISMS
+                    </span>
+
+                    <h2>Built-in Synchronization Services</h2>
+
+                    <p>
+                        HRTOS provides several synchronization
+                        mechanisms for different task coordination
+                        and resource management requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Semaphore -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Semaphores</h3>
+
+                        <p>
+                            Semaphores provide a synchronization
+                            mechanism for coordinating task
+                            execution and managing access
+                            to available resources.
+                        </p>
+
+                        <ul>
+                            <li>Task synchronization</li>
+                            <li>Resource availability signaling</li>
+                            <li>Task waiting and wake-up</li>
+                            <li>Coordinated execution</li>
+                        </ul>
+
+                        <p>
+                            Suitable for signaling between
+                            application tasks and coordinating
+                            access to shared resources.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Mutex -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Mutexes</h3>
+
+                        <p>
+                            Mutexes provide mutual exclusion
+                            when multiple tasks need to access
+                            shared resources.
+                        </p>
+
+                        <ul>
+                            <li>Mutual exclusion</li>
+                            <li>Shared resource protection</li>
+                            <li>Controlled resource ownership</li>
+                            <li>Priority inheritance support</li>
+                        </ul>
+
+                        <p>
+                            Useful for protecting shared
+                            data structures, peripheral
+                            interfaces and critical
+                            application resources.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Events -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Event Management</h3>
+
+                        <p>
+                            Events provide a mechanism for
+                            tasks to wait for and respond
+                            to application or system events.
+                        </p>
+
+                        <ul>
+                            <li>Event signaling</li>
+                            <li>Task synchronization</li>
+                            <li>Event-driven execution</li>
+                            <li>Coordinated task wake-up</li>
+                        </ul>
+
+                        <p>
+                            Suitable for coordinating multiple
+                            application conditions and
+                            asynchronous operations.
+                        </p>
+
+                    </article>
+
+
+                    <!-- Unified Wait -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Unified Wait Mechanism</h3>
+
+                        <p>
+                            HRTOS provides a unified waiting
+                            mechanism that connects task
+                            blocking and wake-up operations
+                            across supported kernel services.
+                        </p>
+
+                        <ul>
+                            <li>Blocking task operations</li>
+                            <li>Timeout-based waiting</li>
+                            <li>Resource waiting</li>
+                            <li>Coordinated wake-up handling</li>
+                        </ul>
+
+                        <p>
+                            This provides a consistent
+                            foundation for synchronization
+                            and communication operations.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Priority Inheritance -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        PRIORITY INHERITANCE
+                    </span>
+
+                    <h2>Managing Priority Inversion</h2>
+
+                    <p>
+                        Priority inheritance helps reduce
+                        priority inversion when tasks compete
+                        for shared resources protected by mutexes.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <h3>What Is Priority Inversion?</h3>
+
+                    <p>
+                        Priority inversion occurs when a
+                        high-priority task is blocked because
+                        a lower-priority task holds a shared
+                        resource.
+                    </p>
+
+                    <p>
+                        The situation can become more complex
+                        if medium-priority tasks continue
+                        executing and delay the lower-priority
+                        task from releasing that resource.
+                    </p>
+
+
+                    <h3>Priority Inheritance</h3>
+
+                    <p>
+                        With priority inheritance, a task
+                        holding a mutex can temporarily
+                        inherit a higher priority when
+                        a higher-priority task is blocked
+                        waiting for that mutex.
+                    </p>
+
+                    <p>
+                        This allows the resource-holding
+                        task to execute with an adjusted
+                        priority, helping it complete
+                        its critical section and release
+                        the shared resource sooner.
+                    </p>
+
+
+                    <h3>Engineering Benefits</h3>
+
+                    <p>
+                        Priority inheritance helps improve
+                        scheduling behavior in applications
+                        where multiple tasks access shared
+                        resources with different priorities.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Priority Inversion Workflow -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        EXECUTION MODEL
+                    </span>
+
+                    <h2>How Priority Inheritance Works</h2>
+
+                    <p>
+                        A simplified example of resource
+                        contention between three tasks.
+                    </p>
+
+                </div>
+
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">01</span>
+
+                        <h3>Low-Priority Task</h3>
+
+                        <p>
+                            Acquires a mutex and begins
+                            accessing a shared resource.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Resource Locked</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">02</span>
+
+                        <h3>High-Priority Task</h3>
+
+                        <p>
+                            Attempts to acquire the same
+                            mutex and becomes blocked.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Priority Inheritance</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">03</span>
+
+                        <h3>Resource Release</h3>
+
+                        <p>
+                            The resource-holding task
+                            temporarily inherits priority,
+                            completes its operation
+                            and releases the mutex.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        After the mutex is released,
+                        the waiting high-priority task
+                        can proceed according to the
+                        kernel scheduling rules.
+                    </p>
+
+                    <p>
+                        This mechanism helps prevent
+                        unnecessary delays caused by
+                        priority inversion.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Application Scenarios -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        APPLICATION SCENARIOS
+                    </span>
+
+                    <h2>Practical Synchronization Applications</h2>
+
+                    <p>
+                        Synchronization services can be used
+                        across different embedded application
+                        modules.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Shared Peripheral Access</h3>
+
+                        <p>
+                            Coordinate access to shared
+                            communication interfaces,
+                            displays and other peripherals.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Sensor Data Processing</h3>
+
+                        <p>
+                            Coordinate sensor acquisition,
+                            data processing and application
+                            response tasks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Application Events</h3>
+
+                        <p>
+                            Allow tasks to respond to
+                            system events and changes
+                            in application state.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Shared Data Protection</h3>
+
+                        <p>
+                            Protect shared data structures
+                            and coordinate concurrent
+                            access between tasks.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Resource Management -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RESOURCE MANAGEMENT
+                    </span>
+
+                    <h2>Synchronization Under Embedded Constraints</h2>
+
+                    <p>
+                        Synchronization mechanisms must
+                        operate within the limited memory
+                        and processing resources of 8051
+                        microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS integrates synchronization
+                        services into its kernel resource
+                        management architecture.
+                    </p>
+
+                    <p>
+                        The standard system configuration
+                        provides configurable limits
+                        for synchronization and communication
+                        objects.
+                    </p>
+
+                    <p>
+                        This makes resource planning
+                        an important part of embedded
+                        application development.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Features -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED FEATURES
+                    </span>
+
+                    <h2>Explore Other System Capabilities</h2>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <h3>Task Scheduling</h3>
+
+                        <p>
+                            Learn about task priorities,
+                            preemptive scheduling and
+                            fast-task execution.
+                        </p>
+
+                        <a href="./scheduler.html"
+                            class="text-link">
+                            Task Scheduling
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Interrupt Management</h3>
+
+                        <p>
+                            Explore interrupt handling,
+                            nested interrupts and
+                            task wake-up mechanisms.
+                        </p>
+
+                        <a href="./interrupt.html"
+                            class="text-link">
+                            Interrupt Management
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Inter-Task Communication</h3>
+
+                        <p>
+                            Discover message queues,
+                            mailboxes and task communication.
+                        </p>
+
+                        <a href="./communication.html"
+                            class="text-link">
+                            Communication
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Build Reliable Multitasking Applications</h2>
+
+                    <p>
+                        Explore HRTOS documentation and
+                        development resources to understand
+                        how synchronization services
+                        can be integrated into your
+                        embedded applications.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../docs/api.html"
+                            class="btn btn-primary">
+                            Explore API Documentation
+                        </a>
+
+                        <a href="../examples/"
+                            class="btn btn-secondary">
+                            View Examples
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

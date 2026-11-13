@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Timing Accuracy | HRTOS Performance</title>
+    <meta name="description"
+        content="Explore HRTOS timing accuracy, millisecond delay measurements, Timer0 system time base, and measured timing behavior on 8051 microcontrollers.">
+    <meta name="keywords"
+        content="HRTOS, 8051 RTOS, timing accuracy, millisecond timing, os_delay, Timer0, delay measurement, real-time operating system">
+    <meta name="author" content="HRTOS Project">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/timing-accuracy.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Timing Accuracy | HRTOS">
+    <meta property="og:description"
+        content="Measured delay accuracy and system timing behavior in HRTOS on 8051 microcontrollers.">
+    <meta property="og:url" content="https://en.hrtos.com/performance/timing-accuracy.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HRTOS Timing Accuracy",
+        "description": "Timing accuracy and delay measurements for HRTOS on 8051 microcontrollers.",
+        "url": "https://en.hrtos.com/performance/timing-accuracy.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "HRTOS",
+            "url": "https://en.hrtos.com/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <a href="./">Performance</a>
+                    <span>/</span>
+                    <span>Timing Accuracy</span>
+                </div>
+
+                <div class="hero-content">
+                    <span class="section-label">PERFORMANCE</span>
+
+                    <h1>Timing Accuracy</h1>
+
+                    <p class="hero-description">
+                        Consistent timing is essential for real-time
+                        embedded applications. This page presents
+                        measured HRTOS delay behavior, millisecond-level
+                        timing results, and the role of the system
+                        time base on 8051 microcontrollers.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">OVERVIEW</span>
+                    <h2>System Timing in HRTOS</h2>
+                    <p>
+                        HRTOS provides time-based services for task
+                        scheduling and application delays. These
+                        services allow tasks to wait for specified
+                        periods without requiring continuous busy
+                        waiting in application code.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>System Time Base</h3>
+                        <p>
+                            Timer0 provides the periodic system timing
+                            reference used by the kernel in the
+                            documented reference configuration.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Task Delay</h3>
+                        <p>
+                            Tasks can enter a delayed state and
+                            resume execution when their configured
+                            waiting period has elapsed.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Time Measurement</h3>
+                        <p>
+                            Measured delay values provide practical
+                            information about timing behavior under
+                            a specific hardware and software setup.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Millisecond Timing -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">MEASURED RESULTS</span>
+                    <h2>Millisecond Timing Measurements</h2>
+                    <p>
+                        The following measurements compare configured
+                        millisecond intervals with their recorded
+                        execution times on the STC12C5A60S2 platform.
+                    </p>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Configured Interval</th>
+                                <th>Measured Time</th>
+                                <th>Difference</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 ms</td>
+                                <td>1.000 ms</td>
+                                <td>0.000 ms</td>
+                            </tr>
+                            <tr>
+                                <td>5 ms</td>
+                                <td>4.988 ms</td>
+                                <td>-0.012 ms</td>
+                            </tr>
+                            <tr>
+                                <td>10 ms</td>
+                                <td>9.970 ms</td>
+                                <td>-0.030 ms</td>
+                            </tr>
+                            <tr>
+                                <td>100 ms</td>
+                                <td>99.690 ms</td>
+                                <td>-0.310 ms</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    Differences are calculated as measured time minus
+                    configured time. The values represent the recorded
+                    measurements under the stated test conditions.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Delay API -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TASK DELAY</span>
+                    <h2>os_delay() Measurements</h2>
+                    <p>
+                        The os_delay() interface allows a task to
+                        suspend its execution for a specified
+                        number of system time units. The following
+                        values are the recorded measurements for
+                        the tested configuration.
+                    </p>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>os_delay() Argument</th>
+                                <th>Measured Time</th>
+                                <th>Approximate Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>os_delay(1)</td>
+                                <td>12.572 ms</td>
+                                <td>12.572 ms</td>
+                            </tr>
+                            <tr>
+                                <td>os_delay(5)</td>
+                                <td>56.6729 ms</td>
+                                <td>56.673 ms</td>
+                            </tr>
+                            <tr>
+                                <td>os_delay(10)</td>
+                                <td>111.80 ms</td>
+                                <td>111.800 ms</td>
+                            </tr>
+                            <tr>
+                                <td>os_delay(100)</td>
+                                <td>1.104 s</td>
+                                <td>1104 ms</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    The os_delay() measurements are presented separately
+                    from the millisecond interval measurements above.
+                    They describe the observed behavior of this API
+                    under the tested configuration and should not be
+                    assumed to have a one-to-one numerical relationship
+                    with the configured millisecond intervals.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Time Base -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">SYSTEM TIME BASE</span>
+                    <h2>Timer0-Based Timing</h2>
+                    <p>
+                        HRTOS uses Timer0 as the system time base
+                        in the documented reference configuration.
+                        Periodic timer activity provides the timing
+                        reference required by kernel time services.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>Periodic Time Reference</h3>
+
+                    <p>
+                        The system timer generates periodic timing
+                        events. These events allow the kernel to
+                        update time-related state and manage tasks
+                        that are waiting for a specified period.
+                    </p>
+
+                    <h3>Task Delay and Scheduling</h3>
+
+                    <p>
+                        When a task requests a delay, it is placed
+                        into a waiting state according to the
+                        kernel's time-management mechanism. Other
+                        eligible tasks can execute while the delayed
+                        task is waiting.
+                    </p>
+
+                    <h3>Hardware-Dependent Timing</h3>
+
+                    <p>
+                        Actual timing behavior depends on the
+                        microcontroller clock, timer configuration,
+                        timer interrupt processing, and software
+                        execution overhead. The selected system
+                        time base is therefore an important part
+                        of the measurement environment.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Timing Factors -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TIMING FACTORS</span>
+                    <h2>Factors Affecting Timing Behavior</h2>
+                    <p>
+                        Configured time intervals and observed
+                        execution times may differ because of
+                        several hardware and software factors.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Clock Frequency</h3>
+                        <p>
+                            The MCU clock determines the timing
+                            resolution of hardware timer operation
+                            and instruction execution.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Timer Configuration</h3>
+                        <p>
+                            Timer reload values, timer mode, and
+                            interrupt frequency influence the
+                            system time reference.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Processing</h3>
+                        <p>
+                            Interrupt entry, execution, and return
+                            contribute to the total processing
+                            overhead associated with timekeeping.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Scheduling Activity</h3>
+                        <p>
+                            Task scheduling and context switching
+                            affect when a delayed task actually
+                            resumes execution.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Environment -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TEST ENVIRONMENT</span>
+                    <h2>Measurement Platform</h2>
+                    <p>
+                        The timing measurements presented on this
+                        page were obtained using the following
+                        reference hardware and software configuration.
+                    </p>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <tbody>
+                            <tr>
+                                <th>Microcontroller</th>
+                                <td>STC12C5A60S2</td>
+                            </tr>
+                            <tr>
+                                <th>CPU Mode</th>
+                                <td>1T mode</td>
+                            </tr>
+                            <tr>
+                                <th>Clock Frequency</th>
+                                <td>11.0592 MHz</td>
+                            </tr>
+                            <tr>
+                                <th>Operating System</th>
+                                <td>HRTOS 4.x</td>
+                            </tr>
+                            <tr>
+                                <th>Compiler</th>
+                                <td>Keil C51</td>
+                            </tr>
+                            <tr>
+                                <th>System Timer</th>
+                                <td>Timer0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    For further information about the hardware
+                    platforms and test configurations, see the
+                    <a href="./test-environment.html">Test Environment</a>
+                    page.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Interpretation -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">ENGINEERING NOTES</span>
+                    <h2>Interpreting Timing Results</h2>
+                    <p>
+                        Timing measurements should be evaluated
+                        according to the behavior being measured
+                        and the requirements of the target application.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>Configured Interval vs. Actual Execution Time</h3>
+
+                    <p>
+                        A configured delay represents a requested
+                        waiting period. The actual time before a
+                        task resumes can also depend on timer
+                        resolution, scheduling activity, and
+                        other system execution overhead.
+                    </p>
+
+                    <h3>Time Base vs. Application Response</h3>
+
+                    <p>
+                        System time-base accuracy and application-level
+                        response time are different properties.
+                        A periodic timer can provide a consistent
+                        time reference, while the time at which
+                        an application task executes also depends
+                        on scheduling and system load.
+                    </p>
+
+                    <h3>Measurement Scope</h3>
+
+                    <p>
+                        The published results describe the tested
+                        configuration. They are not universal
+                        guarantees for all 8051-compatible devices,
+                        clock frequencies, compiler settings,
+                        or application workloads.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">EXPLORE MORE</span>
+                    <h2>Related Performance Topics</h2>
+                    <p>
+                        Explore other HRTOS performance measurements
+                        and system implementation details.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Performance Benchmarks</h3>
+                        <p>
+                            Review the overall measured performance
+                            of HRTOS.
+                        </p>
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Context Switching</h3>
+                        <p>
+                            Learn about normal and fast task
+                            context switching.
+                        </p>
+                        <a href="./context-switch.html" class="text-link">
+                            View Context Switching
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Latency</h3>
+                        <p>
+                            Explore interrupt and nested interrupt
+                            execution measurements.
+                        </p>
+                        <a href="./interrupt-latency.html" class="text-link">
+                            View Interrupt Latency
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Test Environment</h3>
+                        <p>
+                            Review the hardware and software
+                            configurations used for testing.
+                        </p>
+                        <a href="./test-environment.html" class="text-link">
+                            View Test Environment
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+<div class="cta-content">
+                <h2>Explore HRTOS Architecture</h2>
+
+                <p>
+                    Learn how HRTOS combines system timing,
+                    task scheduling, interrupt handling, and
+                    synchronization for 8051 applications.
+                </p>
+
+                <div class="cta-buttons">
+                    <a href="../architecture/scheduling.html" class="btn btn-primary">
+                        Scheduling Architecture
+                    </a>
+
+                    <a href="../docs/" class="btn btn-secondary">
+                        Documentation
+                    </a>
+                </div>
+</div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="../product/">Overview</a></li>
+                        <li><a href="../product/releases.html">Releases</a></li>
+                        <li><a href="../download/">Download</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li><a href="../features/">Features</a></li>
+                        <li><a href="../architecture/">Architecture</a></li>
+                        <li><a href="./">Performance</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../docs/">Documentation</a></li>
+                        <li><a href="../drivers/">Drivers</a></li>
+                        <li><a href="../examples/">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="../about/">About HRTOS</a></li>
+                        <li><a href="../about/history.html">History</a></li>
+                        <li><a href="../about/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>2017-2026 HRTOS Project. All rights reserved.</p>
+                <p>Designed for 8051. Built for real-time applications.</p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

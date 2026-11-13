@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resource Management | HRTOS Architecture</title>
+    <meta name="description"
+        content="Learn how HRTOS manages kernel resources, synchronization objects, message queues, and memory constraints on 8051 microcontrollers.">
+    <meta name="keywords"
+        content="HRTOS, 8051, resource management, RTOS resources, message queue, semaphore, mutex, embedded operating system">
+
+    <link rel="canonical" href="https://en.hrtos.com/architecture/resource-management.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script src="../assets/js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="site-logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/index.html">Product</a>
+                <a href="../features/index.html">Features</a>
+                <a href="index.html" class="active">Architecture</a>
+                <a href="../performance/index.html">Performance</a>
+                <a href="../hardware/index.html">Hardware</a>
+                <a href="../drivers/index.html">Drivers</a>
+                <a href="../examples/index.html">Examples</a>
+                <a href="../docs/index.html">Documentation</a>
+                <a href="../download/index.html">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="section-tag">SYSTEM ARCHITECTURE</div>
+
+                <h1>Resource Management</h1>
+
+                <p class="hero-description">
+                    Structured management of kernel resources for
+                    predictable and efficient operation on resource-constrained
+                    8051 microcontrollers.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="../docs/index.html" class="btn btn-primary">
+                        Explore Documentation
+                    </a>
+
+                    <a href="memory.html" class="btn btn-secondary">
+                        Memory Architecture
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Overview -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">OVERVIEW</div>
+                <h2>Managing Limited System Resources</h2>
+                <p>
+                    Embedded systems often operate with strict limits on
+                    internal RAM, external RAM, and available processing
+                    capacity. HRTOS provides structured resource management
+                    to help applications coordinate tasks without relying
+                    on unrestricted dynamic allocation.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+                    <h3>Defined Capacity</h3>
+                    <p>
+                        Resource capacities are configured according to
+                        the target system and its application requirements.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Task Coordination</h3>
+                    <p>
+                        Synchronization and communication mechanisms allow
+                        multiple tasks to coordinate access to shared
+                        resources.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+                    <h3>Memory Awareness</h3>
+                    <p>
+                        Resource limits are designed with the memory
+                        constraints of 8051-class microcontrollers in mind.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Resource Capacity -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">CONFIGURATION</div>
+                <h2>Configured Resource Capacity</h2>
+                <p>
+                    HRTOS defines capacity limits for selected kernel
+                    resources. The following values describe the standard
+                    configuration of the HRTOS 4.x system.
+                </p>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Standard Capacity</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Normal Tasks</td>
+                            <td>16</td>
+                            <td>
+                                Normal task identifiers range from 0 to 15.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Fast Tasks</td>
+                            <td>2</td>
+                            <td>
+                                Dedicated fast task contexts for
+                                time-sensitive application processing.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Kernel Resources</td>
+                            <td>6</td>
+                            <td>
+                                Configured resource capacity in the
+                                standard system configuration.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Message Queues</td>
+                            <td>3</td>
+                            <td>
+                                Configured message queue capacity for
+                                inter-task communication.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Scheduler Levels</td>
+                            <td>10</td>
+                            <td>
+                                Configured scheduling priority levels.
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <p class="content-narrow">
+                These values describe configured system limits, not the
+                amount of memory consumed by every application at runtime.
+                Actual resource usage depends on the enabled kernel
+                services, application configuration, and target hardware.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- Resource Types -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">KERNEL SERVICES</div>
+                <h2>Resource Types and Coordination</h2>
+                <p>
+                    HRTOS provides several kernel services that help
+                    application tasks exchange information, synchronize
+                    execution, and coordinate access to shared resources.
+                </p>
+            </div>
+
+            <div class="capability-grid">
+
+                <div class="capability-item">
+                    <h3>Semaphores</h3>
+                    <p>
+                        Provide synchronization between tasks and help
+                        coordinate access to shared operations or resources.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Mutexes</h3>
+                    <p>
+                        Protect shared resources from conflicting concurrent
+                        access. HRTOS supports priority inheritance for
+                        mutex-based synchronization.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Events</h3>
+                    <p>
+                        Allow tasks to wait for event conditions and
+                        coordinate execution based on application events.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Message Queues</h3>
+                    <p>
+                        Provide buffered communication between tasks,
+                        allowing producers and consumers to operate
+                        independently.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Mailboxes</h3>
+                    <p>
+                        Support message-based communication between
+                        application tasks.
+                    </p>
+                </div>
+
+                <div class="capability-item">
+                    <h3>Unified Waiting</h3>
+                    <p>
+                        A unified waiting mechanism provides a consistent
+                        way for tasks to wait for supported synchronization
+                        and communication conditions.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Resource Lifecycle -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">RESOURCE LIFECYCLE</div>
+                <h2>Resource Usage in an Embedded Application</h2>
+                <p>
+                    Resource management begins with system configuration
+                    and continues throughout application execution.
+                    The following diagram illustrates the general workflow.
+                </p>
+            </div>
+
+            <div class="architecture-flow">
+
+                <div class="flow-step">
+                    <div class="flow-number">01</div>
+                    <h3>Configuration</h3>
+                    <p>
+                        Define task counts, resource capacities,
+                        and enabled kernel services.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">02</div>
+                    <h3>Initialization</h3>
+                    <p>
+                        Initialize the kernel and the resources
+                        required by the application.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">03</div>
+                    <h3>Runtime Operation</h3>
+                    <p>
+                        Tasks use synchronization and communication
+                        services during normal execution.
+                    </p>
+                </div>
+
+                <div class="flow-connector"></div>
+
+                <div class="flow-step">
+                    <div class="flow-number">04</div>
+                    <h3>Coordination</h3>
+                    <p>
+                        Waiting tasks resume when the corresponding
+                        synchronization or communication conditions
+                        are satisfied.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Design Considerations -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">ENGINEERING CONSIDERATIONS</div>
+                <h2>Designing Within 8051 Constraints</h2>
+                <p>
+                    Resource planning is an important part of embedded
+                    software engineering. HRTOS uses defined capacities
+                    to make system configuration easier to evaluate.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <h3>Plan Before Deployment</h3>
+                    <p>
+                        Estimate the number of tasks, synchronization
+                        objects, and communication channels required
+                        by the application.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Consider Memory Limits</h3>
+                    <p>
+                        Evaluate DATA, IDATA, and XDATA requirements
+                        together with the memory occupied by application
+                        variables and kernel contexts.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Validate Under Load</h3>
+                    <p>
+                        Test resource usage and task coordination under
+                        representative operating conditions, including
+                        concurrent events and communication activity.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Related Architecture -->
+    <section class="section section-alt">
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-tag">RELATED ARCHITECTURE</div>
+                <h2>Explore the HRTOS Architecture</h2>
+                <p>
+                    Resource management works together with the kernel,
+                    scheduler, memory model, and task management system.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <h3>Kernel Architecture</h3>
+                    <p>
+                        Understand the overall structure of the HRTOS kernel.
+                    </p>
+                    <a href="kernel.html" class="text-link">
+                        Explore Kernel
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Memory Architecture</h3>
+                    <p>
+                        Learn how HRTOS uses the 8051 memory model.
+                    </p>
+                    <a href="memory.html" class="text-link">
+                        Explore Memory
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Task Management</h3>
+                    <p>
+                        Learn about task contexts, task identifiers,
+                        and task execution.
+                    </p>
+                    <a href="task-management.html" class="text-link">
+                        Explore Task Management
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+
+            <div class="cta-content">
+                <h2>Build Structured 8051 Applications</h2>
+
+                <p>
+                    Explore HRTOS documentation, APIs, and application
+                    examples to understand how kernel services can be
+                    integrated into embedded projects.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="../docs/index.html" class="btn btn-primary">
+                        View Documentation
+                    </a>
+
+                    <a href="../download/index.html" class="btn btn-secondary">
+                        Download HRTOS
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is an operating system project for
+                        8051 and MCS-51 microcontrollers.
+                    </p>
+
+                    <p>
+                        Engineering Real-Time on 8051.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Product</h3>
+                    <a href="../product/overview.html">Overview</a>
+                    <a href="../product/releases.html">Releases</a>
+                    <a href="../download/index.html">Download</a>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Technology</h3>
+                    <a href="../features/index.html">Features</a>
+                    <a href="index.html">Architecture</a>
+                    <a href="../performance/index.html">Performance</a>
+                    <a href="../hardware/index.html">Hardware</a>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <a href="../drivers/index.html">Drivers</a>
+                    <a href="../examples/index.html">Examples</a>
+                    <a href="../docs/index.html">Documentation</a>
+                </div>
+
+                <div class="footer-links">
+                    <h3>About</h3>
+                    <a href="../about/index.html">About HRTOS</a>
+                    <a href="../about/history.html">Project History</a>
+                    <a href="../about/contact.html">Contact</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2017-2026 HRTOS. All rights reserved.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>

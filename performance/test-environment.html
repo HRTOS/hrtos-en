@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test Environment | HRTOS Performance</title>
+    <meta name="description"
+        content="Learn about the hardware platforms, development tools, test configurations, and measurement scope used for HRTOS performance evaluation on 8051 microcontrollers.">
+    <meta name="keywords"
+        content="HRTOS, 8051, test environment, performance testing, STC12C5A60S2, STC8H8U64K, Keil C51, embedded system">
+    <meta name="author" content="HRTOS Project">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/test-environment.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Test Environment | HRTOS">
+    <meta property="og:description"
+        content="Hardware platforms and measurement configurations used in HRTOS performance testing.">
+    <meta property="og:url" content="https://en.hrtos.com/performance/test-environment.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HRTOS Test Environment",
+        "description": "Hardware platforms, development tools, and test configurations used for HRTOS performance evaluation.",
+        "url": "https://en.hrtos.com/performance/test-environment.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "HRTOS",
+            "url": "https://en.hrtos.com/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <a href="./">Performance</a>
+                    <span>/</span>
+                    <span>Test Environment</span>
+                </div>
+
+                <div class="hero-content">
+                    <span class="section-label">PERFORMANCE</span>
+
+                    <h1>Test Environment</h1>
+
+                    <p class="hero-description">
+                        Performance measurements are meaningful only when
+                        their hardware platforms and test conditions are
+                        clearly identified. This page documents the main
+                        platforms and development environment used to
+                        evaluate HRTOS on 8051 microcontrollers.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">OVERVIEW</span>
+                    <h2>Hardware-Based Performance Evaluation</h2>
+                    <p>
+                        HRTOS performance evaluation is based on execution
+                        on real 8051-compatible microcontrollers. The
+                        measurements cover task switching, interrupt
+                        execution, timing behavior, and long-duration
+                        system operation.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+                    <p>
+                        Different test platforms are used for different
+                        evaluation purposes. Detailed timing measurements
+                        are recorded on the STC12C5A60S2, while extended
+                        stress testing is performed on the STC8H8U64K.
+                    </p>
+
+                    <p>
+                        Keeping these test environments separate helps
+                        ensure that each result is interpreted in the
+                        context of the hardware on which it was obtained.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Platforms -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">HARDWARE PLATFORMS</span>
+                    <h2>Target Microcontrollers</h2>
+                    <p>
+                        Two STC microcontrollers are used for the
+                        performance measurements and long-duration
+                        testing documented on this website.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>STC12C5A60S2</h3>
+
+                        <p>
+                            Used as the primary platform for detailed
+                            HRTOS timing measurements.
+                        </p>
+
+                        <ul>
+                            <li>8051-compatible MCU</li>
+                            <li>1T operating mode</li>
+                            <li>11.0592 MHz clock</li>
+                            <li>Task switching measurements</li>
+                            <li>Interrupt execution measurements</li>
+                            <li>System timing measurements</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>STC8H8U64K</h3>
+
+                        <p>
+                            Used for long-duration execution and
+                            stress testing.
+                        </p>
+
+                        <ul>
+                            <li>STC8 family MCU</li>
+                            <li>8051-compatible architecture</li>
+                            <li>Extended execution testing</li>
+                            <li>Repeated test rounds</li>
+                            <li>High-volume test variants</li>
+                            <li>Sustained CPU workload</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Primary Purpose</th>
+                                <th>Test Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>STC12C5A60S2</td>
+                                <td>Detailed timing evaluation</td>
+                                <td>Switching, interrupts, timing</td>
+                            </tr>
+                            <tr>
+                                <td>STC8H8U64K</td>
+                                <td>Long-duration execution</td>
+                                <td>Stress and stability testing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Development Environment -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">DEVELOPMENT TOOLS</span>
+                    <h2>Software Environment</h2>
+                    <p>
+                        HRTOS is developed for the 8051/MCS-51 ecosystem
+                        using the Keil C51 toolchain.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Compiler</h3>
+                        <p>
+                            Keil C51 is used to build HRTOS applications
+                            for compatible 8051 microcontrollers.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Target Architecture</h3>
+                        <p>
+                            The test platforms belong to the 8051-compatible
+                            microcontroller family.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Operating System</h3>
+                        <p>
+                            HRTOS 4.x provides the task scheduling,
+                            interrupt coordination, and timing
+                            functions evaluated in these tests.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <tbody>
+                            <tr>
+                                <th>Operating System</th>
+                                <td>HRTOS 4.x</td>
+                            </tr>
+                            <tr>
+                                <th>Development Toolchain</th>
+                                <td>Keil C51</td>
+                            </tr>
+                            <tr>
+                                <th>Target Architecture</th>
+                                <td>8051 / MCS-51</td>
+                            </tr>
+                            <tr>
+                                <th>Primary MCU Vendor</th>
+                                <td>STC</td>
+                            </tr>
+                            <tr>
+                                <th>Evaluation Method</th>
+                                <td>On-target hardware testing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Timing Test Configuration -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TIMING MEASUREMENTS</span>
+                    <h2>Reference Timing Configuration</h2>
+                    <p>
+                        The following configuration applies to the
+                        detailed timing measurements performed on the
+                        STC12C5A60S2 platform.
+                    </p>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Configuration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Microcontroller</td>
+                                <td>STC12C5A60S2</td>
+                            </tr>
+                            <tr>
+                                <td>Operating Mode</td>
+                                <td>1T</td>
+                            </tr>
+                            <tr>
+                                <td>Clock Frequency</td>
+                                <td>11.0592 MHz</td>
+                            </tr>
+                            <tr>
+                                <td>System Time Base</td>
+                                <td>Timer0</td>
+                            </tr>
+                            <tr>
+                                <td>Normal Task Capacity</td>
+                                <td>16</td>
+                            </tr>
+                            <tr>
+                                <td>Fast Task Capacity</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Scheduling Levels</td>
+                                <td>10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    These values describe the documented reference
+                    configuration. Individual applications may use
+                    different system configurations.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Test Categories -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TEST COVERAGE</span>
+                    <h2>Performance Test Categories</h2>
+                    <p>
+                        The HRTOS performance documentation separates
+                        different aspects of system behavior into
+                        dedicated measurement categories.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Context Switching</h3>
+                        <p>
+                            Measures the execution time associated
+                            with normal and fast task context switching.
+                        </p>
+                        <a href="./context-switch.html" class="text-link">
+                            View Context Switching
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Interrupt Execution</h3>
+                        <p>
+                            Records interrupt and nested interrupt
+                            execution timing on the reference platform.
+                        </p>
+                        <a href="./interrupt-latency.html" class="text-link">
+                            View Interrupt Latency
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Timing Accuracy</h3>
+                        <p>
+                            Evaluates measured delays and system
+                            time-base behavior.
+                        </p>
+                        <a href="./timing-accuracy.html" class="text-link">
+                            View Timing Accuracy
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Long-Duration Stress Testing</h3>
+                        <p>
+                            Examines sustained execution and
+                            repeated test activity over an extended period.
+                        </p>
+                        <a href="./stress-test.html" class="text-link">
+                            View Stress Test
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Measurement Methodology -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">METHODOLOGY</span>
+                    <h2>Interpreting Measurement Results</h2>
+                    <p>
+                        Performance figures should always be considered
+                        together with their measurement conditions.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>Hardware Dependency</h3>
+
+                    <p>
+                        Execution timing depends on the target MCU,
+                        clock configuration, instruction execution
+                        characteristics, and peripheral behavior.
+                        Results obtained on one device should not
+                        automatically be applied to another device.
+                    </p>
+
+                    <h3>Software Dependency</h3>
+
+                    <p>
+                        Compiler settings, generated machine code,
+                        system configuration, and application code
+                        can affect execution time. Measurements are
+                        therefore associated with the tested software
+                        configuration.
+                    </p>
+
+                    <h3>Measurement Scope</h3>
+
+                    <p>
+                        Different timing metrics describe different
+                        parts of system behavior. Interrupt execution
+                        time, task context switching time, and
+                        application-level response time should not
+                        be treated as interchangeable measurements.
+                    </p>
+
+                    <h3>Application Validation</h3>
+
+                    <p>
+                        The published measurements provide reference
+                        information about HRTOS under specific test
+                        conditions. Applications with strict timing
+                        requirements should be measured and validated
+                        on their own target hardware and workloads.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Engineering Notes -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">ENGINEERING NOTES</span>
+                    <h2>Reproducibility and Test Scope</h2>
+                    <p>
+                        A useful performance report should make clear
+                        which hardware and software configurations
+                        were used and what each measurement represents.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Identify the Target</h3>
+                        <p>
+                            Record the exact MCU model and operating
+                            mode used for each measurement.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Record Clock Conditions</h3>
+                        <p>
+                            Clock frequency and timing configuration
+                            are essential when comparing execution
+                            time measurements.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Separate Test Types</h3>
+                        <p>
+                            Timing benchmarks and long-duration
+                            stress tests answer different engineering
+                            questions and should be reported separately.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Validate Real Applications</h3>
+                        <p>
+                            Reference results are a starting point.
+                            Actual application behavior must be
+                            evaluated under its intended workload.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">EXPLORE MORE</span>
+                    <h2>Performance Documentation</h2>
+                    <p>
+                        Browse the complete set of HRTOS performance
+                        measurements and test descriptions.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Performance Overview</h3>
+                        <p>
+                            Explore the performance evaluation
+                            structure and available test results.
+                        </p>
+                        <a href="./" class="text-link">
+                            Performance Overview
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Performance Benchmarks</h3>
+                        <p>
+                            Review measured task switching,
+                            interrupt, and timing results.
+                        </p>
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Stress Testing</h3>
+                        <p>
+                            Read the recorded long-duration
+                            execution test results.
+                        </p>
+                        <a href="./stress-test.html" class="text-link">
+                            View Stress Test
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Hardware Platforms</h3>
+                        <p>
+                            Explore the microcontroller platforms
+                            supported by HRTOS.
+                        </p>
+                        <a href="../hardware/" class="text-link">
+                            View Hardware
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+<div class="cta-content">
+                <h2>Explore HRTOS</h2>
+
+                <p>
+                    Learn more about the HRTOS kernel, its
+                    architecture, supported hardware, and
+                    development resources for 8051 systems.
+                </p>
+
+                <div class="cta-buttons">
+                    <a href="../architecture/" class="btn btn-primary">
+                        System Architecture
+                    </a>
+
+                    <a href="../docs/" class="btn btn-secondary">
+                        Documentation
+                    </a>
+                </div>
+</div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="../product/">Overview</a></li>
+                        <li><a href="../product/releases.html">Releases</a></li>
+                        <li><a href="../download/">Download</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li><a href="../features/">Features</a></li>
+                        <li><a href="../architecture/">Architecture</a></li>
+                        <li><a href="./">Performance</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../docs/">Documentation</a></li>
+                        <li><a href="../drivers/">Drivers</a></li>
+                        <li><a href="../examples/">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="../about/">About HRTOS</a></li>
+                        <li><a href="../about/history.html">History</a></li>
+                        <li><a href="../about/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>2017-2026 HRTOS Project. All rights reserved.</p>
+                <p>Designed for 8051. Built for real-time applications.</p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

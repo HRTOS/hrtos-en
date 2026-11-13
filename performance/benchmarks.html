@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HRTOS Performance Benchmarks | 8051 RTOS Measurements</title>
+
+    <meta name="description"
+        content="Explore HRTOS performance benchmarks, including task switching, interrupt execution, system timing, and other measured operating system operations on 8051 microcontrollers.">
+
+    <meta name="keywords"
+        content="HRTOS benchmarks, 8051 RTOS performance, 8051 operating system benchmark, task switching benchmark, interrupt response time, embedded RTOS measurements">
+
+    <meta name="author" content="HRTOS Project">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/benchmarks.html">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <meta property="og:title" content="HRTOS Performance Benchmarks">
+    <meta property="og:description"
+        content="Hardware-based performance benchmark results for HRTOS on 8051 microcontrollers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://en.hrtos.com/performance/benchmarks.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HRTOS Performance Benchmarks",
+        "url": "https://en.hrtos.com/performance/benchmarks.html",
+        "description": "Hardware-based benchmark measurements of HRTOS operating system operations on 8051 microcontrollers."
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">PERFORMANCE BENCHMARKS</span>
+
+                    <h1>HRTOS Performance Benchmarks</h1>
+
+                    <p class="hero-description">
+                        Measured execution performance of HRTOS
+                        on 8051 microcontrollers, covering task
+                        switching, interrupt response, system timing,
+                        and other real-time operating system operations.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./context-switch.html" class="btn btn-primary">
+                            Context Switching
+                        </a>
+
+                        <a href="./test-environment.html" class="btn btn-secondary">
+                            Test Environment
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">OVERVIEW</span>
+
+                    <h2>Measuring Operating System Performance</h2>
+
+                    <p>
+                        Performance benchmarks provide quantitative
+                        information about the execution cost of
+                        operating system operations.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        For an 8051-based real-time operating system,
+                        execution efficiency is influenced by processor
+                        architecture, register management, memory access,
+                        interrupt handling, and scheduling mechanisms.
+                    </p>
+
+                    <p>
+                        HRTOS benchmarks focus on actual execution
+                        measurements on physical microcontrollers.
+                        The purpose is to provide practical reference
+                        data for understanding kernel behavior
+                        and evaluating system performance.
+                    </p>
+
+                    <p>
+                        The measurements presented on this page
+                        are associated with specific hardware
+                        configurations and test conditions.
+                        They should be interpreted as measured
+                        results rather than universal performance
+                        specifications.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Platform -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">BENCHMARK PLATFORM</span>
+
+                    <h2>Primary Measurement Platform</h2>
+
+                    <p>
+                        The following measurements were obtained
+                        using an STC12C5A60S2 microcontroller.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Configuration</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Microcontroller</td>
+                                <td>STC12C5A60S2</td>
+                                <td>8051-compatible microcontroller</td>
+                            </tr>
+
+                            <tr>
+                                <td>Clock Frequency</td>
+                                <td>11.0592 MHz</td>
+                                <td>Operating clock frequency</td>
+                            </tr>
+
+                            <tr>
+                                <td>CPU Mode</td>
+                                <td>1T</td>
+                                <td>Single-clock machine cycle configuration</td>
+                            </tr>
+
+                            <tr>
+                                <td>Development Toolchain</td>
+                                <td>Keil C51</td>
+                                <td>C51 compiler environment</td>
+                            </tr>
+
+                            <tr>
+                                <td>Operating System</td>
+                                <td>HRTOS V4.x</td>
+                                <td>HRTOS 4.x test configuration</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="section-note">
+                    The benchmark values below refer to this
+                    test platform unless otherwise specified.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Main Benchmark Results -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">MEASURED RESULTS</span>
+
+                    <h2>Core Performance Measurements</h2>
+
+                    <p>
+                        Selected execution time measurements
+                        from HRTOS hardware testing.
+                    </p>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">143.5</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Fast Task Switching
+                        </div>
+
+                        <p>
+                            Scheduling-bit triggered switching
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">229.5</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Fast Task Switching
+                        </div>
+
+                        <p>
+                            Time-slice triggered switching
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">394.33</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Normal Task Switching
+                        </div>
+
+                        <p>
+                            Scheduling-bit triggered switching
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">550.33</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Normal Task Switching
+                        </div>
+
+                        <p>
+                            Time-slice triggered switching
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">12.167</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Interrupt Execution
+                        </div>
+
+                        <p>
+                            Measured interrupt response
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">11.917</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Nested Interrupt
+                        </div>
+
+                        <p>
+                            Measured nested interrupt execution
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">720.917</div>
+
+                        <div class="stat-unit">us</div>
+
+                        <div class="stat-label">
+                            Event Wake-up
+                        </div>
+
+                        <p>
+                            Event wait to next task execution
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-value">347.21</div>
+
+                        <div class="stat-unit">ms</div>
+
+                        <div class="stat-label">
+                            Startup Time
+                        </div>
+
+                        <p>
+                            Power-on to hrtos_main
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p class="section-note">
+                    All values are specific measurements under
+                    the stated test configuration. Startup time
+                    refers to the measured interval from power-on
+                    to hrtos_main, not the time required for
+                    a task context switch.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Delay Benchmark -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">SYSTEM TIMING</span>
+
+                    <h2>Delay Function Measurements</h2>
+
+                    <p>
+                        Measured elapsed time for representative
+                        HRTOS delay operations on the test platform.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Time-based operations are important
+                        for periodic execution, task synchronization,
+                        and application-level timing control.
+                        The following measurements show the
+                        relationship between configured delay
+                        intervals and measured elapsed time.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Delay Configuration</th>
+                                <th>Measured Elapsed Time</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>os_delay(1)</td>
+                                <td>12.572</td>
+                                <td>ms</td>
+                            </tr>
+
+                            <tr>
+                                <td>os_delay(5)</td>
+                                <td>56.6729</td>
+                                <td>ms</td>
+                            </tr>
+
+                            <tr>
+                                <td>os_delay(10)</td>
+                                <td>111.80</td>
+                                <td>ms</td>
+                            </tr>
+
+                            <tr>
+                                <td>os_delay(100)</td>
+                                <td>1.104</td>
+                                <td>s</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        These measurements describe the behavior
+                        of the tested delay interface and its
+                        configured timing mechanism.
+                        The actual elapsed time can differ from
+                        the requested interval due to system
+                        tick configuration and scheduling behavior.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Millisecond Timing -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">TIMING ACCURACY</span>
+
+                    <h2>Millisecond Timing Measurements</h2>
+
+                    <p>
+                        Additional measurements of the
+                        millisecond-based timing interface.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Configured Interval</th>
+                                <th>Measured Elapsed Time</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>1 ms</td>
+                                <td>1.000</td>
+                                <td>ms</td>
+                            </tr>
+
+                            <tr>
+                                <td>5 ms</td>
+                                <td>4.988</td>
+                                <td>ms</td>
+                            </tr>
+
+                            <tr>
+                                <td>10 ms</td>
+                                <td>9.970</td>
+                                <td>ms</td>
+                            </tr>
+
+                            <tr>
+                                <td>100 ms</td>
+                                <td>99.690</td>
+                                <td>ms</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="section-actions">
+
+                    <a href="./timing-accuracy.html" class="btn btn-primary">
+                        Explore Timing Accuracy
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Performance Comparison -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">SCHEDULING PERFORMANCE</span>
+
+                    <h2>Normal and Fast Task Switching</h2>
+
+                    <p>
+                        HRTOS provides different task execution
+                        context mechanisms for normal and fast tasks.
+                        Their measured switching times are shown below.
+                    </p>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+
+                        <thead>
+                            <tr>
+                                <th>Task Type</th>
+                                <th>Scheduling Trigger</th>
+                                <th>Measured Time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Fast Task</td>
+                                <td>Scheduling Bit</td>
+                                <td>143.5 us</td>
+                            </tr>
+
+                            <tr>
+                                <td>Fast Task</td>
+                                <td>Time Slice</td>
+                                <td>229.5 us</td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task</td>
+                                <td>Scheduling Bit</td>
+                                <td>394.33 us</td>
+                            </tr>
+
+                            <tr>
+                                <td>Normal Task</td>
+                                <td>Time Slice</td>
+                                <td>550.33 us</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        Fast task switching uses dedicated
+                        register-bank resources, while normal
+                        task switching manages a more extensive
+                        processor context.
+                    </p>
+
+                    <p>
+                        The measured difference reflects the
+                        different context management mechanisms
+                        and execution paths used by the two
+                        task categories.
+                    </p>
+
+                </div>
+
+                <div class="section-actions">
+
+                    <a href="./context-switch.html" class="btn btn-primary">
+                        Detailed Context Switching Results
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Stress Test Reference -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">LONG-DURATION TESTING</span>
+
+                    <h2>Beyond Execution Speed</h2>
+
+                    <p>
+                        Performance evaluation also includes
+                        long-duration operation and repeated
+                        system execution.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        In addition to short-duration execution
+                        measurements, HRTOS has undergone
+                        extended stress testing on the
+                        STC8H8U64K microcontroller.
+                    </p>
+
+                    <p>
+                        The recorded test results include
+                        more than 72 hours of continuous
+                        operation, 8,842 test rounds,
+                        and over 35 million tested variants
+                        without reported errors.
+                    </p>
+
+                    <p>
+                        These results belong to a separate
+                        hardware test platform and should
+                        not be directly combined with the
+                        STC12C5A60S2 timing measurements.
+                    </p>
+
+                </div>
+
+                <div class="section-actions">
+
+                    <a href="./stress-test.html" class="btn btn-primary">
+                        Explore Stress Testing
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Measurement Methodology -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">METHODOLOGY</span>
+
+                    <h2>Benchmark Measurement Principles</h2>
+
+                    <p>
+                        Performance values must be interpreted
+                        within the context of their measurement
+                        methods and execution conditions.
+                    </p>
+
+                </div>
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Hardware Execution</h3>
+
+                        <p>
+                            Measurements are performed on
+                            physical microcontrollers to
+                            evaluate actual target execution.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Defined Test Conditions</h3>
+
+                        <p>
+                            Processor model, clock frequency,
+                            operating mode, and software
+                            configuration are identified
+                            as part of the test environment.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Operation-Specific Results</h3>
+
+                        <p>
+                            Different kernel operations
+                            are measured separately to
+                            distinguish their execution costs.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Practical Reference Data</h3>
+
+                        <p>
+                            Results provide technical
+                            reference information rather
+                            than guaranteed performance
+                            for every supported device.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">RELATED PERFORMANCE TESTS</span>
+
+                    <h2>Explore Detailed Measurements</h2>
+
+                    <p>
+                        Continue to the individual performance
+                        evaluation pages for more information.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <h3>Context Switching</h3>
+
+                        <p>
+                            Detailed measurements of normal
+                            and fast task switching.
+                        </p>
+
+                        <a href="./context-switch.html" class="text-link">
+                            View Context Switching
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Interrupt Latency</h3>
+
+                        <p>
+                            Interrupt response and nested
+                            interrupt measurements.
+                        </p>
+
+                        <a href="./interrupt-latency.html" class="text-link">
+                            View Interrupt Latency
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Timing Accuracy</h3>
+
+                        <p>
+                            Delay functions and system
+                            timing behavior.
+                        </p>
+
+                        <a href="./timing-accuracy.html" class="text-link">
+                            View Timing Accuracy
+                        </a>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <h3>Stress Testing</h3>
+
+                        <p>
+                            Long-duration system execution
+                            and stability testing.
+                        </p>
+
+                        <a href="./stress-test.html" class="text-link">
+                            View Stress Testing
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Explore HRTOS Performance in Detail</h2>
+
+                    <p>
+                        Learn about the architecture,
+                        examine the technical documentation,
+                        and evaluate HRTOS on supported
+                        8051 microcontrollers.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="./" class="btn btn-primary">
+                            Performance Overview
+                        </a>
+
+                        <a href="../docs/" class="btn btn-secondary">
+                            Technical Documentation
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Technology</h4>
+                        <a href="../features/">Features</a>
+                        <a href="../architecture/">Architecture</a>
+                        <a href="./">Performance</a>
+                        <a href="../hardware/">Hardware</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../drivers/">Drivers</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../docs/">Documentation</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">Project History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    2017-2026 HRTOS Project.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Designed for 8051. Built for real-time applications.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

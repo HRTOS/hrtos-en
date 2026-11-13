@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interrupt Latency | HRTOS Performance</title>
+    <meta name="description"
+        content="Explore HRTOS interrupt handling performance on 8051 microcontrollers, including measured interrupt execution time, nested interrupt behavior, and timing considerations.">
+    <meta name="keywords"
+        content="HRTOS, 8051, interrupt latency, interrupt response time, nested interrupts, real-time operating system, STC MCU">
+    <meta name="author" content="HRTOS Project">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://en.hrtos.com/performance/interrupt-latency.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Interrupt Latency | HRTOS">
+    <meta property="og:description"
+        content="Interrupt handling and measured execution timing on 8051 microcontrollers.">
+    <meta property="og:url" content="https://en.hrtos.com/performance/interrupt-latency.html">
+    <meta property="og:site_name" content="HRTOS">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Interrupt Latency",
+        "description": "HRTOS interrupt handling performance and timing measurements on 8051 microcontrollers.",
+        "url": "https://en.hrtos.com/performance/interrupt-latency.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "HRTOS",
+            "url": "https://en.hrtos.com/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+     <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="../features/">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="./" class="active">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <a href="./">Performance</a>
+                    <span>/</span>
+                    <span>Interrupt Latency</span>
+                </div>
+
+                <div class="hero-content">
+                    <span class="section-label">PERFORMANCE</span>
+
+                    <h1>Interrupt Latency</h1>
+
+                    <p class="hero-description">
+                        Interrupt handling is a fundamental part of real-time
+                        system behavior. This page describes HRTOS interrupt
+                        execution measurements and the considerations involved
+                        in handling interrupts on 8051 microcontrollers.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">OVERVIEW</span>
+                    <h2>Interrupt Handling in HRTOS</h2>
+                    <p>
+                        Interrupts provide a mechanism for responding to
+                        external events and time-critical hardware conditions.
+                        HRTOS is designed to work with the interrupt architecture
+                        of the 8051 family while maintaining coordinated
+                        task scheduling and system resource management.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Interrupt Execution</h3>
+                        <p>
+                            Interrupt service routines handle hardware events
+                            directly. Their execution time contributes to the
+                            overall response behavior of the system.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Nested Interrupts</h3>
+                        <p>
+                            Nested interrupt handling allows a higher-priority
+                            interrupt to be serviced while a lower-priority
+                            interrupt is executing, subject to the MCU
+                            interrupt configuration.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Task Coordination</h3>
+                        <p>
+                            Interrupt events can be coordinated with task-level
+                            processing through the kernel's scheduling and
+                            synchronization mechanisms.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Measurement Results -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">MEASURED RESULTS</span>
+                    <h2>Interrupt Execution Measurements</h2>
+                    <p>
+                        The following values are measured on an STC12C5A60S2
+                        microcontroller operating in 1T mode at 11.0592 MHz.
+                        They represent the measured execution timing under
+                        the stated test configuration.
+                    </p>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-value">12.167</div>
+                        <div class="stat-label">Interrupt Execution</div>
+                        <p>Microseconds</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">11.917</div>
+                        <div class="stat-label">Nested Interrupt Execution</div>
+                        <p>Microseconds</p>
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Measurement</th>
+                                <th>Measured Time</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Interrupt execution</td>
+                                <td>12.167</td>
+                                <td>us</td>
+                            </tr>
+                            <tr>
+                                <td>Nested interrupt execution</td>
+                                <td>11.917</td>
+                                <td>us</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    These measurements are specific to the tested hardware,
+                    clock configuration, interrupt routine, and measurement
+                    method. They should not be interpreted as universal
+                    interrupt latency guarantees for all 8051 devices.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Interrupt Execution Model -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">EXECUTION MODEL</span>
+                    <h2>Interrupt Execution Flow</h2>
+                    <p>
+                        Interrupt handling involves hardware interrupt
+                        recognition, CPU context handling, execution of the
+                        interrupt service routine, and return to the
+                        interrupted execution context.
+                    </p>
+                </div>
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+                        <div class="flow-number">01</div>
+                        <h3>Hardware Event</h3>
+                        <p>
+                            A peripheral or external signal generates
+                            an interrupt request.
+                        </p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">02</div>
+                        <h3>Interrupt Recognition</h3>
+                        <p>
+                            The 8051 interrupt controller and CPU determine
+                            whether the request can be serviced.
+                        </p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">03</div>
+                        <h3>ISR Execution</h3>
+                        <p>
+                            The corresponding interrupt service routine
+                            executes and handles the event.
+                        </p>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">04</div>
+                        <h3>Return</h3>
+                        <p>
+                            The CPU returns from the interrupt and resumes
+                            the appropriate execution context.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Nested Interrupts -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">INTERRUPT PRIORITY</span>
+                    <h2>Nested Interrupt Handling</h2>
+                    <p>
+                        Nested interrupts provide a way to handle events with
+                        different urgency levels. The actual behavior depends
+                        on the interrupt priority configuration and the
+                        capabilities of the target 8051-compatible MCU.
+                    </p>
+                </div>
+
+                <div class="content-narrow">
+
+                    <h3>Priority-Based Execution</h3>
+
+                    <p>
+                        When nested interrupts are enabled, an interrupt
+                        with sufficient priority may interrupt a currently
+                        executing lower-priority interrupt service routine.
+                        This allows urgent hardware events to receive
+                        attention without waiting for the lower-priority
+                        routine to finish.
+                    </p>
+
+                    <p>
+                        The measured nested interrupt execution time on the
+                        STC12C5A60S2 test platform was 11.917 us under the
+                        tested conditions.
+                    </p>
+
+                    <h3>ISR and Kernel API Considerations</h3>
+
+                    <p>
+                        Interrupt service routines should remain short and
+                        predictable. Operations that may trigger task
+                        scheduling or wake-up processing must follow the
+                        kernel's interrupt-context rules.
+                    </p>
+
+                    <p>
+                        In particular, nested interrupt handlers should not
+                        call scheduling or task wake-up APIs. Priority-related
+                        operations must also respect the target MCU's interrupt
+                        priority configuration.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Design Considerations -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">ENGINEERING CONSIDERATIONS</span>
+                    <h2>Designing Predictable Interrupt Handling</h2>
+                    <p>
+                        Interrupt performance is determined by both hardware
+                        behavior and software implementation. Reliable
+                        real-time behavior requires attention to the complete
+                        interrupt execution path.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Keep ISRs Short</h3>
+                        <p>
+                            Perform only the operations required to handle
+                            the immediate hardware event. Move longer
+                            processing tasks to normal task context whenever
+                            practical.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Control Nesting Depth</h3>
+                        <p>
+                            Nested interrupts increase execution complexity
+                            and resource usage. Configure interrupt priorities
+                            and nesting behavior according to application
+                            requirements.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Respect Execution Context</h3>
+                        <p>
+                            Kernel services must be used according to their
+                            execution-context requirements. Avoid invoking
+                            scheduling operations from unsupported nested
+                            interrupt contexts.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Measure on Target Hardware</h3>
+                        <p>
+                            Interrupt timing varies with MCU architecture,
+                            clock frequency, compiler output, peripheral
+                            configuration, and ISR implementation.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Test Platform -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">TEST CONFIGURATION</span>
+                    <h2>Measurement Environment</h2>
+                    <p>
+                        The interrupt execution measurements presented
+                        on this page were obtained using the following
+                        hardware configuration.
+                    </p>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <tbody>
+                            <tr>
+                                <th>Microcontroller</th>
+                                <td>STC12C5A60S2</td>
+                            </tr>
+                            <tr>
+                                <th>CPU Mode</th>
+                                <td>1T mode</td>
+                            </tr>
+                            <tr>
+                                <th>Clock Frequency</th>
+                                <td>11.0592 MHz</td>
+                            </tr>
+                            <tr>
+                                <th>Operating System</th>
+                                <td>HRTOS 4.x</td>
+                            </tr>
+                            <tr>
+                                <th>Compiler</th>
+                                <td>Keil C51</td>
+                            </tr>
+                            <tr>
+                                <th>Measurement Scope</th>
+                                <td>Interrupt and nested interrupt execution timing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="section-note">
+                    For additional information about the test platform and
+                    measurement conditions, see the
+                    <a href="./test-environment.html">Test Environment</a>
+                    page.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Related Pages -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">EXPLORE MORE</span>
+                    <h2>Related Performance Topics</h2>
+                    <p>
+                        Explore other measurements and implementation
+                        details of HRTOS.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+                        <h3>Performance Benchmarks</h3>
+                        <p>
+                            Review the overall performance measurements
+                            and benchmark results.
+                        </p>
+                        <a href="./benchmarks.html" class="text-link">
+                            View Benchmarks
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Context Switching</h3>
+                        <p>
+                            Understand normal and fast task context
+                            switching behavior.
+                        </p>
+                        <a href="./context-switch.html" class="text-link">
+                            View Context Switching
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Timing Accuracy</h3>
+                        <p>
+                            Explore system time-base behavior and
+                            measured timing accuracy.
+                        </p>
+                        <a href="./timing-accuracy.html" class="text-link">
+                            View Timing Accuracy
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Test Environment</h3>
+                        <p>
+                            Learn about the hardware and software
+                            configurations used for testing.
+                        </p>
+                        <a href="./test-environment.html" class="text-link">
+                            View Test Environment
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+<div class="cta-content">
+                <h2>Explore the HRTOS Architecture</h2>
+
+                <p>
+                    Learn how HRTOS integrates interrupt handling,
+                    task scheduling, synchronization, and system
+                    resource management on 8051 microcontrollers.
+                </p>
+
+                <div class="cta-buttons">
+                    <a href="../architecture/interrupt-model.html" class="btn btn-primary">
+                        Interrupt Model
+                    </a>
+
+                    <a href="../docs/" class="btn btn-secondary">
+                        Documentation
+                    </a>
+                </div>
+</div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                    </a>
+
+                    <p>
+                        HRTOS is a real-time operating system
+                        designed for 8051 microcontrollers.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="../product/">Overview</a></li>
+                        <li><a href="../product/releases.html">Releases</a></li>
+                        <li><a href="../download/">Download</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li><a href="../features/">Features</a></li>
+                        <li><a href="../architecture/">Architecture</a></li>
+                        <li><a href="./">Performance</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../docs/">Documentation</a></li>
+                        <li><a href="../drivers/">Drivers</a></li>
+                        <li><a href="../examples/">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="../about/">About HRTOS</a></li>
+                        <li><a href="../about/history.html">History</a></li>
+                        <li><a href="../about/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>2017-2026 HRTOS Project. All rights reserved.</p>
+                <p>Designed for 8051. Built for real-time applications.</p>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>

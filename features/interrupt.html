@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interrupt Management | HRTOS for 8051</title>
+
+    <meta name="description"
+        content="Explore HRTOS interrupt management for 8051 microcontrollers, including interrupt handling, nested interrupts, priority management, register bank usage and task wake-up mechanisms.">
+
+    <meta name="keywords"
+        content="8051 interrupt management, 8051 RTOS, HRTOS interrupt handling, nested interrupts, interrupt latency, MCS-51 operating system">
+
+    <link rel="canonical"
+        href="https://en.hrtos.com/features/interrupt.html">
+
+    <link rel="icon" href="../assets/images/logo.svg"
+        type="image/svg+xml">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.svg" alt="HRTOS Logo">
+                <span>HRTOS</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="../product/">Product</a>
+                <a href="./" class="active">Features</a>
+                <a href="../architecture/">Architecture</a>
+                <a href="../performance/">Performance</a>
+                <a href="../hardware/">Hardware</a>
+                <a href="../drivers/">Drivers</a>
+                <a href="../examples/">Examples</a>
+                <a href="../docs/">Documentation</a>
+                <a href="../download/">Download</a>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="section-tag">
+                        SYSTEM FEATURES / INTERRUPTS
+                    </span>
+
+                    <h1>
+                        Interrupt Management
+                    </h1>
+
+                    <p class="hero-description">
+                        Responsive interrupt handling designed
+                        for 8051 real-time embedded systems.
+                    </p>
+
+                    <p>
+                        HRTOS integrates interrupt management
+                        with its task scheduling architecture,
+                        providing structured interrupt handling,
+                        nested interrupt support and controlled
+                        interaction between interrupt service
+                        routines and application tasks.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../performance/interrupt-latency.html"
+                            class="btn btn-primary">
+                            Interrupt Performance
+                        </a>
+
+                        <a href="./"
+                            class="btn btn-secondary">
+                            All Features
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        OVERVIEW
+                    </span>
+
+                    <h2>Interrupts in Real-Time Systems</h2>
+
+                    <p>
+                        Interrupts are essential to responsive
+                        embedded systems. They allow the processor
+                        to react to hardware events without relying
+                        entirely on continuous polling.
+                    </p>
+
+                </div>
+
+                <div class="content-narrow">
+
+                    <p>
+                        On 8051 microcontrollers, interrupt sources
+                        may include timers, external signals,
+                        serial communication and other peripheral
+                        events.
+                    </p>
+
+                    <p>
+                        In a multitasking environment, interrupt
+                        handling must work together with task
+                        scheduling, context management and system
+                        resource protection.
+                    </p>
+
+                    <p>
+                        HRTOS provides an integrated interrupt
+                        management model designed for the
+                        characteristics of the 8051 architecture.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Core Capabilities -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        CORE CAPABILITIES
+                    </span>
+
+                    <h2>Interrupt Management Features</h2>
+
+                    <p>
+                        A structured interrupt model for
+                        hardware event handling and real-time
+                        application execution.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Interrupt Handling -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>01</span>
+                        </div>
+
+                        <h3>Interrupt Handling</h3>
+
+                        <p>
+                            HRTOS integrates interrupt processing
+                            into the system execution model,
+                            allowing hardware events to be
+                            handled alongside scheduled tasks.
+                        </p>
+
+                        <ul>
+                            <li>Structured interrupt handling</li>
+                            <li>Hardware event response</li>
+                            <li>Interrupt context management</li>
+                            <li>Integration with kernel services</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Nested Interrupts -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>02</span>
+                        </div>
+
+                        <h3>Nested Interrupt Support</h3>
+
+                        <p>
+                            Nested interrupt handling allows
+                            higher-priority interrupt events
+                            to be serviced while a lower-priority
+                            interrupt is being processed,
+                            subject to hardware and system rules.
+                        </p>
+
+                        <ul>
+                            <li>Nested interrupt processing</li>
+                            <li>Interrupt priority handling</li>
+                            <li>Interrupt context tracking</li>
+                            <li>Controlled interrupt nesting</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Register Bank -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>03</span>
+                        </div>
+
+                        <h3>Register Bank Management</h3>
+
+                        <p>
+                            HRTOS takes the 8051 register bank
+                            architecture into account when
+                            managing execution contexts.
+                        </p>
+
+                        <ul>
+                            <li>8051 register bank architecture</li>
+                            <li>Dedicated fast-task register banks</li>
+                            <li>Interrupt register bank management</li>
+                            <li>Context isolation considerations</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Task Wake-up -->
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            <span>04</span>
+                        </div>
+
+                        <h3>Interrupt-Driven Task Wake-up</h3>
+
+                        <p>
+                            Hardware events can be used to trigger
+                            task-level processing through
+                            supported kernel synchronization
+                            and wake-up mechanisms.
+                        </p>
+
+                        <ul>
+                            <li>Event-driven task execution</li>
+                            <li>Task wake-up mechanisms</li>
+                            <li>Reduced polling requirements</li>
+                            <li>Integration with task scheduling</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Interrupt Model -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        EXECUTION MODEL
+                    </span>
+
+                    <h2>Interrupt and Task Interaction</h2>
+
+                    <p>
+                        Interrupt service routines handle
+                        time-sensitive hardware events, while
+                        application tasks perform deferred
+                        processing.
+                    </p>
+
+                </div>
+
+
+                <div class="architecture-flow">
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">01</span>
+
+                        <h3>Hardware Event</h3>
+
+                        <p>
+                            A timer, external signal or
+                            peripheral generates an interrupt.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Interrupt</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">02</span>
+
+                        <h3>Interrupt Service Routine</h3>
+
+                        <p>
+                            The ISR performs time-critical
+                            processing and handles the
+                            hardware event.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-connector">
+                        <span>Event Notification</span>
+                    </div>
+
+
+                    <div class="flow-step">
+
+                        <span class="flow-number">03</span>
+
+                        <h3>Application Task</h3>
+
+                        <p>
+                            A task performs the remaining
+                            application processing when
+                            scheduled by the kernel.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        This design separates immediate
+                        hardware response from application-level
+                        processing.
+                    </p>
+
+                    <p>
+                        It helps keep interrupt service routines
+                        focused and allows more complex operations
+                        to execute in the task context.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Nested Interrupts -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        NESTED INTERRUPTS
+                    </span>
+
+                    <h2>Priority-Aware Interrupt Processing</h2>
+
+                    <p>
+                        Interrupt nesting provides a mechanism
+                        for handling higher-priority events
+                        without requiring every interrupt
+                        to wait for lower-priority processing
+                        to finish.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <h3>Interrupt Priority</h3>
+
+                    <p>
+                        On supported 8051 hardware configurations,
+                        interrupt priority determines which
+                        interrupt can preempt another interrupt.
+                        HRTOS accounts for interrupt nesting
+                        when managing its execution context.
+                    </p>
+
+                    <h3>Interrupt Context Management</h3>
+
+                    <p>
+                        Nested interrupt execution requires
+                        careful management of register state,
+                        stack usage and interrupt context.
+                    </p>
+
+                    <p>
+                        HRTOS uses its interrupt management
+                        model to track interrupt nesting
+                        and maintain the required execution
+                        state.
+                    </p>
+
+                    <h3>Kernel API Restrictions</h3>
+
+                    <p>
+                        Not every kernel operation is suitable
+                        for execution inside an interrupt
+                        service routine.
+                    </p>
+
+                    <p>
+                        In particular, nested interrupt
+                        service routines must not invoke
+                        scheduling or task wake-up APIs.
+                        Supported priority-related operations
+                        are subject to the system's interrupt
+                        nesting rules.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 8051 Architecture -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        8051 ARCHITECTURE
+                    </span>
+
+                    <h2>Designed Around the MCS-51 Architecture</h2>
+
+                    <p>
+                        Interrupt management must account for
+                        the hardware architecture and execution
+                        characteristics of 8051 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="capability-grid">
+
+                    <div class="capability-item">
+
+                        <h3>Register Banks</h3>
+
+                        <p>
+                            The 8051 provides multiple register
+                            banks. HRTOS uses register bank
+                            allocation as part of its context
+                            management strategy.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Stack Management</h3>
+
+                        <p>
+                            Interrupt entry, nested execution
+                            and context preservation require
+                            careful stack management.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Interrupt Priorities</h3>
+
+                        <p>
+                            Hardware interrupt priority
+                            mechanisms are considered in
+                            the HRTOS interrupt execution model.
+                        </p>
+
+                    </div>
+
+
+                    <div class="capability-item">
+
+                        <h3>Real-Time Response</h3>
+
+                        <p>
+                            Interrupt handling is designed
+                            to support responsive embedded
+                            applications with predictable
+                            execution paths.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Performance -->
+        <section class="section section-alt">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        PERFORMANCE
+                    </span>
+
+                    <h2>Measured Interrupt Performance</h2>
+
+                    <p>
+                        Interrupt response and execution
+                        overhead are important considerations
+                        in real-time embedded systems.
+                    </p>
+
+                </div>
+
+
+                <div class="content-narrow">
+
+                    <p>
+                        HRTOS has been tested on 8051-based
+                        microcontrollers to evaluate interrupt
+                        response and nested interrupt execution.
+                    </p>
+
+                    <p>
+                        On an STC12C5A60S2 running at
+                        11.0592 MHz in 1T mode, the measured
+                        interrupt execution time was approximately
+                        12.167 microseconds, while the measured
+                        nested interrupt execution time was
+                        approximately 11.917 microseconds
+                        under the documented test conditions.
+                    </p>
+
+                    <p>
+                        These measurements provide a practical
+                        reference for evaluating interrupt
+                        handling overhead on the tested platform.
+                    </p>
+
+                    <a href="../performance/interrupt-latency.html"
+                        class="btn btn-primary">
+                        View Interrupt Benchmarks
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Related Features -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        RELATED FEATURES
+                    </span>
+
+                    <h2>Explore Other System Capabilities</h2>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <h3>Task Scheduling</h3>
+
+                        <p>
+                            Learn how HRTOS manages task
+                            priorities and execution.
+                        </p>
+
+                        <a href="./scheduler.html"
+                            class="text-link">
+                            Task Scheduling
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Synchronization</h3>
+
+                        <p>
+                            Explore semaphores, mutexes,
+                            events and task coordination.
+                        </p>
+
+                        <a href="./synchronization.html"
+                            class="text-link">
+                            Synchronization
+                        </a>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>Communication</h3>
+
+                        <p>
+                            Learn about message queues,
+                            mailboxes and inter-task communication.
+                        </p>
+
+                        <a href="./communication.html"
+                            class="text-link">
+                            Communication
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <h2>Explore HRTOS for 8051</h2>
+
+                    <p>
+                        Learn more about the system architecture,
+                        performance measurements and practical
+                        development resources.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="../architecture/interrupt-model.html"
+                            class="btn btn-primary">
+                            Interrupt Architecture
+                        </a>
+
+                        <a href="../docs/"
+                            class="btn btn-secondary">
+                            Documentation
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="../index.html" class="logo">
+                        <img src="../assets/images/logo.svg"
+                            alt="HRTOS Logo">
+                        <span>HRTOS</span>
+                    </a>
+
+                    <p>
+                        A real-time operating system
+                        for 8051 and MCS-51 microcontrollers.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <div>
+                        <h4>Product</h4>
+                        <a href="../product/">Overview</a>
+                        <a href="../product/releases.html">Releases</a>
+                        <a href="../download/">Download</a>
+                    </div>
+
+                    <div>
+                        <h4>Resources</h4>
+                        <a href="../docs/">Documentation</a>
+                        <a href="../examples/">Examples</a>
+                        <a href="../drivers/">Drivers</a>
+                    </div>
+
+                    <div>
+                        <h4>About</h4>
+                        <a href="../about/">About HRTOS</a>
+                        <a href="../about/history.html">History</a>
+                        <a href="../about/contact.html">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    Copyright &copy; 2017-2026 HRTOS.
+                    All rights reserved.
+                </p>
+
+                <p>
+                    Engineering Real-Time on 8051.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
